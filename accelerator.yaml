@@ -33,9 +33,5 @@ accelerator:
       ["**"]
     exclude:
       ["accelerator.yaml"]
-    let:
-    - name: usepgVector
-      expression:
-        "#vector-database != 'InMemory'"
 
 

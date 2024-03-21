@@ -30,7 +30,7 @@
         <div ng-include src="albumsView"></div>
         <div ng-controller="InfoController">
             <deep-chat ng-if='info.profiles.includes("llm")' id="music-ai"   
-                introMessage="Hi I am your Spring Music assistant, ask me anything!"
+                introMessage="Hi I am your Boneyard assistant, ask me anything!"
                 request='{
                 "url": "/ai/rag",
                 "method": "POST",
@@ -56,7 +56,7 @@
                           "marginLeft": "0px", "color": "black"}},
                       "ai": {
                         "outerContainer": {
-                          "backgroundColor": "#FFEBF0", "borderTop": "1px solid rgba(0,0,0,.1)", "borderBottom": "1px solid rgba(0,0,0,.1)"
+                          "backgroundColor": "#F0F0F0", "borderTop": "1px solid rgba(0,0,0,.1)", "borderBottom": "1px solid rgba(0,0,0,.1)"
                         }
                       }
                     }

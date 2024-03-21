@@ -1,0 +1,13 @@
+---
+applications:
+- name: dekt-metal
+  memory: 1G
+  path: target/dekt-metal-0.5.jar
+  buildpack: java_buildpack_offline
+  services:
+    - dekt-genai
+    - dekt-embeddings
+  env:
+    JBP_CONFIG_SPRING_AUTO_RECONFIGURATION: '{enabled: false}'
+    SPRING_PROFILES_ACTIVE: http2
+    JBP_CONFIG_OPEN_JDK_JRE: '{ jre: { version: 17.+ } }'

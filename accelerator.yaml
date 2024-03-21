@@ -1,5 +1,5 @@
 accelerator:
-  displayName: Spring Music
+  displayName: Spring Boot with AI LLM support
   description: The classic TAS demo application, a music catalog written in java/spring, now with AI LLM support!
   iconUrl: https://spring.io/img/projects/spring-cloud.svg
   tags:

@@ -6,7 +6,7 @@ applications:
   buildpack: java_buildpack_offline
   services:
     - dekt-genai
-    - dekt-embeddings
+    - dekt-secret-sauce
   env:
     JBP_CONFIG_SPRING_AUTO_RECONFIGURATION: '{enabled: false}'
     SPRING_PROFILES_ACTIVE: http2

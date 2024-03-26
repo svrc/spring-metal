@@ -9,11 +9,11 @@ management:
   endpoints:
     web:
       exposure:
-        include: "*"
+        #include: "*"
+        include: "governance"
   endpoint:
     health:
       show-details: always
-
 ---
 spring:
   config:
@@ -23,8 +23,9 @@ spring:
 server:
   http2:
     enabled: true
-  #port: 8443
-  #ssl:
+#  port: 8443
+  #port: 8080
+ # ssl:
     #no compliant
     #enabled: true
     #key-alias: demo
@@ -33,12 +34,12 @@ server:
     #key-store-type: PKCS12
     
     #complaint
-    #enabled: true
-    #key-alias: demo
-    #key-store: classpath:keystore.bks
-    #key-store-password: changeit
-    #key-password: changeit
-    #key-store-type: "BCFKS"
+  #  enabled: true
+  #  key-alias: demo
+  #  key-store: classpath:keystore.bks
+  #  key-store-password: changeit
+  #  key-password: changeit
+  #  key-store-type: "BCFKS"
 
 ---
 spring:

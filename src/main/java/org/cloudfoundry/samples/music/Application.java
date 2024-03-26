@@ -4,7 +4,6 @@ import org.cloudfoundry.samples.music.config.SpringApplicationContextInitializer
 import org.cloudfoundry.samples.music.repositories.AlbumRepositoryPopulator;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
-import org.springframework.scheduling.annotation.EnableScheduling;
 
 @SpringBootApplication
 public class Application {

@@ -26,6 +26,7 @@ public class AlbumRepositoryPopulator implements ApplicationListener<Application
 
     @Override
     public void onApplicationEvent(ApplicationReadyEvent event) {
+        @SuppressWarnings("rawtypes")
         CrudRepository albumRepository =
                 BeanFactoryUtils.beanOfTypeIncludingAncestors(event.getApplicationContext(), CrudRepository.class);
 
@@ -35,7 +36,7 @@ public class AlbumRepositoryPopulator implements ApplicationListener<Application
     }
 
     @SuppressWarnings("unchecked")
-    private void populate(CrudRepository repository) {
+    private void populate(@SuppressWarnings("rawtypes") CrudRepository repository) {
         Object entity = getEntityFromResource(sourceData);
 
         if (entity instanceof Collection) {

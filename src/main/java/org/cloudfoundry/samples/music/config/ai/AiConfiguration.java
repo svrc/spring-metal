@@ -17,15 +17,11 @@
 package org.cloudfoundry.samples.music.config.ai;
 
 import org.springframework.ai.client.AiClient;
-import org.springframework.ai.embedding.EmbeddingClient;
 import org.springframework.ai.retriever.VectorStoreRetriever;
-import org.springframework.ai.vectorstore.PgVectorStore;
 import org.springframework.ai.vectorstore.VectorStore;
-import org.springframework.ai.vectorstore.InMemoryVectorStore;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
-import org.springframework.jdbc.core.JdbcTemplate;
 
 /**
  *

@@ -1,6 +1,5 @@
 package org.cloudfoundry.samples.music.web;
 
-import java.io.IOException;
 import java.util.*;
 
 import org.cloudfoundry.samples.music.config.ai.MessageRetriever;
@@ -15,14 +14,7 @@ import org.springframework.ai.document.Document;
 import org.springframework.ai.vectorstore.VectorStore;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Profile;
-import org.springframework.core.env.Environment;
-import org.springframework.data.repository.CrudRepository;
 import org.springframework.web.bind.annotation.*;
-
-import com.fasterxml.jackson.databind.ObjectMapper;
-
-import io.pivotal.cfenv.core.CfEnv;
-import jakarta.validation.Valid;
 
 @RestController
 @Profile("llm")

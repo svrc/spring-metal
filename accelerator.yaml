@@ -12,8 +12,27 @@ accelerator:
   - name: springAI
     dataType: boolean
     inputType: checkbox
-    label: Add LLM wiring
-    description: Add LLM code to my app using Spring AI
+    label: Add LLM wiring with Spring AI
+  - name: springAI-chat
+    dataType: boolean
+    inputType: checkbox
+    label: Chat codebase
+    dependsOn:
+      name: springAI
+  - name: springAI-textImg
+    dataType: boolean
+    inputType: checkbox
+    label: Test-to-Image codebase
+    dependsOn:
+      name: springAI
+  - name: springAI-embedding
+    dataType: boolean
+    inputType: checkbox
+    label: Embeddings codebase
+    dependsOn:
+      name: springAI
+
+  
       
   - name: vectorDB
     label: Vector Database
@@ -21,11 +40,11 @@ accelerator:
     defaultValue: pgvector
     choices:
       - value: memory
-        name: In Memory
+        text: In Memory
       - value: pgvector
-        name: Tanzu Postgres with pgvector support
+        text: Tanzu Postgres with pgvector support
       - value: gpdb
-        name: Greenplum Database
+        text: Greenplum Database
   
   - name: openAI
     label: Open AI endpoint

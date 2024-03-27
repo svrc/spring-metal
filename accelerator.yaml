@@ -6,16 +6,71 @@ accelerator:
   - spring 
   - java 
   - llm 
+
   options:
-  - name: use-llm
+
+  - name: springAI
     dataType: boolean
     inputType: checkbox
-    label: Attach TAS LLM Service
-    description: Bind an instance of TAS LLM and enable the chat widget
-  engine:
-    include:
-      ["**"]
-    exclude:
-      ["accelerator.yaml"]
+    label: Add LLM wiring
+    description: Add LLM code to my app using Spring AI
+      
+  - name: vectorDB
+    label: Vector Database
+    inputType: select
+    defaultValue: pgvector
+    choices:
+      - value: memory
+        name: In Memory
+      - value: pgvector
+        name: Tanzu Postgres with pgvector support
+      - value: gpdb
+        name: Greenplum Database
+  
+  - name: openAI
+    label: Open AI endpoint
+    defaultValue: fastchat
+    inputType: select
+    choices:
+      - value: fastchat
+        text: Fast Chat
+      - value: chatgpt
+        text: Chat GPT (public openai)
+  
 
-
+  #deployment type
+  - name: appDeploymentType
+    label: Deployment environment
+    #description: Type of deployment configurations
+    defaultValue: tap
+    inputType: select
+    choices:
+    - value: tap
+      text: Tanzu Platform for K8s
+    - value: cf
+      text: Tanzu Platform for VMs
+      
+engine:
+  merge:
+    #generic transformation
+    - includes: ["**"]
+      excludes: [ "config/**", "src/main/java/backend/connectors/**", "config/tap/provision-dev-services.sh"]
+      chain:
+        - type: ReplaceText
+          substitutions:
+            - text: APP_NAME
+              with: "#artifactId"
+            - text: JAVA_VER
+              with: "#javaVersion"
+            - text: PARENT_APP
+              with: "#parentApp"
+  
+  #deployment configs per type
+    - includes: [ "config/tap/*"]
+      condition: "#appDeploymentType == 'tap'"
+      chain:
+        - type: YTT
+    - includes: [ "config/cf/**"]
+      condition: "#appDeploymentType == 'cf'"
+      chain:
+        - type: YTT

@@ -13,32 +13,23 @@ management:
   endpoint:
     health:
       show-details: always
----
-spring:
-  config:
-    activate:
-      on-profile: http2
+#---
+#spring:
+#  config:
+#    activate:
+#      on-profile: http2
 
 server:
   http2:
     enabled: true
   #port: 8443
-  #port: 8080
   #ssl:
-    #no compliant
-    #enabled: true
-    #key-alias: demo
-    #key-store: classpath:keystore.p12
-    #key-password: changeit
-    #key-store-type: PKCS12
-    
-    #complaint
-    #enabled: true
-    #key-alias: demo
-    #key-store: classpath:keystore.bks
-    #key-store-password: changeit
-    #key-password: changeit
-    #key-store-type: "BCFKS"
+  #  enabled: true
+  #  key-alias: demo
+  #  key-store: classpath:keystore.bks
+  #  key-store-password: changeit
+  #  key-password: changeit
+  #  key-store-type: "BCFKS"
 
 ---
 spring:
@@ -69,7 +60,7 @@ spring:
     properties:
       hibernate:
         dialect: org.hibernate.dialect.ProgressDialect
-#---
+---
 #tanzu:
 #  governance:
 #    fips:

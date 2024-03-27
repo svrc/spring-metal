@@ -41,7 +41,7 @@ accelerator:
   - name: vectorDB
     label: Vector Database
     inputType: select
-    defaultValue: pgvector
+    defaultValue: memory
     choices:
       - value: memory
         text: In Memory

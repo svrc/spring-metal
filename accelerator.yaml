@@ -13,7 +13,7 @@ accelerator:
     dataType: boolean
     inputType: checkbox
     defaultValue: false
-    label: Add LLM wiring with Spring AI
+    label: Add LLM codebase with Spring AI
   - name: chatCode
     dataType: boolean
     inputType: checkbox
@@ -74,16 +74,7 @@ engine:
   merge:
     #generic transformation
     - includes: ["**"]
-      excludes: [ "config/**", "src/main/java/backend/connectors/**", "config/tap/provision-dev-services.sh"]
-      chain:
-        - type: ReplaceText
-          substitutions:
-            - text: APP_NAME
-              with: "#artifactId"
-            - text: JAVA_VER
-              with: "#javaVersion"
-            - text: PARENT_APP
-              with: "#parentApp"
+      excludes: [ "accelerator.yaml"]
   
   #deployment configs per type
     - includes: [ "config/tap/*"]

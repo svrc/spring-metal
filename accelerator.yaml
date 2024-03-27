@@ -16,6 +16,7 @@ accelerator:
     label: Add LLM codebase with Spring AI
   - name: chatCode
     dataType: boolean
+    defaultValue: false
     inputType: checkbox
     label: Chat codebase
     dependsOn:
@@ -23,11 +24,13 @@ accelerator:
   - name: textImgCode
     dataType: boolean
     inputType: checkbox
+    defaultValue: false
     label: Test-to-Image codebase
     dependsOn:
       name: springAI
   - name: embeddingCode
     dataType: boolean
+    defaultValue: false
     inputType: checkbox
     label: Embeddings codebase
     dependsOn:

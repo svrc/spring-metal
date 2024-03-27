@@ -12,6 +12,7 @@ accelerator:
   - name: springAI
     dataType: boolean
     inputType: checkbox
+    defaultValue: false
     label: Add LLM wiring with Spring AI
   - name: chatCode
     dataType: boolean

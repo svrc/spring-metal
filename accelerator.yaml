@@ -13,19 +13,19 @@ accelerator:
     dataType: boolean
     inputType: checkbox
     label: Add LLM wiring with Spring AI
-  - name: springAI-chat
+  - name: chatCode
     dataType: boolean
     inputType: checkbox
     label: Chat codebase
     dependsOn:
       name: springAI
-  - name: springAI-textImg
+  - name: textImgCode
     dataType: boolean
     inputType: checkbox
     label: Test-to-Image codebase
     dependsOn:
       name: springAI
-  - name: springAI-embedding
+  - name: embeddingCode
     dataType: boolean
     inputType: checkbox
     label: Embeddings codebase

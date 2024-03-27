@@ -37,17 +37,18 @@
       </snapshots>
     </repository>
     <!-- Commercial Spring Extensions -->
-    <!-- 
+    <!--
     <repository>
       <id>tanzu-spring-repo</id>
       <url>https://artifactory.eng.vmware.com/api-auto-registration-docker-local</url>
     </repository>
     -->
+    
 	</repositories>
   
   <dependencies>
     <!-- Commercial Spring Extensions -->
-    <!-- 
+    <!--
     <dependency>
       <groupId>com.vmware.tanzu.spring.governance</groupId>
       <artifactId>tanzu-spring-fips-starter</artifactId>

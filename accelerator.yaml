@@ -41,10 +41,10 @@ accelerator:
   - name: vectorDB
     label: Vector Database
     inputType: select
-    defaultValue: memory
+    defaultValue: vcf
     choices:
-      - value: memory
-        text: In Memory
+      - value: vcf
+        text: VCF pgvegtor
       - value: pgvector
         text: Tanzu Postgres with pgvector support
       - value: gpdb

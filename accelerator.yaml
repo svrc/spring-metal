@@ -59,6 +59,8 @@ accelerator:
         text: Fast Chat
       - value: chatgpt
         text: Chat GPT (public openai)
+      - value: vcf
+        text: Private AI open ai
   
 
   #deployment type

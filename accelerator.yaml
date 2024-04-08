@@ -9,6 +9,11 @@ accelerator:
 
   options:
 
+  - name: parentApp
+    label: Business application
+    inputType: text
+    dataType: string
+
   - name: springAI
     dataType: boolean
     inputType: checkbox

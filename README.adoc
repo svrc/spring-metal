@@ -1,3 +1,31 @@
-== Dekt Metal
+# Demo of AI/LLM with Tanzu 
 
-Spring boot apps with web UI and data support to demo AI and Spring Extentions
+This repo contains artifacts to build and run GenAI apps with Spring Boot and Tanzu
+
+## Tanzu Platform for VMs
+
+```
+cf create-service genai-service shared-ai-plan dekt-genai
+cf create-service postgres on-demand-postgres-db dekt-secret-sauce
+cf push
+```
+
+## Tanzu Platform for K8s 
+
+```
+tanzu space use dekt-genai-apps
+
+tanzu services class-claims create dekt-genai --class genai-service
+tanzu services class-claims create dekt-genai --class genai-service
+
+tanzu apps apply dekt-metal
+```
+
+## Spring AI
+
+```
+spring ai add --description "Add JPA functionality for Spring Boot 3.0. Add an integration test" --preview
+
+spring guide apply README-ai-jpa.md
+```
+

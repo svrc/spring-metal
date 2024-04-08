@@ -13,16 +13,16 @@ management:
   endpoint:
     health:
       show-details: always
-#---
-#spring:
-#  config:
-#    activate:
-#      on-profile: http2
+---
+spring:
+  config:
+    activate:
+      on-profile: http2
 
 server:
   http2:
     enabled: true
-  #port: 8443
+  port: 8443
   #ssl:
   #  enabled: true
   #  key-alias: demo

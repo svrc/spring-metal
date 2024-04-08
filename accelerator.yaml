@@ -48,24 +48,20 @@ accelerator:
     inputType: select
     defaultValue: vcf
     choices:
-      - value: vcf
-        text: VCF pgvegtor
-      - value: pgvector
-        text: Tanzu Postgres with pgvector support
+      - value: postgres
+        text: PostgresQL + PGVector
       - value: gpdb
-        text: Greenplum Database
+        text: Greenplum
   
   - name: openAI
-    label: Open AI endpoint
-    defaultValue: fastchat
+    label: AI service 
+    defaultValue: openai
     inputType: select
     choices:
-      - value: fastchat
-        text: Fast Chat
-      - value: chatgpt
-        text: Chat GPT (public openai)
+      - value: openai
+        text: Open AI
       - value: vcf
-        text: Private AI open ai
+        text: VCF Private AI
   
 
   #deployment type

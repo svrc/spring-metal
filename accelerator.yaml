@@ -46,7 +46,7 @@ accelerator:
   - name: vectorDB
     label: Vector Database
     inputType: select
-    defaultValue: vcf
+    defaultValue: postgres
     choices:
       - value: postgres
         text: PostgresQL + PGVector

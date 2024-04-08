@@ -13,12 +13,12 @@ cf push
 ## Tanzu Platform for K8s 
 
 ```
-tanzu space use dekt-genai-apps
+tanzu space use AI-Spring-metal
 
-tanzu services class-claims create dekt-genai --class genai-service
-tanzu services class-claims create dekt-genai --class genai-service
+tanzu services class-claims create AI Service --class genai-service
+tanzu services class-claims create PGVector --class postgres
 
-tanzu apps apply dekt-metal
+tanzu apps apply spring-metal-portal
 ```
 
 ## Spring AI
@@ -29,3 +29,4 @@ spring ai add --description "Add JPA functionality for Spring Boot 3.0. Add an i
 spring guide apply README-ai-jpa.md
 ```
 
+https://nvcr.io/ohlfw0olaadg/ea-rag-examples/rag-playground:0.4.0

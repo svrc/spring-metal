@@ -64,30 +64,30 @@ accelerator:
         text: VCF Private AI
   
 
-  #deployment type
-  - name: appDeploymentType
-    label: Deployment environment
-    #description: Type of deployment configurations
-    defaultValue: tap
-    inputType: select
-    choices:
-    - value: tap
-      text: Tanzu Platform for K8s
-    - value: cf
-      text: Tanzu Platform for VMs
+  #runtime
+  - name: runtime
+    dataType: boolean
+    inputType: checkbox
+    defaultValue: false
+    label: Add runtime configurations
+  - name: k8s
+    dataType: boolean
+    defaultValue: false
+    inputType: checkbox
+    label: Kubernetes
+    dependsOn:
+      name: runtime
+  - name: cf
+    dataType: boolean
+    inputType: checkbox
+    defaultValue: false
+    label: Cloud Foundry
+    dependsOn:
+      name: runtime
       
 engine:
   merge:
     #generic transformation
     - includes: ["**"]
       excludes: [ "accelerator.yaml"]
-  
-  #deployment configs per type
-    - includes: [ "config/tap/*"]
-      condition: "#appDeploymentType == 'tap'"
-      chain:
-        - type: YTT
-    - includes: [ "config/cf/**"]
-      condition: "#appDeploymentType == 'cf'"
-      chain:
-        - type: YTT
+

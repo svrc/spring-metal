@@ -1,0 +1,27 @@
+apiVersion: carto.run/v1alpha1
+kind: Workload
+metadata:
+  name: dekt-metal
+  labels:
+    apps.tanzu.vmware.com/workload-type: web
+    apps.tanzu.vmware.com/has-tests: "true"
+    app.kubernetes.io/part-of: dekt-metal
+    apps.tanzu.vmware.com/auto-configure-actuators: "true"
+spec:
+  source:
+    git:
+      url: https://github.com/dektlong/dekt-metal
+      ref:
+        branch: main
+  
+  serviceClaims:
+  - name: ai-service
+    ref:
+      apiVersion: services.apps.tanzu.vmware.com/v1alpha1
+      kind: ClassClaim
+      name: private-ai-service
+  - name: pgvector
+    ref:
+      apiVersion: services.apps.tanzu.vmware.com/v1alpha1
+      kind: ClassClaim
+      name: vector-db

@@ -2,21 +2,26 @@
 
 This repo contains artifacts to build and run GenAI apps with Spring Boot and Tanzu
 
-## Tanzu Platform for VMs
+## cf runtime
 
 ```
-cf create-service genai-service shared-ai-plan dekt-genai
-cf create-service postgres on-demand-postgres-db dekt-secret-sauce
+cf target -o ai-apps -s ai-spring-metal
+
+cf create-service private-ai-service shared-ai-plan ai-service
+
+cf create-service postgres on-demand-postgres-db pgvector
+
 cf push
 ```
 
-## Tanzu Platform for K8s 
+## k8s runtime
 
 ```
-tanzu space use AI-Spring-metal
+tanzu space use ai-spring-metal
 
-tanzu services class-claims create AI Service --class genai-service
-tanzu services class-claims create PGVector --class postgres
+tanzu services class-claim create ai-service --class private-ai-service
+
+tanzu services class-claim create pgvector --class vector-db
 
 tanzu apps apply spring-metal-portal
 ```
@@ -29,4 +34,4 @@ spring ai add --description "Add JPA functionality for Spring Boot 3.0. Add an i
 spring guide apply README-ai-jpa.md
 ```
 
-https://nvcr.io/ohlfw0olaadg/ea-rag-examples/rag-playground:0.4.0
+https://nvcr.io/ohlfw0olaadg/ea-rag-examples/rag-application-text-chatbot:0.4.0

@@ -1,6 +1,6 @@
 ---
 applications:
-- name: dekt-metal
+- name: spring-metal
   memory: 1G
   path: target/dekt-metal-0.5.jar
   buildpack: java_buildpack_offline

@@ -19,9 +19,10 @@ cf push
 ```
 tanzu space use ai-spring-metal
 
-tanzu services class-claim create ai-service --class private-ai-service
+tanzu services instance create PostgreSQLInstance/on-demand-postgres-db
+tanzu services instance bind PostgreSQLInstance/on-demand-postgres-db ContainerApp/spring-metal --as pgvector
 
-tanzu services class-claim create pgvector --class vector-db
+tanzu services instance bind PreprovisionedService/private-ai-service ContainerApp/spring-metal --as ai-service
 
 tanzu apps apply spring-metal-portal
 ```

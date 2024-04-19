@@ -2,13 +2,13 @@
 
 case $1 in
 create)
-    cf create-service genai-service shared-ai-plan dekt-genai
-    cf create-service postgres on-demand-postgres-db dekt-secret-sauce
+    cf create-service genai-service  shared-ai-plan ai-service
+    cf create-service postgres on-demand-postgres-db pgvector
     ;;
 delete)
-    cf delete-service dekt-genai -f
-    cf delete-service dekt-secret-sauce -f
-    cf delete dekt-ai -f
+    cf delete-service ai-service -f
+    cf delete-service pgvector -f
+    cf delete spring-metal -f
     ;;
 *)
     echo "Please use create or delete"

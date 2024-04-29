@@ -1,9 +1,10 @@
 apiVersion: apps.tanzu.vmware.com/v1
-kind: ContainerApp 
+kind: ContainerApp
 metadata:
-  name: spring-metal 
+  creationTimestamp: null
+  name: spring-metal
 spec:
-  build: 
+  build:
     buildpacks: {}
     path: ..
   ports:

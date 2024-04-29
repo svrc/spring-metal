@@ -10,6 +10,6 @@ spec:
  availabilityTargets:
  - name: eu-availibility-target
  - name: us-availibility-target
-   replicas: 2
+   replicas: 1
  updateStrategy:
    type: RollingUpdate

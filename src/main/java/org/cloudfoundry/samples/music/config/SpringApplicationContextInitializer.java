@@ -19,8 +19,8 @@ import org.springframework.core.env.Profiles;
 import org.springframework.core.env.PropertySource;
 import org.springframework.util.StringUtils;
 
-import org.springframework.cloud.bindings.Binding;
 import org.springframework.cloud.bindings.Bindings;
+import org.springframework.cloud.bindings.Binding;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -46,9 +46,9 @@ public class SpringApplicationContextInitializer implements ApplicationContextIn
         profileNameToServiceTags.put("redis", Collections.singletonList("redis"));
         profileNameToServiceTags.put("oracle", Collections.singletonList("oracle"));
         profileNameToServiceTags.put("sqlserver", Collections.singletonList("sqlserver"));
-        
+
         serviceTypesToProfileName.put("postgresql", "postgres");        
-        
+
     }
 
     @Override
@@ -76,8 +76,7 @@ public class SpringApplicationContextInitializer implements ApplicationContextIn
 		List<String> k8sServiceTypes = bindings.stream()
 			.map(Binding::getType)
 			.collect(Collectors.toList());
-			
-		
+
         logger.info("Found services " + StringUtils.collectionToCommaDelimitedString(serviceNames));
         logger.info("Found k8s service types " + StringUtils.collectionToCommaDelimitedString(k8sServiceTypes));
 
@@ -88,12 +87,12 @@ public class SpringApplicationContextInitializer implements ApplicationContextIn
                 }
             }
         }
-        
+
         for (String type : k8sServiceTypes) {
         	if (serviceTypesToProfileName.get(type) != null) {
         		profiles.add(serviceTypesToProfileName.get(type));
         	}
-        }        
+        }
 
         if (profiles.size() > 1) {
             throw new IllegalStateException(
@@ -117,7 +116,7 @@ public class SpringApplicationContextInitializer implements ApplicationContextIn
            logger.info("Setting service profile llm");
            appEnvironment.addActiveProfile("llm");
 		}
-		
+
         if (profiles.size() > 0) {
             logger.info("Setting service profile " + profiles.get(0));
             appEnvironment.addActiveProfile(profiles.get(0));

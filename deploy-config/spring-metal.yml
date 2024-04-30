@@ -6,7 +6,7 @@ metadata:
 spec:
   nonSecretEnv:
   - name: spring_profiles_active
-    value: postgres
+    value: postgres,llm
   build:
     buildpacks: {}
     path: ..

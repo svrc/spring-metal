@@ -14,6 +14,8 @@ spec:
   - name: JAVA_TOOL_OPTIONS
     value: -Dmanagement.endpoint.health.probes.add-additional-paths=true -Dmanagement.health.probes.enabled=true
       -Dserver.port=8080 -Dserver.shutdown.grace-period=24s
+  - name: spring_profiles_active
+    value: postgres
   ports:
   - name: main
     port: 8080

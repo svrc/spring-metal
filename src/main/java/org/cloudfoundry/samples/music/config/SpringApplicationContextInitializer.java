@@ -37,13 +37,18 @@ public class SpringApplicationContextInitializer implements ApplicationContextIn
     private static final Log logger = LogFactory.getLog(SpringApplicationContextInitializer.class);
 
     private static final Map<String, List<String>> profileNameToServiceTags = new HashMap<>();
+    private static final Map<String, String> serviceTypesToProfileName = new HashMap<>();
+
     static {
         profileNameToServiceTags.put("mongodb", Collections.singletonList("mongodb"));
-        profileNameToServiceTags.put("postgres", Collections.singletonList("postgres"));
+        profileNameToServiceTags.put("postgres", Collections.singletonList("postgres"));        
         profileNameToServiceTags.put("mysql", Collections.singletonList("mysql"));
         profileNameToServiceTags.put("redis", Collections.singletonList("redis"));
         profileNameToServiceTags.put("oracle", Collections.singletonList("oracle"));
         profileNameToServiceTags.put("sqlserver", Collections.singletonList("sqlserver"));
+        
+        serviceTypesToProfileName.put("postgresql", "postgres");        
+        
     }
 
     @Override
@@ -74,7 +79,7 @@ public class SpringApplicationContextInitializer implements ApplicationContextIn
 			
 		
         logger.info("Found services " + StringUtils.collectionToCommaDelimitedString(serviceNames));
-        logger.info("Found k8s services " + StringUtils.collectionToCommaDelimitedString(k8sServiceTypes));
+        logger.info("Found k8s service types " + StringUtils.collectionToCommaDelimitedString(k8sServiceTypes));
 
         for (CfService service : services) {
             for (String profileKey : profileNameToServiceTags.keySet()) {
@@ -85,8 +90,8 @@ public class SpringApplicationContextInitializer implements ApplicationContextIn
         }
         
         for (String type : k8sServiceTypes) {
-        	if (profileNameToServiceTags.get(type) != null) {
-        		profiles.add(type);
+        	if (serviceTypesToProfileName.get(type) != null) {
+        		profiles.add(serviceTypesToProfileName.get(type));
         	}
         }        
 
@@ -109,6 +114,7 @@ public class SpringApplicationContextInitializer implements ApplicationContextIn
 
 
 		if (k8sServiceTypes.contains("openai")) {
+           logger.info("Setting service profile llm");
            appEnvironment.addActiveProfile("llm");
 		}
 		

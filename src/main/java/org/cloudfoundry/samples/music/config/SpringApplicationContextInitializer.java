@@ -72,8 +72,8 @@ public class SpringApplicationContextInitializer implements ApplicationContextIn
                 .map(CfService::getName)
                 .collect(Collectors.toList());
 
-        List<Binding> bindings = new Bindings().getBindings();
-        List<String> k8sServiceTypes = bindings.stream()
+        Bindings bindings = new Bindings();
+        List<String> k8sServiceTypes = bindings.getBindings().stream()
             .map(Binding::getType)
             .collect(Collectors.toList());
 
@@ -111,10 +111,16 @@ public class SpringApplicationContextInitializer implements ApplicationContextIn
             appEnvironment.getSystemProperties().put("spring.ai.openai.api-key", llmCredentials.getMap().get("api_key"));
         }
 
-
         if (k8sServiceTypes.contains("openai")) {
            logger.info("Setting service profile llm");
            appEnvironment.addActiveProfile("llm");
+           bindings.filterBindings("openai").forEach(binding -> {
+			 appEnvironment.getSystemProperties().put("spring.ai.openai.api-key", binding.getSecret().get("api-key"));
+			 String openAiUrl = binding.getSecret().get("uri");
+			 if (!openAiUrl.endsWith("/"))
+			 	openAiUrl = openAiUrl + "/";
+			 appEnvironment.getSystemProperties().put("spring.ai.openai.base-url", openAiUrl);
+		   });
         }
 
         if (profiles.size() > 0) {

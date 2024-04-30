@@ -1,0 +1,24 @@
+---
+apiVersion: tanzu.vmware.com/v1
+kind: SpringCloudGatewayRouteConfig
+metadata:
+  name: spring-metal-ui-config
+spec:
+  routes:
+  - predicates:
+    - Path=/**
+    - Method=GET
+    order: 1000
+    filters:
+    - StripPrefix=0
+    name: spring-metal
+---
+apiVersion: "tanzu.vmware.com/v1"
+kind: SpringCloudGatewayMapping
+metadata:
+  name: spring-metal-ui-mapping
+spec:
+  gatewayRef:
+    name: spring-metal-gateway
+  routeConfigRef:
+    name: spring-metal-ui-config

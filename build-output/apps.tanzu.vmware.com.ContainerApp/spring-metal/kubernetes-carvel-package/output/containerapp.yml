@@ -1,0 +1,64 @@
+apiVersion: apps.tanzu.vmware.com/v1
+kind: ContainerApp
+metadata:
+  annotations:
+    containerapp.apps.tanzu.vmware.com/class: kubernetes
+  creationTimestamp: null
+  name: spring-metal
+spec:
+  content:
+    packageRefName: spring-metal.apps.local.20240429.0.319777000
+    packageVersion: 20240429.0.319777000
+  image: harbor.vmtanzu.com/openso-tap-apps/spring-metal@sha256:b1005a5f96ab4503dfb9795032326e5f36e969e595448618201fe482e6fe07b4
+  nonSecretEnv:
+  - name: JAVA_TOOL_OPTIONS
+    value: -Dmanagement.endpoint.health.probes.add-additional-paths=true -Dmanagement.health.probes.enabled=true
+      -Dserver.port=8080 -Dserver.shutdown.grace-period=24s
+  ports:
+  - name: main
+    port: 8080
+  probes:
+    liveness:
+      httpGet:
+        path: /livez
+        port: 8080
+        scheme: HTTP
+    readiness:
+      httpGet:
+        path: /readyz
+        port: 8080
+        scheme: HTTP
+    startup:
+      failureThreshold: 120
+      httpGet:
+        path: /readyz
+        port: 8080
+        scheme: HTTP
+      initialDelaySeconds: 1
+      periodSeconds: 1
+  relatedRefs:
+  - for: kubernetes.list-replicas
+    kind: Pod
+    labelSelector: containerapp.apps.tanzu.vmware.com/app-name=spring-metal
+  - apiGroup: apps
+    for: kubernetes.service-binding-target
+    kind: Deployment
+    name: spring-metal
+  - for: kubernetes.service-target
+    kind: Service
+    name: spring-metal
+  - for: kubernetes.scale-replicas
+    keyPath: .data.'values\.yml'->[yaml].replicas
+    kind: Secret
+    name: spring-metal
+  - for: kubernetes.scale-resources
+    keyPath: .data.'values\.yml'->[yaml].resources
+    kind: Secret
+    name: spring-metal
+  - for: kubernetes.set-secret-env
+    keyPath: .data.'values\.yml'->[yaml].secretEnv
+    kind: Secret
+    name: spring-metal
+  resources:
+    cpu: 300m
+    memory: 1Gi

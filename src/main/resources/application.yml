@@ -59,7 +59,7 @@ spring:
   jpa:
     properties:
       hibernate:
-        dialect: org.hibernate.dialect.ProgressDialect
+        dialect: org.hibernate.dialect.PostgreSQLDialect
 ---
 #tanzu:
 #  governance:

@@ -59,15 +59,15 @@ public class InfoController {
 
     private String[] getServiceNames() {
         List<CfService> services = cfEnv.findAllServices();
-		List<Binding> bindings = new Bindings().getBindings();
+        List<Binding> bindings = new Bindings().getBindings();
 
         List<String> names = new ArrayList<>();
         for (CfService service : services) {
             names.add(service.getName());
         }
-		for (Binding bind : bindings) {
-			names.add(bind.getName());
-		}
+        for (Binding bind : bindings) {
+            names.add(bind.getName());
+        }
         return names.toArray(new String[0]);
     }
 }

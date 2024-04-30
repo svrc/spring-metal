@@ -72,10 +72,10 @@ public class SpringApplicationContextInitializer implements ApplicationContextIn
                 .map(CfService::getName)
                 .collect(Collectors.toList());
 
-		List<Binding> bindings = new Bindings().getBindings();
-		List<String> k8sServiceTypes = bindings.stream()
-			.map(Binding::getType)
-			.collect(Collectors.toList());
+        List<Binding> bindings = new Bindings().getBindings();
+        List<String> k8sServiceTypes = bindings.stream()
+            .map(Binding::getType)
+            .collect(Collectors.toList());
 
         logger.info("Found services " + StringUtils.collectionToCommaDelimitedString(serviceNames));
         logger.info("Found k8s service types " + StringUtils.collectionToCommaDelimitedString(k8sServiceTypes));
@@ -89,9 +89,9 @@ public class SpringApplicationContextInitializer implements ApplicationContextIn
         }
 
         for (String type : k8sServiceTypes) {
-        	if (serviceTypesToProfileName.get(type) != null) {
-        		profiles.add(serviceTypesToProfileName.get(type));
-        	}
+            if (serviceTypesToProfileName.get(type) != null) {
+                profiles.add(serviceTypesToProfileName.get(type));
+            }
         }
 
         if (profiles.size() > 1) {
@@ -112,10 +112,10 @@ public class SpringApplicationContextInitializer implements ApplicationContextIn
         }
 
 
-		if (k8sServiceTypes.contains("openai")) {
+        if (k8sServiceTypes.contains("openai")) {
            logger.info("Setting service profile llm");
            appEnvironment.addActiveProfile("llm");
-		}
+        }
 
         if (profiles.size() > 0) {
             logger.info("Setting service profile " + profiles.get(0));

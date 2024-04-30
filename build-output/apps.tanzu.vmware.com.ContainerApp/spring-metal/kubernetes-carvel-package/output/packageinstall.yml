@@ -7,7 +7,7 @@ spec:
   packageRef:
     refName: spring-metal.apps.local
     versionSelection:
-      constraints: 20240429.0.319777000
+      constraints: 20240430.0.20251000
   serviceAccountName: tanzu-containerapp-installer
   values:
   - secretRef:

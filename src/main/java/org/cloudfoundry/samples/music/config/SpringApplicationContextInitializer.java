@@ -19,6 +19,9 @@ import org.springframework.core.env.Profiles;
 import org.springframework.core.env.PropertySource;
 import org.springframework.util.StringUtils;
 
+import org.springframework.cloud.bindings.Binding;
+import org.springframework.cloud.bindings.Bindings;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -34,13 +37,18 @@ public class SpringApplicationContextInitializer implements ApplicationContextIn
     private static final Log logger = LogFactory.getLog(SpringApplicationContextInitializer.class);
 
     private static final Map<String, List<String>> profileNameToServiceTags = new HashMap<>();
+    private static final Map<String, String> serviceTypesToProfileName = new HashMap<>();
+
     static {
         profileNameToServiceTags.put("mongodb", Collections.singletonList("mongodb"));
-        profileNameToServiceTags.put("postgres", Collections.singletonList("postgres"));
+        profileNameToServiceTags.put("postgres", Collections.singletonList("postgres"));        
         profileNameToServiceTags.put("mysql", Collections.singletonList("mysql"));
         profileNameToServiceTags.put("redis", Collections.singletonList("redis"));
         profileNameToServiceTags.put("oracle", Collections.singletonList("oracle"));
         profileNameToServiceTags.put("sqlserver", Collections.singletonList("sqlserver"));
+        
+        serviceTypesToProfileName.put("postgresql", "postgres");        
+        
     }
 
     @Override
@@ -64,7 +72,14 @@ public class SpringApplicationContextInitializer implements ApplicationContextIn
                 .map(CfService::getName)
                 .collect(Collectors.toList());
 
+		List<Binding> bindings = new Bindings().getBindings();
+		List<String> k8sServiceTypes = bindings.stream()
+			.map(Binding::getType)
+			.collect(Collectors.toList());
+			
+		
         logger.info("Found services " + StringUtils.collectionToCommaDelimitedString(serviceNames));
+        logger.info("Found k8s service types " + StringUtils.collectionToCommaDelimitedString(k8sServiceTypes));
 
         for (CfService service : services) {
             for (String profileKey : profileNameToServiceTags.keySet()) {
@@ -73,6 +88,12 @@ public class SpringApplicationContextInitializer implements ApplicationContextIn
                 }
             }
         }
+        
+        for (String type : k8sServiceTypes) {
+        	if (serviceTypesToProfileName.get(type) != null) {
+        		profiles.add(serviceTypesToProfileName.get(type));
+        	}
+        }        
 
         if (profiles.size() > 1) {
             throw new IllegalStateException(
@@ -91,6 +112,12 @@ public class SpringApplicationContextInitializer implements ApplicationContextIn
             appEnvironment.getSystemProperties().put("spring.ai.openai.api-key", llmCredentials.getMap().get("api_key"));
         }
 
+
+		if (k8sServiceTypes.contains("openai")) {
+           logger.info("Setting service profile llm");
+           appEnvironment.addActiveProfile("llm");
+		}
+		
         if (profiles.size() > 0) {
             logger.info("Setting service profile " + profiles.get(0));
             appEnvironment.addActiveProfile(profiles.get(0));

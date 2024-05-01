@@ -13,6 +13,12 @@ import org.springframework.core.env.Environment;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+
+import org.springframework.cloud.bindings.Bindings;
+import org.springframework.cloud.bindings.Binding;
+
+
+
 import io.pivotal.cfenv.core.CfEnv;
 import io.pivotal.cfenv.core.CfService;
 
@@ -45,17 +51,22 @@ public class InfoController {
         return new ApplicationInfo(springEnvironment.getActiveProfiles(), getServiceNames(), instance);
     }
 
-    @RequestMapping(value = "/service")
-    public List<CfService> showServiceInfo() {
-        return cfEnv.findAllServices();
-    }
+//     <stuart.charlton@broadcom.com>: This probably shouldn't be exposed.
+//     @RequestMapping(value = "/service")
+//     public List<CfService> showServiceInfo() {
+//         return cfEnv.findAllServices();
+//     }
 
     private String[] getServiceNames() {
         List<CfService> services = cfEnv.findAllServices();
+        List<Binding> bindings = new Bindings().getBindings();
 
         List<String> names = new ArrayList<>();
         for (CfService service : services) {
             names.add(service.getName());
+        }
+        for (Binding bind : bindings) {
+            names.add(bind.getName());
         }
         return names.toArray(new String[0]);
     }

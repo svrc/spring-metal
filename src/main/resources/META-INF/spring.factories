@@ -1,3 +1,0 @@
-# Binding Properties Factories
-org.springframework.cloud.bindings.boot.BindingsPropertiesProcessor=\
-org.cloudfoundry.samples.music.config.OpenAiBindingsPropertiesProcessor

@@ -4,9 +4,6 @@ metadata:
   creationTimestamp: null
   name: spring-metal
 spec:
-  nonSecretEnv:
-  - name: spring_profiles_active
-    value: postgres,llm
   build:
     buildpacks: {}
     path: ..

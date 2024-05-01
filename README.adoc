@@ -2,7 +2,7 @@
 
 This repo contains artifacts to build and run GenAI apps with Spring Boot and Tanzu
 
-## cf runtime
+## cf runtime - external back-end services
 
 ```
 cf target -o ai-apps -s ai-spring-metal
@@ -17,22 +17,27 @@ cf push
 ## k8s runtime
 
 ```
-tanzu space use ai-spring-metal
+**make sure you use the latest versions of the Tanzu cli**
 
-tanzu services instance create PostgreSQLInstance/on-demand-postgres-db
-tanzu services instance bind PostgreSQLInstance/on-demand-postgres-db ContainerApp/spring-metal --as pgvector
+Make sure the space profile has ingress trait configured with Route53 domain and a secret was applied on the UCP for making changes to AWS. also make sure that the Egress trair has open == true to be able to connect to external services.
+run the flollowing commands after creating the space based on the profile:
 
-tanzu services instance bind PreprovisionedService/private-ai-service ContainerApp/spring-metal --as ai-service
+**build**
 
-tanzu apps apply spring-metal-portal
+tanzu context use <my-context>
+tanzu projectr use <my-project>
+tanzu space use <my-space>
+
+tanzu build -o build-output #this will build the code and consolidate the build output in this folder
+tanzu deploy --from-build build-output #this will deploy from the folder we have just built
+
 ```
+External service creation and binding
 
-## Spring AI
+use the conf/.secert folder to configure the external services yaml files, there is a PreProvisionedService and Secret to configure with the connection details from the external service (TAS in this case)
+after creating the services with kubectl to the space (UCP context) now we can bind them with the following commands:
+
+tanzu service instance bind PreProvisionedService/<genaiservicename> ContainerApp/<appname> --as genai
+tanzu services instance bind PostgreSQLInstance/<postgresname> ContainerApp/<appname> --as db
 
 ```
-spring ai add --description "Add JPA functionality for Spring Boot 3.0. Add an integration test" --preview
-
-spring guide apply README-ai-jpa.md
-```
-
-https://nvcr.io/ohlfw0olaadg/ea-rag-examples/rag-application-text-chatbot:0.4.0

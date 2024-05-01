@@ -12,32 +12,57 @@ cf create-service private-ai-service shared-ai-plan ai-service
 cf create-service postgres on-demand-postgres-db pgvector
 
 cf push
-```
+
 
 ## k8s runtime
 
-```
+
 **make sure you use the latest versions of the Tanzu cli**
 
 Make sure the space profile has ingress trait configured with Route53 domain and a secret was applied on the UCP for making changes to AWS. also make sure that the Egress trair has open == true to be able to connect to external services.
 run the flollowing commands after creating the space based on the profile:
 
-**build**
+**Set context**
 
+```
 tanzu context use <my-context>
 tanzu projectr use <my-project>
 tanzu space use <my-space>
+```
 
-tanzu build -o build-output #this will build the code and consolidate the build output in this folder
-tanzu deploy --from-build build-output #this will deploy from the folder we have just built
+**Build**
 
 ```
-External service creation and binding
+tanzu build -o build-output #this will build the code and consolidate the build output in this folder
+```
 
-use the conf/.secert folder to configure the external services yaml files, there is a PreProvisionedService and Secret to configure with the connection details from the external service (TAS in this case)
+**Deploy**
+
+This will deploy from the folder we have just built
+
+```
+tanzu deploy --from-build build-output
+```
+
+**Bind**
+
+External service creation and binding
+Use the conf/.secert folder to configure the external services yaml files, there is a PreProvisionedService and Secret to configure with the connection details from the external service (TAS in this case)
 after creating the services with kubectl to the space (UCP context) now we can bind them with the following commands:
 
+Create pre provisioned services
+
+```
+tanzu context use <my-context>
+Kubectl create -f conf/.secret
+```
+Bind preproveisioned services to the app
+
+```
 tanzu service instance bind PreProvisionedService/<genaiservicename> ContainerApp/<appname> --as genai
 tanzu services instance bind PostgreSQLInstance/<postgresname> ContainerApp/<appname> --as db
 
 ```
+
+
+Brows the app ingress link from the Space UI

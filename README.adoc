@@ -2,15 +2,6 @@
 
 This repository contains artifacts necessary to build and run generative AI applications using Spring Boot and Tanzu Platform. The instructions below cover setup for both Cloud Foundry (cf) and Kubernetes (k8s) environments.
 
-## Table of Contents
-- Prerequisites
-- Installation
-  - Cloud Foundry Runtime
-  - Kubernetes Runtime
-- Deployment
-- Configuration
-- Troubleshooting
-
 ## Prerequisites
 - Ensure you have the latest version of the Tanzu CLI installed.
 - Access to a Route53 domain and necessary AWS permissions.

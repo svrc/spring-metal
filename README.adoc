@@ -23,7 +23,7 @@ cf push
 
 Set up your Kubernetes environment ensuring all prerequisites are met:
 
-### Set context:
+#### Set context:
 
 ```bash
 tanzu login
@@ -31,7 +31,7 @@ tanzu context use <my-context>
 tanzu project use <my-project>
 tanzu space use <my-space>
 ```
-# Build
+## Build
 
 Follow these commands to build your application:
 
@@ -39,7 +39,7 @@ Follow these commands to build your application:
 tanzu build -o build-output
 ```
 
-# Deploy
+## Deploy
 
 Follow these commands to deploy your application from the build-output folder:
 
@@ -47,14 +47,14 @@ Follow these commands to deploy your application from the build-output folder:
 tanzu deploy --from-build build-output
 ```
 
-# Bind
+## Bind
 
-## Configuration
+### Configuration
 Place your configuration files in the `conf/.secret` directory. Adjust the YAML files to match the connection details provided by the external service.
 
-## Binding External Services
+### Binding External Services
 
-### Create and bind the pre-provisioned services using the secrets:
+#### Create and bind the pre-provisioned services using the secrets:
 Create and bind pre-provisioned services:
 
 ```bash

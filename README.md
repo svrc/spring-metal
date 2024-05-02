@@ -1,5 +1,6 @@
 # Demo of Spring AI with Tanzu platform
 
+![Spring Boot](https://img.shields.io/badge/Spring%20Boot-2.5.0-brightgreen.svg)
 ![Java Spring](https://img.shields.io/badge/spring-6.0-brightgreen.svg)
 ![AI LLM](https://img.shields.io/badge/AI-LLM-blue.svg)
 ![PostgreSQL](https://img.shields.io/badge/postgres-14.1-blue.svg)

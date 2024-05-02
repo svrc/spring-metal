@@ -1,6 +1,6 @@
 # Demo of AI/LLM with Tanzu
 
-![Java Spring](https://img.shields.io/badge/spring-6.0-green.svg)
+[![Java Spring](spring)](https://img.shields.io/badge/spring-6.0-green.svg)
 
 ![AI LLM](https://img.shields.io/badge/AI-LLM-blue.svg)
 

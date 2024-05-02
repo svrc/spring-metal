@@ -1,4 +1,4 @@
-# Demo of AI/LLM with Tanzu
+# Demo of Spring AI with Tanzu platform
 
 This repository contains artifacts necessary to build and run generative AI applications using Spring Boot and Tanzu Platform. The instructions below cover setup for both Cloud Foundry (cf) and Kubernetes (k8s) environments.
 

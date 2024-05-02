@@ -2,8 +2,8 @@
 
 ![Spring Boot](https://img.shields.io/badge/Spring%20Boot-3.1.2-brightgreen.svg)
 ![AI LLM](https://img.shields.io/badge/AI-LLM-blue.svg)
-![PostgreSQL](https://img.shields.io/badge/postgres-14.1-blue.svg)
-![Tanzu](https://img.shields.io/badge/tanzu-platform-blue.svg)
+![PostgreSQL](https://img.shields.io/badge/postgres-15.1-red.svg)
+![Tanzu](https://img.shields.io/badge/tanzu-platform-purple.svg)
 
 This repository contains artifacts necessary to build and run generative AI applications using Spring Boot and Tanzu Platform. The instructions below cover setup for both Cloud Foundry (cf) and Kubernetes (k8s) environments.
 

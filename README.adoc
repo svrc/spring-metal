@@ -19,11 +19,11 @@ cf create-service postgres on-demand-postgres-db pgvector
 cf push
 ```
 
-# Kubernetes Runtime
+### Kubernetes Runtime
 
 Set up your Kubernetes environment ensuring all prerequisites are met:
 
-## Set context:
+### Set context:
 
 ```bash
 tanzu login

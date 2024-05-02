@@ -1,68 +1,80 @@
-# Demo of AI/LLM with Tanzu 
+# Demo of Spring AI with Tanzu platform
 
-This repo contains artifacts to build and run GenAI apps with Spring Boot and Tanzu
+This repository contains artifacts necessary to build and run generative AI applications using Spring Boot and Tanzu Platform. The instructions below cover setup for both Cloud Foundry (cf) and Kubernetes (k8s) environments.
 
-## cf runtime - external back-end services
+## Prerequisites
+- Ensure you have the latest version of the Tanzu CLI installed.
+- Access to a Route53 domain and necessary AWS permissions.
+- Configured egress settings (open by default) to connect to external services.
 
-```
+## Installation
+
+### Cloud Foundry Runtime
+Set up your target environment and create necessary services:
+
+```bash
 cf target -o ai-apps -s ai-spring-metal
-
 cf create-service private-ai-service shared-ai-plan ai-service
-
 cf create-service postgres on-demand-postgres-db pgvector
-
 cf push
-
-
-## k8s runtime
-
-
-**make sure you use the latest versions of the Tanzu cli**
-
-Make sure the space profile has ingress trait configured with Route53 domain and a secret was applied on the UCP for making changes to AWS. also make sure that the Egress trair has open == true to be able to connect to external services.
-run the flollowing commands after creating the space based on the profile:
-
-**Set context**
-
 ```
+
+### Kubernetes Runtime
+
+Set up your Kubernetes environment ensuring all prerequisites are met:
+
+#### Set context:
+
+```bash
+tanzu login
 tanzu context use <my-context>
-tanzu projectr use <my-project>
+tanzu project use <my-project>
 tanzu space use <my-space>
 ```
+## Build
 
-**Build**
+Follow these commands to build your application:
 
+```bash
+tanzu build -o build-output
 ```
-tanzu build -o build-output #this will build the code and consolidate the build output in this folder
-```
 
-**Deploy**
+## Deploy
 
-This will deploy from the folder we have just built
+Follow these commands to deploy your application from the build-output folder:
 
-```
+```bash
 tanzu deploy --from-build build-output
 ```
 
-**Bind**
+## Bind
 
-External service creation and binding
-Use the conf/.secert folder to configure the external services yaml files, there is a PreProvisionedService and Secret to configure with the connection details from the external service (TAS in this case)
-after creating the services with kubectl to the space (UCP context) now we can bind them with the following commands:
+### Configuration
+Place your configuration files in the `conf/.secret` directory. Adjust the YAML files to match the connection details provided by the external service.
 
-Create pre provisioned services
+### Binding External Services
 
-```
+#### Create and bind the pre-provisioned services using the secrets:
+Create and bind pre-provisioned services:
+
+```bash
 tanzu context use <my-context>
-Kubectl create -f conf/.secret
-```
-Bind preproveisioned services to the app
-
-```
+kubectl create -f conf/.secret
 tanzu service instance bind PreProvisionedService/<genaiservicename> ContainerApp/<appname> --as genai
 tanzu services instance bind PostgreSQLInstance/<postgresname> ContainerApp/<appname> --as db
-
 ```
 
+### Troubleshooting
 
-Brows the app ingress link from the Space UI
+#### Issue: Problem with external service binding.
+- **Solution:** Ensure that all credentials and connection details in `conf/.secret` are correct and updated.
+
+#### Issue: Application deployment fails.
+- **Solution:** Check the build output for errors and verify the Tanzu configuration settings.
+
+Browse your application through the app ingress link provided in the Space UI after deployment.
+
+## Contributing
+Contributions to this project are welcome. Please ensure to follow the existing coding style and add unit tests for any new or changed functionality.
+
+

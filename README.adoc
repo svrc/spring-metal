@@ -1,6 +1,6 @@
-# Demo of AI/LLM with Tanzu 
+# Demo of AI/LLM with Tanzu
 
-This repo contains artifacts to build and run GenAI apps with Spring Boot and Tanzu
+This repo contains artifacts to build and run GenAI apps with Spring Boot and Tanzu Platform
 
 ## cf runtime - external back-end services
 
@@ -19,14 +19,14 @@ cf push
 
 **make sure you use the latest versions of the Tanzu cli**
 
-Make sure the space profile has ingress trait configured with Route53 domain and a secret was applied on the UCP for making changes to AWS. also make sure that the Egress trair has open == true to be able to connect to external services.
-run the flollowing commands after creating the space based on the profile:
+Make sure the space profile has ingress trait configured with a Route53 domain and a secret was applied to the space for making changes to AWS. Also make sure that the egress trait has open == true (default is open == false) to be able to connect to external services.
+Run the flollowing commands after creating the space based on the profile:
 
 **Set context**
 
 ```
 tanzu context use <my-context>
-tanzu projectr use <my-project>
+tanzu project use <my-project>
 tanzu space use <my-space>
 ```
 
@@ -54,7 +54,7 @@ Create pre provisioned services
 
 ```
 tanzu context use <my-context>
-Kubectl create -f conf/.secret
+kubectl create -f conf/.secret
 ```
 Bind preproveisioned services to the app
 
@@ -65,4 +65,4 @@ tanzu services instance bind PostgreSQLInstance/<postgresname> ContainerApp/<app
 ```
 
 
-Brows the app ingress link from the Space UI
+Browse the app ingress link from the Space UI

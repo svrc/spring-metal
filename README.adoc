@@ -64,12 +64,12 @@ tanzu service instance bind PreProvisionedService/<genaiservicename> ContainerAp
 tanzu services instance bind PostgreSQLInstance/<postgresname> ContainerApp/<appname> --as db
 ```
 
-## Troubleshooting
+### Troubleshooting
 
-### Issue: Problem with external service binding.
+#### Issue: Problem with external service binding.
 - **Solution:** Ensure that all credentials and connection details in `conf/.secret` are correct and updated.
 
-### Issue: Application deployment fails.
+#### Issue: Application deployment fails.
 - **Solution:** Check the build output for errors and verify the Tanzu configuration settings.
 
 Browse your application through the app ingress link provided in the Space UI after deployment.

@@ -46,11 +46,20 @@ public class AIController {
             "userScore: " + album.getUserScore() + "\n";
 
         List<Document> documents = new ArrayList<>();
-        Document doc = new Document(text);
+        Document doc = new Document(album.getId(), text, new HashMap<>());
         logger.info("Adding Album " + doc.toString());
         documents.add(doc);
         this.vectorStore.add(documents);
         return text;
     }
+
+    @RequestMapping(value = "/ai/deleteDoc", method = RequestMethod.POST)
+    public String deleteDoc(@RequestBody String id) {
+        logger.info("Deleting Album " + id);
+        this.vectorStore.delete(Collections.singletonList(id));
+        return id;
+    }
+
+
 
 }

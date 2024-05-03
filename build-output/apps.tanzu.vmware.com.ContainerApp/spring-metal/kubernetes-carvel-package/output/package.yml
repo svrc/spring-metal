@@ -2,10 +2,10 @@ apiVersion: data.packaging.carvel.dev/v1alpha1
 kind: Package
 metadata:
   creationTimestamp: null
-  name: spring-metal.apps.local.20240501.0.793756000
+  name: spring-metal.apps.local.20240502.0.41848000
 spec:
   refName: spring-metal.apps.local
-  releasedAt: "2024-05-01T10:44:13Z"
+  releasedAt: "2024-05-02T17:30:33Z"
   template:
     spec:
       deploy:
@@ -25,4 +25,4 @@ spec:
           - '-'
   valuesSchema:
     openAPIv3: null
-  version: 20240501.0.793756000
+  version: 20240502.0.41848000

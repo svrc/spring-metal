@@ -3,6 +3,7 @@ configuration:
   dev:
     paths:
     - deploy-config/
+    - .tanzu/config/
   plain:
     paths:
     - deploy-config/

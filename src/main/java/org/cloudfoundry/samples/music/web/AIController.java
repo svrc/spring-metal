@@ -23,6 +23,15 @@ public class AIController {
     private MessageRetriever messageRetriever;
     private VectorStore vectorStore;
 
+    public static String generateVectorDoc(Album album) {
+            return "artist: " + album.getArtist() + "\n" +
+            "title: " + album.getTitle() + "\n" +
+            "releaseYear: " + album.getReleaseYear() + "\n" +
+            "genre: " + album.getGenre() + "\n" +
+            "userReview: " + album.getUserReview() + "\n" +
+            "userScore: " + album.getUserScore() + "\n";
+    }
+
     @Autowired
     public AIController(VectorStore vectorStore, MessageRetriever messageRetriever) {
         this.messageRetriever = messageRetriever;
@@ -36,14 +45,11 @@ public class AIController {
         return messageRetriever.retrieve(messages[messages.length - 1].getText());
     }
 
+
     @RequestMapping(value = "/ai/addDoc", method = RequestMethod.POST)
     public String addDoc(@RequestBody Album album) {
-        String text = "artist: " + album.getArtist() + "\n" + 
-            "title: " + album.getTitle() + "\n" + 
-            "releaseYear: " + album.getReleaseYear() + "\n" +
-            "genre: " + album.getGenre() + "\n" +
-            "userReview: " + album.getUserReview() + "\n" +
-            "userScore: " + album.getUserScore() + "\n";
+
+        String text = generateVectorDoc(album);
 
         List<Document> documents = new ArrayList<>();
         Document doc = new Document(album.getId(), text, new HashMap<>());

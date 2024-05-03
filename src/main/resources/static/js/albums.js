@@ -41,9 +41,10 @@ function AlbumsController($scope, $http, $modal, Albums, Album, Status) {
           $http.post('/ai/deleteDoc', album.id);
         }
         Albums.save(album,
-            function () {
+            function (value, result) {
                 Status.success("Album saved");
-                $http.post('/ai/addDoc', album);
+                $http.post('/ai/addDoc', value);
+
                 list();
             },
             function (result) {
@@ -130,7 +131,7 @@ function AlbumModalController($scope, $modalInstance, album, action) {
     };
 };
 
-function AlbumEditorController($scope, Albums, Status, EditorStatus) {
+function AlbumEditorController($scope, $http, Albums, Status, EditorStatus) {
     $scope.enableEditor = function (album, fieldName) {
         $scope.newFieldValue = album[fieldName];
         EditorStatus.enable(album.id, fieldName);
@@ -154,6 +155,8 @@ function AlbumEditorController($scope, Albums, Status, EditorStatus) {
         Albums.save({}, album,
             function () {
                 Status.success("Album saved");
+                $http.post('/ai/deleteDoc', album.id);
+                $http.post('/ai/addDoc', album);
                 list();
             },
             function (result) {

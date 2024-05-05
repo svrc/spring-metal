@@ -2,9 +2,8 @@ apiVersion: config.tanzu.vmware.com/v1
 configuration:
   dev:
     paths:
-    - deploy-config/
     - .tanzu/config/
   plain:
     paths:
-    - deploy-config/
+    - .tanzu/config/
 kind: TanzuConfig

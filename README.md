@@ -14,7 +14,7 @@ This repository contains artifacts necessary to build and run generative AI appl
 ## Prerequisites
 - Ensure you have the latest version of the Tanzu CLI installed.
 - Access to a Route53 domain and necessary AWS permissions.
-- Configured egress settings (open by default) to connect to external services.
+- Configured egress settings (closed by default) to connect to external services.
 
 ## Installation
 

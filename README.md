@@ -1,4 +1,4 @@
-# Demo of Spring AI with Tanzu platform
+# Demo of Tanzu platform and SpringAI
 
 ![Spring Boot](https://img.shields.io/badge/Spring%20Boot-3.1.2-brightgreen.svg)
 ![AI LLM](https://img.shields.io/badge/AI-LLM-blue.svg)

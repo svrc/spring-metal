@@ -7,7 +7,7 @@ spec:
   - group: gateway.networking.k8s.io
     kind: Gateway
     name: default-gateway
-    sectionName: http-spring-metal-test-11
+    sectionName: http-spring-metal
   rules:
   - backendRefs:
     - group: ""

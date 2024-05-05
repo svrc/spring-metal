@@ -7,6 +7,10 @@
 
 This repository contains artifacts necessary to build and run generative AI applications using Spring Boot and Tanzu Platform. The instructions below cover setup for both Cloud Foundry (cf) and Kubernetes (k8s) environments.
 
+## Architecture
+
+![Alt text](https://github.com/0pens0/spring-metal/blob/main/image.png?raw=true "Spring-metal AI topology")
+
 ## Prerequisites
 - Ensure you have the latest version of the Tanzu CLI installed.
 - Access to a Route53 domain and necessary AWS permissions.

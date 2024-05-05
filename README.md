@@ -19,7 +19,7 @@ This repository contains artifacts necessary to build and run generative AI appl
 ## Installation
 
 ### Cloud Foundry Runtime
-Set up your target environment and create necessary services:
+Set up your target environment and create necessary back-end services for the ai demo:
 
 ```bash
 cf target -o ai-apps -s ai-spring-metal

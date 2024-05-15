@@ -5,7 +5,7 @@ metadata:
   annotations:
     healthcheck.gslb.tanzu.vmware.com/service: spring-metal
     healthcheck.gslb.tanzu.vmware.com/path: /
-    healthcheck.gslb.tanzu.vmware.com/port: "80"
+    healthcheck.gslb.tanzu.vmware.com/port: "8080"
 spec:
   parentRefs:
   - group: gateway.networking.k8s.io

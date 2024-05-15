@@ -7,13 +7,13 @@ metadata:
   name: spring-metal
 spec:
   content:
-    buildTimestamp: "2024-05-12T22:49:14Z"
-    gitCommit: c8be994849dae3c63bfe86df8ae0de49697623c3-dirty
+    buildTimestamp: "2024-05-15T12:42:13Z"
+    gitCommit: 4bf565a61633f0290e18015a7a83d4393701c71d-dirty
     gitURL: github.com/0pens0/spring-metal.git
     packageRefName: spring-metal.apps.local
-    summary: git:c8be994 @ 2024-05-12T22:49:14Z
-    version: 20240512.2249.14598
-  image: harbor.vmtanzu.com/openso-tap-apps/spring-metal@sha256:bfe6a224ee1853a08497fcf2dab9113c3f98cb06365a8be109cd2e5ab224c3fb
+    summary: git:4bf565a @ 2024-05-15T12:42:13Z
+    version: 20240515.1242.13543
+  image: harbor.vmtanzu.com/openso-tap-apps/spring-metal@sha256:91147850596c7c3af41835bda2d66e62790def359d174fe7f63b6db2b85781f7
   nonSecretEnv:
   - name: JAVA_TOOL_OPTIONS
     value: -Dmanagement.endpoint.health.probes.add-additional-paths=true -Dmanagement.health.probes.enabled=true

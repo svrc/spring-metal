@@ -2,10 +2,10 @@ apiVersion: data.packaging.carvel.dev/v1alpha1
 kind: Package
 metadata:
   creationTimestamp: null
-  name: spring-metal.apps.local.20240515.1242.13543
+  name: spring-metal.apps.local.20240515.1436.29954
 spec:
   refName: spring-metal.apps.local
-  releasedAt: "2024-05-15T12:43:17Z"
+  releasedAt: "2024-05-15T14:37:13Z"
   template:
     spec:
       deploy:
@@ -14,7 +14,7 @@ spec:
           - --wait=false
       fetch:
       - imgpkgBundle:
-          image: harbor.vmtanzu.com/openso-tap-apps/spring-metal@sha256:ea703e9a6146d121903894d750f47937d0786306f27fa510424f2aae37c17126
+          image: harbor.vmtanzu.com/openso-tap-apps/spring-metal@sha256:148f83fdf809119ae6b499614319c16b3281bb8509c1c3d083861d459cf43c31
       template:
       - ytt:
           paths:
@@ -25,4 +25,4 @@ spec:
           - '-'
   valuesSchema:
     openAPIv3: null
-  version: 20240515.1242.13543
+  version: 20240515.1436.29954

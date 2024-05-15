@@ -7,12 +7,12 @@ metadata:
   name: spring-metal
 spec:
   content:
-    buildTimestamp: "2024-05-15T12:42:13Z"
-    gitCommit: 4bf565a61633f0290e18015a7a83d4393701c71d-dirty
+    buildTimestamp: "2024-05-15T14:36:29Z"
+    gitCommit: da6e3df6edff9314e4406294869fc7b8ea4eb0db-dirty
     gitURL: github.com/0pens0/spring-metal.git
     packageRefName: spring-metal.apps.local
-    summary: git:4bf565a @ 2024-05-15T12:42:13Z
-    version: 20240515.1242.13543
+    summary: git:da6e3df @ 2024-05-15T14:36:29Z
+    version: 20240515.1436.29954
   image: harbor.vmtanzu.com/openso-tap-apps/spring-metal@sha256:91147850596c7c3af41835bda2d66e62790def359d174fe7f63b6db2b85781f7
   nonSecretEnv:
   - name: JAVA_TOOL_OPTIONS

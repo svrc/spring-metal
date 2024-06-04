@@ -3,17 +3,16 @@ kind: ContainerApp
 metadata:
   annotations:
     containerapp.apps.tanzu.vmware.com/class: kubernetes
-  creationTimestamp: null
   name: spring-metal
 spec:
   content:
-    buildTimestamp: "2024-05-15T14:36:29Z"
-    gitCommit: da6e3df6edff9314e4406294869fc7b8ea4eb0db-dirty
+    buildTimestamp: "2024-06-04T13:29:07Z"
+    gitCommit: 86d967a6e6ff579ab66d4eff45a16b5a6865c7ef-dirty
     gitURL: github.com/0pens0/spring-metal.git
     packageRefName: spring-metal.apps.local
-    summary: git:da6e3df @ 2024-05-15T14:36:29Z
-    version: 20240515.1436.29954
-  image: harbor.vmtanzu.com/openso-tap-apps/spring-metal@sha256:91147850596c7c3af41835bda2d66e62790def359d174fe7f63b6db2b85781f7
+    summary: git:86d967a @ 2024-06-04T13:29:07Z
+    version: 20240604.1329.7112
+  image: harbor.vmtanzu.com/stu-tap-apps/spring-metal@sha256:996d13c9af2323e634d613d0fc0f425d2455b80607920a9ceca29c66f226c335
   nonSecretEnv:
   - name: JAVA_TOOL_OPTIONS
     value: -Dmanagement.endpoint.health.probes.add-additional-paths=true -Dmanagement.health.probes.enabled=true
@@ -54,15 +53,15 @@ spec:
   - for: kubernetes.scale-replicas
     keyPath: .data['values.yml']->[yaml].replicas
     kind: Secret
-    name: spring-metal
+    name: spring-metal-values
   - for: kubernetes.scale-resources
     keyPath: .data['values.yml']->[yaml].resources
     kind: Secret
-    name: spring-metal
+    name: spring-metal-values
   - for: kubernetes.set-secret-env
     keyPath: .data['values.yml']->[yaml].secretEnv
     kind: Secret
-    name: spring-metal
+    name: spring-metal-values
   - apiGroup: packaging.carvel.dev
     for: kubernetes.delete
     kind: PackageInstall
@@ -70,7 +69,7 @@ spec:
   - apiGroup: data.packaging.carvel.dev
     for: kubernetes.delete
     kind: Package
-    name: spring-metal.apps.local.20240523.306.35159
+    name: spring-metal.apps.local.20240604.1329.7112
   - for: kubernetes.delete
     kind: Secret
     name: spring-metal-values

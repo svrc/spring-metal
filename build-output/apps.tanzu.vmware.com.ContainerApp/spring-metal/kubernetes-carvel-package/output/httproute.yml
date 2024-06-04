@@ -2,12 +2,43 @@ apiVersion: gateway.networking.k8s.io/v1beta1
 kind: HTTPRoute
 metadata:
   name: spring-metal
+  annotations:
+    healthcheck.gslb.tanzu.vmware.com/service: spring-metal
+    healthcheck.gslb.tanzu.vmware.com/path: /
+    healthcheck.gslb.tanzu.vmware.com/port: "80"
 spec:
   parentRefs:
   - group: gateway.networking.k8s.io
     kind: Gateway
     name: default-gateway
-    sectionName: http-spring-metal-ai-test-10
+    sectionName: http-spring-metal-stu
+  rules:
+  - backendRefs:
+    - group: ""
+      kind: Service
+      name: spring-metal
+      port: 8080
+      weight: 1
+    matches:
+    - path:
+        type: PathPrefix
+        value: /
+
+---
+apiVersion: gateway.networking.k8s.io/v1beta1
+kind: HTTPRoute
+metadata:
+  name: spring-metal-uber
+  annotations:
+    healthcheck.gslb.tanzu.vmware.com/service: spring-metal
+    healthcheck.gslb.tanzu.vmware.com/path: /
+    healthcheck.gslb.tanzu.vmware.com/port: "80"
+spec:
+  parentRefs:
+  - group: gateway.networking.k8s.io
+    kind: Gateway
+    name: default-gateway
+    sectionName: http-spring-metal-uber
   rules:
   - backendRefs:
     - group: ""

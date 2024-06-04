@@ -30,7 +30,11 @@ server:
   #  key-store-password: changeit
   #  key-password: changeit
   #  key-store-type: "BCFKS"
-
+    
+---
+logging:
+  level:
+    root: DEBUG
 ---
 spring:
   config:

@@ -7,8 +7,8 @@ spec:
   packageRef:
     refName: spring-metal.apps.local
     versionSelection:
-      constraints: 20240502.0.41848000
-  serviceAccountName: tanzu-containerapp-installer
+      constraints: 20240523.306.35159
+  serviceAccountName: carvel-package-installer
   values:
   - secretRef:
       name: spring-metal-values

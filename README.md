@@ -69,8 +69,8 @@ Create and bind pre-provisioned services:
 ```bash
 tanzu context use <my-context>
 kubectl create -f conf/.secret
-tanzu service instance bind PreProvisionedService/<genaiservicename> ContainerApp/<appname> --as genai
-tanzu services instance bind PostgreSQLInstance/<postgresname> ContainerApp/<appname> --as db
+tanzu service bind PreProvisionedService/<genaiservicename> ContainerApp/<appname> --as genai
+tanzu services bind PostgreSQLInstance/<postgresname> ContainerApp/<appname> --as db
 ```
 
 ### Troubleshooting

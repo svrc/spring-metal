@@ -24,10 +24,17 @@ Set up your target environment and create necessary back-end services for the ai
 ```bash
 cf target -o ai-apps -s ai-spring-metal
 cf create-service private-ai-service shared-ai-plan ai-service
+cf create-service-key ai-service ai-key
+cf service-key ai-service ai-key
 cf create-service postgres on-demand-postgres-db pgvector
+cf create-service-key pgvector pg-key
+cf service-key pgvector pg-key
 cf push
 ```
-
+Notes:
+- if your Cloud Foundry Runtime srrvices are hosted on a private network, you will need to create or update your postgres service with the TCP Router and Service instance gateway.  [Documentation](https://docs.vmware.com/en/VMware-Tanzu-Postgres-for-Tanzu-Application-Service/1.1/postgres/create-service-gateway-instance.html)
+- The contents of your Kubernetes service secret can be viewed through the service key.  
+  
 ### Kubernetes Runtime
 
 Set up your Kubernetes environment ensuring all prerequisites are met:

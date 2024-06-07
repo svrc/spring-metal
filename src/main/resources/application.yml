@@ -43,7 +43,7 @@ server:
   #  key-store-password: changeit
   #  key-password: changeit
   #  key-store-type: "BCFKS"
-
+    
 ---
 spring:
   config:
@@ -78,3 +78,18 @@ spring:
 #  governance:
 #    fips:
 #      exit-on-failure: true
+---
+tracing:
+    sampling:
+        probability: 0.5
+wavefront:
+    application:
+        name: spring-metal
+        service-name: tanzu-hub-app-management-spring-demo-apps
+        custom-tags:
+            instance_guid: ${CF_INSTANCE_GUID}
+    api-token: cfd06c63-7ef3-4f3d-a48f-8bf662bf2453// this is a fake token since wavefront lib expects a token, though this is not used for authentication to collector for ingestion
+    uri: http://telegraf.hub-collector.service.internal:8765
+metrics:
+    tags:
+        instance_guid: ${CF_INSTANCE_GUID}

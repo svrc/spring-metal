@@ -6,6 +6,9 @@ spring:
     generate-ddl: true
 
 management:
+  wavefront:
+    api-token: cfd06c63-7ef3-4f3d-a48f-8bf662bf2453// this is a fake token since wavefront lib expects a token, though this is not used for authentication to collector for ingestion
+    uri: http://telegraf.hub-collector.service.internal:8765
   endpoints:
     web:
       exposure:
@@ -26,6 +29,10 @@ management:
     env:
       show-values: ALWAYS
   
+---
+logging:
+  level:
+    root: INFO
 ---
 spring:
   config:
@@ -88,8 +95,6 @@ wavefront:
         service-name: tanzu-hub-app-management-spring-demo-apps
         custom-tags:
             instance_guid: ${CF_INSTANCE_GUID}
-    api-token: cfd06c63-7ef3-4f3d-a48f-8bf662bf2453// this is a fake token since wavefront lib expects a token, though this is not used for authentication to collector for ingestion
-    uri: http://telegraf.hub-collector.service.internal:8765
 metrics:
     tags:
         instance_guid: ${CF_INSTANCE_GUID}

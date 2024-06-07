@@ -1,0 +1,6 @@
+2024-06-07 19:39:52: *****************************************************************************
+2024-06-07 19:39:52: *                     Started SBOM Collection                               *
+2024-06-07 19:39:52: *****************************************************************************
+2024-06-07 19:39:53: Executing command: cd /Users/openso/git/spring-metal
+2024-06-07 19:39:54: Executing command: mvn -q org.cyclonedx:cyclonedx-maven-plugin:2.7.11:makeAggregateBom -DoutputDirectory=/Users/openso/git/spring-metal/assessment/sbom -DoutputName=${project.artifactId} -DschemaVersion=1.4 -Dcyclonedx.skipAttach=true -Dcyclonedx.skipNotDeployed=false -DoutputFormat=json
+2024-06-07 19:40:08: Executing command: rm -rf /Users/openso/git/spring-metal/assessment/sbom

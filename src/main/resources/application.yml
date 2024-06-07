@@ -11,8 +11,21 @@ management:
       exposure:
         include: "*"
   endpoint:
+    info:
+      show-values: ALWAYS
+      git:
+        mode: full
+      spring:
+        boot:
+          version: '@app.spring.boot.version@'
+      app:
+        version: @project.version@
     health:
+      enabled: true
       show-details: always
+    env:
+      show-values: ALWAYS
+  
 ---
 spring:
   config:

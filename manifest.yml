@@ -3,7 +3,7 @@ applications:
 - name: spring-metal
   memory: 1G
   path: target/dekt-metal-0.5.jar
-#  buildpack: java_buildpack_offline
+  buildpack: java_buildpack_offline
   random-route: true
   env:
     JBP_CONFIG_SPRING_AUTO_RECONFIGURATION: '{enabled: false}'

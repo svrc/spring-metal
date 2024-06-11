@@ -1,0 +1,14 @@
+name: 'tanzu-cli install'
+description: 'Installing the base TANZU CLI'
+inputs:
+  version:
+    description: 'Version of the TANZU CLI to install'
+    default: 'latest'
+runs:
+  using: "composite"
+  steps:
+    - name: Install Tanzu CLI
+      shell: bash
+      env:
+        TANZU_CLI_VERSION: ${{ inputs.version }}
+      run: install.sh

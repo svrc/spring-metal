@@ -5,7 +5,7 @@ applications:
   path: target/dekt-metal-0.5.jar
   buildpack: java_buildpack_offline
   routes:
-    - route: spring-metal-gitops-demo-global.vmtanzu.net
+    - route: spring-metal-gitops-demo.vmtanzu.net
       protocol: http2
   env:
     JBP_CONFIG_SPRING_AUTO_RECONFIGURATION: '{enabled: false}'

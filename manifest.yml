@@ -4,7 +4,9 @@ applications:
   memory: 1G
   path: target/dekt-metal-0.5.jar
   buildpack: java_buildpack_offline
-  random-route: true
+  routes:
+    - route: spring-metal-demo.global.vmtanzu.com
+      protocol: http2
   env:
     JBP_CONFIG_SPRING_AUTO_RECONFIGURATION: '{enabled: false}'
     SPRING_PROFILES_ACTIVE: http2

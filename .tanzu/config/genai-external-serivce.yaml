@@ -1,0 +1,23 @@
+apiVersion: v1
+data:
+  uri: aHR0cHM6Ly9nZW5haS1wcm94eS5zeXMudGFzLnZtdGFuenUuY29tL3YxLwo=
+  api-key: ZWY0MjYwNTgtYjgwYy00ZTNiLTk4YzItOGRiYTUxYjVjZTRm
+  provider: b3BlbmFp  # openai
+  type: b3BlbmFp  # openai
+kind: Secret
+metadata:
+  name: genai-creds
+type: servicebinding.io/ai
+
+---
+apiVersion: services.tanzu.vmware.com/v1
+kind: PreProvisionedService
+metadata:
+  name: genai
+spec:
+  bindingConnectors:
+  - name: main
+    description: Gen AI credentials
+    type: ai
+    secretRef:
+      name: genai-creds

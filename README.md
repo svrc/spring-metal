@@ -4,6 +4,7 @@
 ![AI LLM](https://img.shields.io/badge/AI-LLM-blue.svg)
 ![PostgreSQL](https://img.shields.io/badge/postgres-15.1-red.svg)
 ![Tanzu](https://img.shields.io/badge/tanzu-platform-purple.svg)
+
 ![Tanzu deploy to K8s](https://github.com/0pens0/spring-metal/actions/workflows/k8sdeploy.yml/badge.svg)
 ![Tanzu deploy to CF](https://github.com/0pens0/spring-metal/actions/workflows/cfdeploy.yml/badge.svg)
 

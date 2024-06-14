@@ -1,4 +1,4 @@
-name: Deploy gitops project
+name: Deploy to CF
 run-name: ${{ github.actor }} deploying
 on:
   push:

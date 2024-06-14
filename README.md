@@ -18,12 +18,14 @@ This repository contains artifacts necessary to build and deploy generative AI a
 ## Prerequisites
 - Ensure you have the TPK8S organisation, project and space information.
 - Ensure you have TPCF organisation and space information to push to the foundation.
-- Ensure you have the parameters of the github action defined in a reposiroty level, secrets and env. vars.
+- Ensure you have the parameters of the github action defined in a reposiroty level, secrets and env. vars.\
+
+Get in to secrets and vars configuration in the repository level >> https://github.com/0pens0/spring-metal/settings/secrets/actions and configure the following:
 - TPK8S parameters:
     - TANZU_CLI_VERSION = tanzu cli version to use
-    - API_ENDPOINT = the api end point information and org ID >> https://api.tanzu.cloud.vmware.com/org/***org-id***
+    - API_ENDPOINT = the api end point information and org ID >> https://api.tanzu.cloud.vmware.com/org/ ***org-id***
     - API_TOKEN = tanzu api token to connect to TPK8S service
-    - BUILD_REGISTRY_CONF = the configuration of **tanzu build** for **containerapp-registry** as part of the build plan >> ***registry***/***project***/{name}
+    - BUILD_REGISTRY_CONF = the configuration of tanzu build for **containerapp-registry** as part of the build plan >> should be ***registry-host-name***/***project***/{name}
     - REGISTRY = the container registry host name used for docker login
     - REGISTRY_USER_NAME = the user used to login to the registry
     - RERGISTRY_PASS = the password used to login to registry
@@ -35,7 +37,7 @@ This repository contains artifacts necessary to build and deploy generative AI a
     - CF_ORG = TPCF org name
     - CF_SPACE = TPCF space name to push to
 
-https://github.com/0pens0/spring-metal/settings/secrets/actions
+
 
 ## Commit a change on this branch (Gitops) and it will trigger the push
 

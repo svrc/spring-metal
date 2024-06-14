@@ -33,7 +33,7 @@ jobs:
       - name: Deploy
         env:
           TANZU_API_TOKEN: ${{ secrets.API_TOKEN }}
-          ENDPOINT: ${{ secrets.API_ENDPOINT || 'console.cloud.vmware.com' }}
+          ENDPOINT: ${{ vars.API_ENDPOINT || 'console.cloud.vmware.com' }}
           REGISTRY: ${{ secrets.REGISTRY_ENDPOINT }}
           REGISTRY_PASS: ${{ secrets.RERGISTRY_PASS}}
         run: |

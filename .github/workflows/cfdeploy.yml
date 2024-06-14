@@ -23,10 +23,12 @@ jobs:
       - name: Connect to CF API
         run: |
           export CF_API=${{ vars.CF_API_ENDPOINT }}
+          export CF_ORG=${{ vars.CF_ORG }}
+          export CF_SPACE=${{ vars.CF_SPACE }}
           echo $CF_API
           cf api $CF_API --skip-ssl-validation
           cf auth admin ${{ secrets.CF_API_TOKEN }}
-          cf target -o tanzu-platform-demo -s spring-metal-space
+          cf target -o $CF_ORG -s $CF_SPACE
 
       - name: Check out repository code
         uses: actions/checkout@v4
@@ -34,10 +36,8 @@ jobs:
         run: |
           export JAVA_HOME=/usr/lib/jvm/java-1.17.0-openjdk-amd64  
           cf target
-          #git clone https://github.com/0pens0/spring-metal
-          #cd spring-metal
           mvn package
-          cf create-space spring-metal-space
+          cf create-space $CF_SPACE
           cf push
           cf apps
 

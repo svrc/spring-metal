@@ -21,7 +21,7 @@ This repository contains artifacts necessary to build and deploy generative AI a
 - Ensure you have the parameters of the github action defined in a reposiroty level, secrets and env. vars.
 - TPK8S parameters:
     - TANZU_CLI_VERSION = tanzu cli version to use
-    - API_ENDPOINT = the api end point information and org ID >> https://api.tanzu.cloud.vmware.com/org/***your-org-id***
+    - API_ENDPOINT = the api end point information and org ID >> https://api.tanzu.cloud.vmware.com/org/***org-id***
     - API_TOKEN = tanzu api token to connect to TPK8S service
     - BUILD_REGISTRY_CONF = the configuration of **tanzu build** for **containerapp-registry** as part of the build plan >> ***registry***/***project***/{name}
     - REGISTRY = the container registry host name used for docker login

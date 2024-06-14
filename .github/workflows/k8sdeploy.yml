@@ -34,7 +34,7 @@ jobs:
         env:
           TANZU_API_TOKEN: ${{ secrets.API_TOKEN }}
           ENDPOINT: ${{ vars.API_ENDPOINT || 'console.cloud.vmware.com' }}
-          REGISTRY: ${{ secrets.REGISTRY_ENDPOINT }}
+          REGISTRY: ${{ vars.REGISTRY_ENDPOINT }}
           REGISTRY_PASS: ${{ secrets.RERGISTRY_PASS}}
         run: |
           tanzu login --endpoint ${ENDPOINT}
@@ -43,8 +43,8 @@ jobs:
           tanzu context list --wide
           tanzu project list
           docker login ${REGISTRY} -u openso -p  ${REGISTRY_PASS}
-          tanzu project use ${{ secrets.PROJECT_NAME }}
+          tanzu project use ${{ vars.PROJECT_NAME }}
           tanzu space list
-          tanzu space use ${{ secrets.SPACE_NAME }}
+          tanzu space use ${{ vars.SPACE_NAME }}
           tanzu deploy -y --diff --patch
       - run: echo "🍏 This job's status is ${{ job.status }}."

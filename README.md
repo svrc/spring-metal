@@ -8,11 +8,11 @@
 ![Tanzu deploy to K8s](https://github.com/0pens0/spring-metal/actions/workflows/k8sdeploy.yml/badge.svg)
 ![Tanzu deploy to CF](https://github.com/0pens0/spring-metal/actions/workflows/cfdeploy.yml/badge.svg)
 
-This repository contains artifacts necessary to build and run generative AI applications using Spring Boot and Tanzu Platform. The instructions below cover setup for both Cloud Foundry (cf) and Kubernetes (k8s) environments.
+This repository contains artifacts necessary to build and deploy generative AI applications using Spring Boot and Tanzu Platform in a gitops fasion. The instructions below cwill push the app into both Cloud Foundry (cf) and Kubernetes (k8s) environments.
 
 ## Architecture
 
-![Alt text](https://github.com/0pens0/spring-metal/blob/main/image.jpg?raw=true "Spring-metal Github action flow")
+![Alt text](https://github.com/0pens0/spring-metal/blob/gitops/image.png?raw=true "Spring-metal Github action flow")
 
 ## Prerequisites
 - Ensure you have the Tanzu organisation, project and space information.

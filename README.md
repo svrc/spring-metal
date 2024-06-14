@@ -1,4 +1,5 @@
-# Demo of Tanzu platform Innerloop Gitops with Github
+# Demo of Tanzu platform & 
+# Gitops with Github Actions
 
 ![Spring Boot](https://img.shields.io/badge/Spring%20Boot-3.1.2-brightgreen.svg)
 ![AI LLM](https://img.shields.io/badge/AI-LLM-blue.svg)
@@ -8,16 +9,18 @@
 ![Tanzu deploy to K8s](https://github.com/0pens0/spring-metal/actions/workflows/k8sdeploy.yml/badge.svg)
 ![Tanzu deploy to CF](https://github.com/0pens0/spring-metal/actions/workflows/cfdeploy.yml/badge.svg)
 
-This repository contains artifacts necessary to build and deploy generative AI applications using Spring Boot and Tanzu Platform in a gitops fasion. The instructions below cwill push the app into both Cloud Foundry (cf) and Kubernetes (k8s) environments.
+This repository contains artifacts necessary to build and deploy generative AI applications using Spring Boot and Tanzu Platform in a gitops fasion. The instructions below will push the app into both Cloud Foundry (cf) and Kubernetes (k8s) environments.
 
 ## Architecture
 
 ![Alt text](https://github.com/0pens0/spring-metal/blob/gitops/image.png?raw=true "Spring-metal Github action flow")
 
 ## Prerequisites
-- Ensure you have the Tanzu organisation, project and space information.
-- Ensure you have access to TPCF and information on the Organisation and space to push to the foundation and you configured the API token.
+- Ensure you have the TPK8S organisation, project and space information.
+- Ensure you have TPCF organisation and space information to push to the foundation.
 - Ensure you have the parameters of the github action defined in a reposiroty level, secrets and env. vars.
+
+https://github.com/0pens0/spring-metal/settings/secrets/actions
 
 ## Commit a change on this branch (Gitops) and it will trigger the push
 

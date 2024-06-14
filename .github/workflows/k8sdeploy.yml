@@ -46,7 +46,5 @@ jobs:
           tanzu project use ${{ secrets.PROJECT_NAME }}
           tanzu space list
           tanzu space use ${{ secrets.SPACE_NAME }}
-          #git clone https://github.com/0pens0/spring-metal
-          #cd spring-metal
           tanzu deploy -y --diff --patch
       - run: echo "🍏 This job's status is ${{ job.status }}."

@@ -22,7 +22,7 @@ jobs:
 
       - name: Connect to CF API
         run: |
-          cf api https://api.sys.tas.vmtanzu.com --skip-ssl-validation
+          cf api ${{ env.CF_API_ENDPOINT }} --skip-ssl-validation
           cf auth admin ${{ secrets.CF_API_TOKEN }}
           cf target -o tanzu-platform-demo -s spring-metal-space
 

@@ -22,7 +22,7 @@ jobs:
 
       - name: Connect to CF API
         run: |
-          export CF_API=${{ secrets.CF_API_TOKEN }}
+          export CF_API=${{ vars.CF_API_ENDPOINT }}
           echo $CF_API
           cf api $CF_API --skip-ssl-validation
           cf auth admin ${{ secrets.CF_API_TOKEN }}

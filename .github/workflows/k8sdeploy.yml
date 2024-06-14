@@ -9,8 +9,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Install Tanzu CLI
+        env:
+          TANZU_CLI_VERSION: ${{vars.TANZU_CLI_VERSION}}
         run: |
-          TANZU_CLI_VERSION=v1.3.0
           curl -Lo tanzu-cli-linux-amd64.tar.gz https://github.com/vmware-tanzu/tanzu-cli/releases/download/${TANZU_CLI_VERSION}/tanzu-cli-linux-amd64.tar.gz
           curl -Lo tanzu-cli-binaries-checksums.txt https://github.com/vmware-tanzu/tanzu-cli/releases/download/${TANZU_CLI_VERSION}/tanzu-cli-binaries-checksums.txt
           if [ "$(cat tanzu-cli-binaries-checksums.txt | grep tanzu-cli-linux-amd64.tar.gz)" != "$(sha256sum tanzu-cli-linux-amd64.tar.gz)" ]; then echo "Checksum does not match"; exit 1; fi

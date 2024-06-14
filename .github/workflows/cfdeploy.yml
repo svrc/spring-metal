@@ -21,8 +21,11 @@ jobs:
           java -version
 
       - name: Connect to CF API
+        env:
+          CF_API: ${{ env.CF_API_ENDPOINT }}
         run: |
-          cf api ${{ env.CF_API_ENDPOINT }} --skip-ssl-validation
+          echo $CF_API
+          cf api $CF_API --skip-ssl-validation
           cf auth admin ${{ secrets.CF_API_TOKEN }}
           cf target -o tanzu-platform-demo -s spring-metal-space
 

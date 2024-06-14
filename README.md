@@ -19,6 +19,21 @@ This repository contains artifacts necessary to build and deploy generative AI a
 - Ensure you have the TPK8S organisation, project and space information.
 - Ensure you have TPCF organisation and space information to push to the foundation.
 - Ensure you have the parameters of the github action defined in a reposiroty level, secrets and env. vars.
+- TPK8S parameters:
+    - TANZU_CLI_VERSION = tanzu cli version to use
+    - API_ENDPOINT = the api end point information and org ID >> https://api.tanzu.cloud.vmware.com/org/***your-org-id***
+    - API_TOKEN = tanzu api token to connect to TPK8S service
+    - BUILD_REGISTRY_CONF = the configuration of **tanzu build** for **containerapp-registry** as part of the build plan >> ***registry***/***project***/{name}
+    - REGISTRY = the container registry host name used for docker login
+    - REGISTRY_USER_NAME = the user used to login to the registry
+    - RERGISTRY_PASS = the password used to login to registry
+    - PROJECT = the TPK8S project name
+    - SPACE = the TPK8S space to deploy to
+- TPCF parameters:
+    - CF_API_ENDPOINT = CF api of the foundation
+    - CF_API_TOKEN = the api token used for api login
+    - CF_ORG = TPCF org name
+    - CF_SPACE = TPCF space name to push to
 
 https://github.com/0pens0/spring-metal/settings/secrets/actions
 

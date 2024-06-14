@@ -17,15 +17,14 @@ jobs:
           sudo apt install openjdk-17-jdk openjdk-17-jre
           sudo update-java-alternatives --set /usr/lib/jvm/java-1.17.0-openjdk-amd64
           export JAVA_HOME=/usr/lib/jvm/java-1.17.0-openjdk-amd64
-          mvn -version
-          java -version
 
       - name: Connect to CF API
+        env:
+          CF_API: ${{ vars.CF_API_ENDPOINT }}
+          CF_ORG: ${{ vars.CF_ORG }}
+          CF_SPACE: ${{ vars.CF_SPACE }}
+
         run: |
-          export CF_API=${{ vars.CF_API_ENDPOINT }}
-          export CF_ORG=${{ vars.CF_ORG }}
-          export CF_SPACE=${{ vars.CF_SPACE }}
-          echo $CF_API
           cf api $CF_API --skip-ssl-validation
           cf auth admin ${{ secrets.CF_API_TOKEN }}
           cf target -o $CF_ORG -s $CF_SPACE
@@ -35,7 +34,6 @@ jobs:
       - name: Deploy
         run: |
           export JAVA_HOME=/usr/lib/jvm/java-1.17.0-openjdk-amd64  
-          cf target
           mvn package
           cf push
           cf apps

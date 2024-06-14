@@ -37,7 +37,6 @@ jobs:
           export JAVA_HOME=/usr/lib/jvm/java-1.17.0-openjdk-amd64  
           cf target
           mvn package
-          cf create-space $CF_SPACE
           cf push
           cf apps
 

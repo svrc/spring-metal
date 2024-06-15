@@ -4,8 +4,6 @@ applications:
   memory: 1G
   path: target/dekt-metal-0.5.jar
   buildpack: java_buildpack_offline
-#  buildpack: java_native_image_cnb_beta 
-#  stack: tanzu-jammy-full-stack
   random-route: true
   env:
     JBP_CONFIG_SPRING_AUTO_RECONFIGURATION: '{enabled: false}'

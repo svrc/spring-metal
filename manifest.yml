@@ -3,9 +3,14 @@ applications:
 - name: spring-metal
   memory: 1G
   path: target/dekt-metal-0.5.jar
-#  buildpack: java_buildpack_offline
+  buildpack: java_buildpack_offline
+#  buildpack: java_native_image_cnb_beta 
+#  stack: tanzu-jammy-full-stack
   random-route: true
   env:
     JBP_CONFIG_SPRING_AUTO_RECONFIGURATION: '{enabled: false}'
     SPRING_PROFILES_ACTIVE: http2
     JBP_CONFIG_OPEN_JDK_JRE: '{ jre: { version: 17.+ } }'
+    BP_JVM_VERSION: 17
+    BP_NATIVE_IMAGE: true
+    BP_MAVEN_ACTIVE_PROFILES: native

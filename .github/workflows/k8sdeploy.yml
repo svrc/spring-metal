@@ -22,7 +22,7 @@ jobs:
           tanzu init
           tanzu version
 
-      - name: Install tanzu plugins
+      - name: Install Tanzu plugins
         run: |
           tanzu plugin install build
           tanzu plugin install resource
@@ -31,7 +31,7 @@ jobs:
 
       - name: Check out repository code
         uses: actions/checkout@v4
-      - name: Deploy
+      - name: Build and Deploy to Tanzu Space
         env:
           TANZU_API_TOKEN: ${{ secrets.API_TOKEN }}
         run: |

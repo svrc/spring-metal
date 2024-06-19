@@ -40,5 +40,5 @@ jobs:
           docker login ${{ vars.REGISTRY }} -u ${{vars.REGISTRY_USER_NAME}} -p ${{ secrets.RERGISTRY_PASS}}
           tanzu project use ${{ vars.PROJECT }}
           tanzu space use ${{ vars.SPACE }}
-          tanzu deploy --only .tanzu/config -y
+          tanzu deploy --patch --diff -y
       - run: echo "🍏 This job's status is ${{ job.status }}."

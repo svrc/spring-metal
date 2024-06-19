@@ -3,7 +3,7 @@ run-name: ${{ github.actor }} deploying
 on:
   push:
     branches:
-      - "gitops"
+      - "dev"
 jobs:
   gitops-deploy:
     runs-on: ubuntu-latest
@@ -39,6 +39,6 @@ jobs:
           tanzu build config --build-plan-source-type=file --build-plan-source conf/platform-config.yml --containerapp-registry ${{ vars.BUILD_REGISTRY_CONF}}
           docker login ${{ vars.REGISTRY }} -u ${{vars.REGISTRY_USER_NAME}} -p ${{ secrets.RERGISTRY_PASS}}
           tanzu project use ${{ vars.PROJECT }}
-          tanzu space use ${{ vars.SPACE }}
+          tanzu space use ${{ vars.SPACE_DEV }}
           tanzu deploy --patch --diff -y
       - run: echo "🍏 This job's status is ${{ job.status }}."

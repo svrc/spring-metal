@@ -55,5 +55,8 @@ jobs:
           git add .
           git commit -m "dev env. code change"
           git push
+          cd ..
+          rm -rf spring-metal-gitops
+          rm -rf .build-output
 
       - run: echo "🍏 This job's status is ${{ job.status }}."

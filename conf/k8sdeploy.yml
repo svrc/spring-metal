@@ -28,6 +28,8 @@ jobs:
         run: |
           tanzu plugin install build -v v0.9.2 -t 'global'
           tanzu plugin install resource -v v0.2.0 -t 'global'
+          tanzu plugin install project -v v0.2.0 -t 'global'
+          tanzu plugin install space -v v0.2.0 -t 'global'
 
       - name: Check out repository code
         uses: actions/checkout@v4
@@ -38,11 +40,7 @@ jobs:
           tanzu login --endpoint ${{ vars.API_ENDPOINT }}
           tanzu build config --build-plan-source-type=file --build-plan-source conf/platform-config.yml --containerapp-registry ${{ vars.BUILD_REGISTRY_CONF}}
           docker login ${{ vars.REGISTRY }} -u ${{vars.REGISTRY_USER_NAME}} -p ${{ secrets.RERGISTRY_PASS}}
-          tanzu build -o .build-output
-          git clone https://github.com/0pens0/spring-metal-gitops
-          tanzu promote --from-build .build-output/apps.tanzu.vmware.com.ContainerApp/spring-metal/kubernetes-carvel-package/output --to spring-metal-gitops/git-ops/spaces/spring-metal-dev
-          cd spring-metal-gitops
-          git add .
-          git commit -m "change"
-          git push
+          tanzu project use ${{ vars.PROJECT }}
+          tanzu space use ${{ vars.SPACE_DEV }}
+          tanzu deploy --patch --diff -y
       - run: echo "🍏 This job's status is ${{ job.status }}."

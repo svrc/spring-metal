@@ -8,6 +8,10 @@ jobs:
   gitops-deploy:
     runs-on: ubuntu-latest
     steps:
+      - uses: de-vri-es/setup-git-credentials@v2
+        with:
+          credentials: ${{secrets.GIT_CREDENTIALS}}
+          
       - name: Install Tanzu CLI
         env:
           TANZU_CLI_VERSION: ${{vars.TANZU_CLI_VERSION}}

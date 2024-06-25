@@ -26,10 +26,10 @@ jobs:
         env:
           TANZU_CLI_INCLUDE_DEACTIVATED_PLUGINS_TEST_ONLY: 1
         run: |
-          tanzu plugin install build
-          tanzu plugin install resource --version v0.2.0
-          tanzu plugin install project
-          tanzu plugin install space
+          tanzu plugin install build -v v0.9.2 -t 'global'
+          tanzu plugin install resource -v v0.2.0 -t 'global'
+          tanzu plugin install project -v v0.2.0 -t 'global'
+          tanzu plugin install space -v v0.2.0 -t 'global'
 
       - name: Check out repository code
         uses: actions/checkout@v4

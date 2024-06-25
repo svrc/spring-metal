@@ -8,10 +8,7 @@ jobs:
   gitops-deploy:
     runs-on: ubuntu-latest
     steps:
-      - uses: de-vri-es/setup-git-credentials@v2
-        with:
-          credentials: ${{secrets.GIT_CREDENTIALS}}
-          
+
       - name: Install Tanzu CLI
         env:
           TANZU_CLI_VERSION: ${{vars.TANZU_CLI_VERSION}}
@@ -44,9 +41,14 @@ jobs:
           tanzu build config --build-plan-source-type=file --build-plan-source conf/platform-config.yml --containerapp-registry ${{ vars.BUILD_REGISTRY_CONF}}
           docker login ${{ vars.REGISTRY }} -u ${{vars.REGISTRY_USER_NAME}} -p ${{ secrets.RERGISTRY_PASS}}
           tanzu build -o .build-output
-      
+
+      - uses: de-vri-es/setup-git-credentials@v2
+        with:
+          credentials: ${{secrets.GIT_CREDENTIALS}}
+          
       - name: Install Tanzu plugins
         run: |
+          git config --global user.name "0pens0"  
           git clone https://github.com/0pens0/spring-metal-gitops
           tanzu promote --from-build .build-output/apps.tanzu.vmware.com.ContainerApp/spring-metal/kubernetes-carvel-package/output --to spring-metal-gitops/git-ops/spaces/spring-metal-dev
           cd spring-metal-gitops

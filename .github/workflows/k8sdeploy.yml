@@ -46,7 +46,7 @@ jobs:
         with:
           credentials: ${{secrets.GIT_CREDENTIALS}}
           
-      - name: Install Tanzu plugins
+      - name: Promote to dev environment
         run: |
           git config --global user.name "0pens0"  
           git clone https://github.com/0pens0/spring-metal-gitops
@@ -55,8 +55,5 @@ jobs:
           git add .
           git commit -m "dev env. code change"
           git push
-          cd ..
-          rm -rf spring-metal-gitops
-          rm -rf .build-output
 
       - run: echo "🍏 This job's status is ${{ job.status }}."

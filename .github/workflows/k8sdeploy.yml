@@ -46,7 +46,6 @@ jobs:
         with:
           credentials: ${{secrets.GIT_CREDENTIALS}}
         
-          
       - name: Promote to dev environment
         run: |
           git config --global user.name "0pens0"

@@ -28,7 +28,7 @@ jobs:
           TANZU_CLI_INCLUDE_DEACTIVATED_PLUGINS_TEST_ONLY: 1
         run: |
           tanzu plugin install build -v v0.9.2 -t 'global'
-          tanzu plugin install resource -v v0.2.0 -t 'global'
+          tanzu plugin install resource -v v0.2.1 -t 'global'
 
       - name: Check out repository code
         uses: actions/checkout@v4
@@ -50,8 +50,8 @@ jobs:
         run: |
           git config --global user.name "0pens0"  
           git clone https://github.com/0pens0/spring-metal-gitops
-          #tanzu promote --from-build .build-output/apps.tanzu.vmware.com.ContainerApp/spring-metal/kubernetes-carvel-package/output --to spring-metal-gitops/git-ops/spaces/spring-metal-dev
-          cp -a .build-output/apps.tanzu.vmware.com.ContainerApp/spring-metal/kubernetes-carvel-package/output/. spring-metal-gitops/git-ops/spaces/spring-metal-dev/spring-metal
+          tanzu promote --from-build .build-output/apps.tanzu.vmware.com.ContainerApp/spring-metal/kubernetes-carvel-package/output --to spring-metal-gitops/git-ops/spaces/spring-metal-dev
+          #cp -a .build-output/apps.tanzu.vmware.com.ContainerApp/spring-metal/kubernetes-carvel-package/output/. spring-metal-gitops/git-ops/spaces/spring-metal-dev/spring-metal
           cd spring-metal-gitops
           git add .
           git commit -m "dev env. code change"

@@ -32,8 +32,6 @@ jobs:
 
       - name: Check out repository code
         uses: actions/checkout@v4
-        with:
-          token: ${{ secrets.GIT_CREDENTIALS }}
 
       - name: Build and Deploy to Tanzu Space
         env:

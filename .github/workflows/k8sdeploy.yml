@@ -53,9 +53,8 @@ jobs:
           git clone https://github.com/0pens0/spring-metal-gitops -b stage
           tanzu promote --from-build .build-output/apps.tanzu.vmware.com.ContainerApp/spring-metal/kubernetes-carvel-package/output --to spring-metal-gitops/git-ops/spaces/spring-metal-dev
           tanzu promote --from-build .build-output/apps.tanzu.vmware.com.ContainerApp/spring-metal/kubernetes-carvel-package/output --to spring-metal-gitops/git-ops/spaces/spring-metal-stage
-          cd git-ops
-          tanzu deploy --nested-contexts --patch --diff -y
-          cd ../spring-metal-gitops
+          tanzu deploy --from-build .build-output --patch --diff -y
+          cd spring-metal-gitops
           git add .
           git commit -m "dev env. code change"
           git push

@@ -61,8 +61,7 @@ jobs:
 
       - uses: stefanzweifel/git-auto-commit-action@v5
         with:
-          branch: stage
-          commit_message: Push application binaries to prod
+          branch: dev
           commit_user_name: 0pens0
 
       - run: echo "🍏 This job's status is ${{ job.status }}."

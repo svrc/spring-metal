@@ -32,6 +32,8 @@ jobs:
 
       - name: Check out repository code
         uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GIT_CREDENTIALS }}
 
       - name: Build and Deploy to Tanzu Space
         env:
@@ -53,10 +55,17 @@ jobs:
           git config --global user.email oren@penso.io
           git clone https://github.com/0pens0/spring-metal-gitops -b stage
           tanzu promote --from-build .build-output/apps.tanzu.vmware.com.ContainerApp/spring-metal/kubernetes-carvel-package/output --to spring-metal-gitops/git-ops/spaces/spring-metal-dev
-          #tanzu promote --from-build .build-output/apps.tanzu.vmware.com.ContainerApp/spring-metal/kubernetes-carvel-package/output --to spring-metal-gitops/git-ops/spaces/spring-metal-stage
           cd spring-metal-gitops
           git add .
           git commit -m "dev env. code change"
           git push
+          cd ..
+          rm -rf .build-output
+
+      - uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          branch: stage
+          commit_message: Push application binaries to prod
+          commit_user_name: 0pens0
 
       - run: echo "🍏 This job's status is ${{ job.status }}."

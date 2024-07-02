@@ -58,6 +58,7 @@ jobs:
           git commit -m "push new version to stage"
           git push
           cd ..
+          
 
       - uses: stefanzweifel/git-auto-commit-action@v5
         with:

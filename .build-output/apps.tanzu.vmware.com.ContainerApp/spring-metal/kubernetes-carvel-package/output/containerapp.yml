@@ -8,13 +8,13 @@ metadata:
   name: spring-metal
 spec:
   content:
-    buildTimestamp: "2024-07-22T10:56:54Z"
-    gitCommit: 1cb79668a625b5be9ec0fd82dd645363acc9ab95-dirty
+    buildTimestamp: "2024-07-22T11:00:36Z"
+    gitCommit: 13fbd8dec751e4a4bfda8b1e6d59b6e4a0c6823c-dirty
     gitURL: github.com/0pens0/spring-metal.git
     packageRefName: spring-metal.apps.local
-    summary: git:1cb7966 @ 2024-07-22T10:56:54Z
-    version: 20240722.1056.54929
-  image: openso.azurecr.io/tap-apps/spring-metal@sha256:73da327982c7415fe10a0622cdfcbf533130bdd33aeab75a97ec83e50ea5eabe
+    summary: git:13fbd8d @ 2024-07-22T11:00:36Z
+    version: 20240722.1100.36952
+  image: openso.azurecr.io/tap-apps/spring-metal@sha256:e8aa936707b6207579e2e5ea881aede967f19c12cf7baf27e5e111232bb24fd9
   nonSecretEnv:
   - name: JAVA_TOOL_OPTIONS
     value: -Dmanagement.endpoint.health.probes.add-additional-paths=true -Dmanagement.health.probes.enabled=true
@@ -71,7 +71,7 @@ spec:
   - apiGroup: data.packaging.carvel.dev
     for: kubernetes.delete
     kind: Package
-    name: spring-metal.apps.local.20240722.1056.54929
+    name: spring-metal.apps.local.20240722.1100.36952
   - for: kubernetes.delete
     kind: Secret
     name: spring-metal-values

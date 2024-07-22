@@ -24,12 +24,13 @@ jobs:
           tanzu version
 
       - name: Install Tanzu plugins
-        env:
-          TANZU_CLI_INCLUDE_DEACTIVATED_PLUGINS_TEST_ONLY: 1
+        #env:
+          #TANZU_CLI_INCLUDE_DEACTIVATED_PLUGINS_TEST_ONLY: 1
         run: |
           tanzu plugin install build
           tanzu plugin install resource
 
+          
       - name: Check out repository code
         uses: actions/checkout@v4
 

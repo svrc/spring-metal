@@ -10,7 +10,7 @@ spec:
   packageRef:
     refName: spring-metal.apps.local
     versionSelection:
-      constraints: 20240708.858.45731
+      constraints: 20240708.1530.56761
   serviceAccountName: carvel-package-installer
   values:
   - secretRef:

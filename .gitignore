@@ -7,6 +7,9 @@ Thumbs.db
 #*
 *#
 
+# tanzu files #
+.tanzu
+
 # Build Files #
 
 bin

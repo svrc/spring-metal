@@ -17,6 +17,7 @@ This repository contains artifacts necessary to build and run generative AI appl
 - Configured egress settings (closed by default) to connect to external services.
 
 ## Preperations
+
 - Create a ```.tanzu/config``` and ```.tanzu/services``` folders
 
 - Copy ```conf/tanzu-changeme/spring-metal.yml``` to ```.tanzu/config``` and update the CHANGE_ME tokens
@@ -64,6 +65,7 @@ tanzu space use <my-space>
 Follow these commands to build your application:
 
 ```bash
+tanzu build config --containerapp-registry [YOUR CONTAINER REGISTRY] 
 tanzu build -o build-output
 ```
 

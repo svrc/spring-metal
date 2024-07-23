@@ -1,6 +1,6 @@
 accelerator:
-  displayName: LLM API Client
-  description: A template for creating API-based LLM application
+  displayName: GenAi with Tanzu Platform
+  description: Accelerator for creating LLM application using Spring AI and Tanzu Platform
   iconUrl: https://raw.githubusercontent.com/cpage-pivotal/dallecool/main/config/ai.png
   tags:
     - java
@@ -8,7 +8,7 @@ accelerator:
     - cloud-native-devs
     - openai
     - llm
-    - phyton
+    - spring-ai
 
   imports:
     - name: tap-workload
@@ -27,19 +27,6 @@ accelerator:
       - value: gpt2
         text: GPT-4
 
-  - name: framworks
-    label: Development Frameworks
-    required: true
-    defaultValue: "spring-ai"
-    inputType: select
-    choices:
-      - value: spring-ai
-        text: Spring AI
-      - value: langchain
-        text: Langchain
-      - value: llamaIndex
-        text: LIamaIndex
-  
   - name: Embeddings 
     label: Embeddings frequency 
     required: true

@@ -18,6 +18,6 @@ spec:
   bindingConnectors:
   - name: main
     description: Gen AI credentials
-    type: ai
+    type: openai
     secretRef:
       name: genai-creds

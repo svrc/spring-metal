@@ -1,6 +1,6 @@
 accelerator:
-  displayName: GenAi with Tanzu Platform
-  description: Accelerator for creating LLM application using Spring AI and Tanzu Platform
+  displayName: GenAi RAG application with Tanzu Platform
+  description: Accelerator for creating GenAI RAG application using Spring AI and Tanzu Platform
   iconUrl: https://raw.githubusercontent.com/cpage-pivotal/dallecool/main/config/ai.png
   tags:
     - java
@@ -14,132 +14,74 @@ accelerator:
     - name: tap-workload
   options:
 
+  - name: addSpringAI
+    label: Use Spring AI development framework
+    inputType: checkbox
+    display: true
+    dataType: boolean
+    defaultValue: false
+  - name: addVectorStore
+    label: Auto configure vector store initializer based on the type of vectorDB bound into the app
+    inputType: checkbox
+    dataType: boolean
+    defaultValue: false
+    dependsOn:
+      name: addSpringAI
+  - name: addPrompt
+    label: Add prompt message retriever and context document
+    inputType: checkbox
+    dataType: boolean
+    defaultValue: false
+    dependsOn:
+      name: addSpringAI
+  - name: idkOptions
+    label: Response behavior for unknown results 
+    inputType: select
+    defaultValue: idk
+    choices:
+      - value: idk
+        text: State you do not know
+      - value: model
+        text: Pass through model best guess reply
+      - value: idkModel
+        text: State you do not know AND pass through model best guess reply
+    dependsOn:
+      name: addPrompt
+  - name: addDocuments
+    label: Always add relevant documents at the end of the reply
+    inputType: checkbox
+    dataType: boolean
+    defaultValue: false
+    dependsOn:
+      name: addPrompt
+  
   - name: llm
-    label: LLM pre-trained model
+    label: LLM model definitions
     required: true
-    defaultValue: "llama2"
+    defaultValue: "platform"
     inputType: select
     choices:
-      - value: llama2
-        text: LLaMA 2
-      - value: starcoder
-        text: StarCoder
-      - value: gpt2
-        text: GPT-4
-
-  - name: Embeddings 
-    label: Embeddings frequency 
-    required: true
-    defaultValue: "immediate"
-    inputType: select
-    choices:
-      - value: immediate
-        text: Immediate
-      - value: daily
-        text: Daily
-      - value: weekly
-        text: Weekly
+      - value: platform
+        text: Use the chat and embeddings models as defined in the platform marketplace
+      - value: chatCustom
+        text: Use custom chat model (will require to modify your applications settings)
+      - value: embeddingCustomer
+        text: Use custom embedding model (will require to modify your applications settings)
 
   - name: runtime
     label: Deployment Runtime 
     required: true
-    defaultValue: "ai-tile"
+    defaultValue: tpcf
     inputType: select
     choices:
-      - value: ai-tile
-        text: TAS AI Tile (Fastchat enpoint, PostgresDB w/ pgVector, RabbitMQ, LLM workers)
-      - value: greenplum
-        text: Greenplum & Vanilla k8s
-      - value: tap
-        text: TAP with workers supply chain
+      - value: tpcf
+        text: Tanzu Platform for Cloud Foundry
+      - value: tpk8s
+        text: Tanzu Platform for K8s
+      - value: tpVCF
+        text: Taznu Platform with VCF Private AI
 
-  - name: gpu
-    label: Add GPU support
-    inputType: checkbox
-    display: true
-    dataType: boolean
-    defaultValue: false
-  - name: llmworker
-    label: LLM Worker VMs
-    inputType: checkbox
-    dataType: boolean
-    dependsOn:
-      name: gpu
-    defaultValue: false
-  - name: training
-    label: Training modules
-    inputType: checkbox
-    dataType: boolean
-    dependsOn:
-      name: gpu
-    defaultValue: false
-  - name: openai
-    label: Open AI endpoint
-    inputType: checkbox
-    dataType: boolean
-    dependsOn:
-      name: gpu
-    defaultValue: false
-
-  - name: advancedParams
-    label: Advanced parameters 
-    description: Use caution modifying defaults! can effect perfomance and costs.
-    inputType: checkbox
-    display: true
-    dataType: boolean
-    defaultValue: false
-  - name: probabilities
-    label: Add probabilities
-    description: Add response info which Indicates how likely a token was to be generated. Helps to debug a given generation, or see alternative options for a token.
-    dependsOn:
-      name: advancedParams
-    defaultValue: "off"
-    inputType: select
-    choices:
-      - value: "off"
-        text: "Off"
-      - value: mostLikely
-        text: Most likely
-      - value: leastlikely
-        text: Least likely
-      - value: full
-        text: Full spectrum
-  - name: temp
-    label: Temperature [0 to 2]
-    description: Controls randomness. Lowering results in less random completions. As the temperature approaches zero, the model will become deterministic and repetitive.
-    dependsOn:
-      name: advancedParams
-    inputType: text
-    defaultValue: "1.0"
-  - name: topp
-    label: Top P [0 to 1]
-    description: Controls diversity via nucleus sampling. 0.5 means half of all likelihood-weighted options are considered.
-    dependsOn:
-      name: advancedParams
-    inputType: text
-    defaultValue: "0.5"
-  - name: freqPenalty
-    label: Frequency penalty [0 to 1]
-    description: How much to penalize new tokens based on their existing frequency in the text so far. Decreases the model's likellhood to repeat the same line verbatim
-    dependsOn:
-      name: advancedParams
-    inputType: text
-    defaultValue: "0.0"
-  - name: presPenalty
-    label: Presence penalty [0 to 1]
-    description: How much to penalize new tokens based on whether they appear in the text so far. Increases the model's likelihood to talk about new topics.
-    dependsOn:
-      name: advancedParams
-    inputType: text
-    defaultValue: "0.0"
-  - name: bestof
-    label: Best of [0 to 1]
-    description: Generates multiple completions server-side, and displays only the best. Streaming only works when set to 1. Since it acts as a multiplier on the number of completions, this parameters can eat into your token quota very quickly - use caution!
-    dependsOn:
-      name: advancedParams
-    inputType: text
-    defaultValue: "0.0"
-    
+  
 
 engine:
   chain:

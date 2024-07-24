@@ -61,7 +61,7 @@ accelerator:
     defaultValue: tpPGVector
     choices:
       - value: tpPGVector
-        text: Tanzu Platform prodived PostgreSQL pgvector
+        text: Tanzu Platform provided PostgreSQL pgvector
       - value: tpGreenPlum
         text: Tanzu Greenplum and pgvector 
       - value: external

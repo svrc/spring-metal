@@ -21,7 +21,7 @@ accelerator:
     inputType: radio
     choices:
       - value: platform
-        text: Use the chat and embeddings models as defined in the GenAI service binding
+        text: Use the chat and embeddings models as defined in the GenAI platform marketplace service
       - value: chatCustom
         text: Use custom chat model (will require to modify your applications settings)
       - value: embeddingCustom

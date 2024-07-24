@@ -72,8 +72,10 @@ accelerator:
     dependsOn:
       name: vectorStore
       value: pgvector
+  
   - name: runtime
     label: Deployment Runtime 
+    description: Select deployment runtime and AI middleware capabilities
     required: true
     defaultValue: tpcf
     inputType: select
@@ -82,21 +84,22 @@ accelerator:
         text: Tanzu Platform for Cloud Foundry
       - value: tpk8s
         text: Tanzu Platform for K8s
-  - name: aiMiddleware
-    label:  AI Middleware capabilities 
-    inputType: multiselect
+  - name: apiGW
+    label: API Gateway with tokens-based rate limiting support
+    inputType: checkbox
     dataType: boolean
-    choices:
-      - value: apiGW
-        text: API Gateway with tokens-based rate limiting support
-      - value: observability
-        text: Pre-wired application observability
-      - value: fips
-        text: FIPS complaince
-    dependsOn:
-      name: runtime
-      value: tpcf
-  
+    defaultValue: false
+  - name: observability
+    label: Pre-wired application observability
+    inputType: checkbox
+    dataType: boolean
+    defaultValue: true
+  - name: fips
+    label: FIPS compliance guardrails
+    inputType: checkbox
+    dataType: boolean
+    defaultValue: false
+
 engine:
   chain:
     - merge:

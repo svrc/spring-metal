@@ -14,26 +14,30 @@ accelerator:
     - name: tap-workload
   options:
 
-  - name: addSpringAI
-    label: Use Spring AI development framework
-    inputType: checkbox
+  - name: vectorStore
+    label: Vector Store
+    inputType: select
     display: true
-    dataType: boolean
-    defaultValue: false
-  - name: addVectorStore
-    label: Auto configure vector store initializer based on the type of vectorDB bound into the app
+    inputType: select
+    defaultValue: memory
+    choices:
+      - value: memory
+        text: Simple (in memory)
+      - value: pgvector
+        text: PostgreSQL pgvector
+  - name: autoConfigPGvector
+    label: Use Spring AI to auto configure vector store initializer based on the PGVector instance binding
     inputType: checkbox
     dataType: boolean
     defaultValue: false
     dependsOn:
-      name: addSpringAI
+      name: vectorStore
+      value: pgvector
   - name: addPrompt
-    label: Add prompt message retriever and context document
+    label: Use Spring AI to add prompt message retriever and context document
     inputType: checkbox
     dataType: boolean
     defaultValue: false
-    dependsOn:
-      name: addSpringAI
   - name: idkOptions
     label: Response behavior for unknown results 
     inputType: select
@@ -62,7 +66,7 @@ accelerator:
     inputType: select
     choices:
       - value: platform
-        text: Use the chat and embeddings models as defined in the platform marketplace
+        text: Use the chat and embeddings models as defined in the GenAI service binding
       - value: chatCustom
         text: Use custom chat model (will require to modify your applications settings)
       - value: embeddingCustom

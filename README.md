@@ -16,6 +16,19 @@ This repository contains artifacts necessary to build and run generative AI appl
 - Access to a Route53 domain and necessary AWS permissions.
 - Configured egress settings (closed by default) to connect to external services.
 
+## Preperations
+
+- Create a ```.tanzu/config``` and ```.tanzu/services``` folders
+
+- Copy ```conf/tanzu-changeme/spring-metal.yml``` to ```.tanzu/config``` and update the CHANGE_ME tokens
+- Copy ```conf/tanzu-changeme/httproute.yml``` to ```.tanzu/config``` and update the CHANGE_ME tokens (app name must match info in ```spring-metal.yml```)
+
+- Copy ```conf/tanzu-changeme/genai-external-service.yml``` to ```.tanzu/services``` and update the CHANGE_ME tokens (all keys must be in 64 bit format)
+- Copy ```conf/tanzu-changeme/genai-service-binding.yml``` to ```.tanzu/services``` and update the CHANGE_ME tokens (app name must match info in ```spring-metal.yml```)
+
+- Copy ```conf/tanzu-changeme/postgres-external-service.yml``` to ```.tanzu/services``` and update the CHANGE_ME tokens (all keys must be in 64 bit format)
+- Copy ```conf/tanzu-changeme/postgres-service-binding.yml``` to ```.tanzu/services``` and update the CHANGE_ME tokens (app name must match info in ```spring-metal.yml```)
+
 ## Installation
 
 ### Cloud Foundry Runtime
@@ -52,6 +65,7 @@ tanzu space use <my-space>
 Follow these commands to build your application:
 
 ```bash
+tanzu build config --containerapp-registry [YOUR CONTAINER REGISTRY] 
 tanzu build -o build-output
 ```
 
@@ -65,19 +79,12 @@ tanzu deploy --from-build build-output
 
 ## Bind
 
-### Configuration
-Place your configuration files in the `conf/.secret` directory. Adjust the YAML files to match the connection details provided by the external service.
-
-### Binding External Services
-
-#### Create and bind the pre-provisioned services using the secrets:
-Create and bind pre-provisioned services:
+#### Create and bind the pre-provisioned services :
+Create secrets to external Postgres (with pgvector) and GenAI control apis running on TPCF and bind them as pre-provisioned services 
 
 ```bash
 tanzu context use <my-context>
-kubectl create -f conf/.secret
-tanzu service bind PreProvisionedService/<genaiservicename> ContainerApp/<appname> --as genai
-tanzu services bind PostgreSQLInstance/<postgresname> ContainerApp/<appname> --as db
+kubectl apply -f .tanzu/services
 ```
 
 ### Troubleshooting

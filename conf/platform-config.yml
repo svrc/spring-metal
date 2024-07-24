@@ -3,7 +3,6 @@ kind: ContainerAppBuildPlan
 metadata:
   name: platform-config
 spec:
-  registry: openso.azurecr.io/tap-apps
   buildpacks:
     builder: "paketobuildpacks/builder-jammy-base"
   postBuildSteps:

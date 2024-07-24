@@ -1,9 +1,9 @@
 apiVersion: v1
 data:
-  database: cG9zdGdyZXM=
-  host: dGNwLnRhcy52bXRhbnp1LmNvbQ==
-  password: YzRCNUQzOVg4MGZFZzJuQzZxMTc=
-  port: MTAyNg== # 1026
+  database: CHANGE_ME
+  host: CHANGE_ME
+  password: CHANGE_ME
+  port: CHANGE_ME
   provider: dGFzcG9zdGdyZXNxbA==  # tas
   type: cG9zdGdyZXNxbAo= # postgresql
   username: cGdhZG1pbg== # pgadmin

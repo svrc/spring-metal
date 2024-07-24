@@ -17,6 +17,7 @@ accelerator:
   - name: llm
     label: LLM models selection
     required: true
+    defaultValue: "platform"
     inputType: radio
     choices:
       - value: platform
@@ -57,6 +58,7 @@ accelerator:
     inputType: select
     display: true
     inputType: radio
+    defaultValue: tpPGVector
     choices:
       - value: tpPGVector
         text: Tanzu Platform provided PostgreSQL pgvector

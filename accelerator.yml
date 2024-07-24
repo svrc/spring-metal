@@ -56,7 +56,7 @@ accelerator:
       name: addPrompt
   
   - name: llm
-    label: LLM model definitions
+    label: LLM models selection
     required: true
     defaultValue: "platform"
     inputType: select
@@ -65,8 +65,36 @@ accelerator:
         text: Use the chat and embeddings models as defined in the platform marketplace
       - value: chatCustom
         text: Use custom chat model (will require to modify your applications settings)
-      - value: embeddingCustomer
+      - value: embeddingCustom
         text: Use custom embedding model (will require to modify your applications settings)
+
+  - name: addAIMiddleware
+    label: Add AI middleware capabilities
+    inputType: checkbox
+    display: true
+    dataType: boolean
+    defaultValue: false
+  - name: addAIObservability
+    label: Add app observability auto configurations
+    inputType: checkbox
+    dataType: boolean
+    defaultValue: false
+    dependsOn:
+      name: addAIMiddleware
+  - name: addAPIGW
+    label: Add API Gateway with model's token rate limiting support
+    inputType: checkbox
+    dataType: boolean
+    defaultValue: false
+    dependsOn:
+      name: addAIMiddleware
+  - name: addFIPS
+    label: Add FIPS complaince
+    inputType: checkbox
+    dataType: boolean
+    defaultValue: false
+    dependsOn:
+      name: addAIMiddleware
 
   - name: runtime
     label: Deployment Runtime 

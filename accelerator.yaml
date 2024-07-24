@@ -18,7 +18,7 @@ accelerator:
     label: LLM models selection
     required: true
     defaultValue: "platform"
-    inputType: select
+    inputType: radio
     choices:
       - value: platform
         text: Use the chat and embeddings models as defined in the GenAI service binding
@@ -34,7 +34,7 @@ accelerator:
     defaultValue: false
   - name: idkOptions
     label: Response behavior for unknown results 
-    inputType: select
+    inputType: radio
     defaultValue: idk
     choices:
       - value: idk

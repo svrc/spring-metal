@@ -14,25 +14,19 @@ accelerator:
     - name: tap-workload
   options:
 
-  - name: vectorStore
-    label: Vector Store
+  - name: llm
+    label: LLM models selection
+    required: true
+    defaultValue: "platform"
     inputType: select
-    display: true
-    inputType: select
-    defaultValue: memory
     choices:
-      - value: memory
-        text: Simple (in memory)
-      - value: pgvector
-        text: PostgreSQL pgvector
-  - name: autoConfigPGvector
-    label: Use Spring AI to auto configure vector store initializer based on the PGVector instance binding
-    inputType: checkbox
-    dataType: boolean
-    defaultValue: false
-    dependsOn:
-      name: vectorStore
-      value: pgvector
+      - value: platform
+        text: Use the chat and embeddings models as defined in the GenAI service binding
+      - value: chatCustom
+        text: Use custom chat model (will require to modify your applications settings)
+      - value: embeddingCustom
+        text: Use custom embedding model (will require to modify your applications settings)
+  
   - name: addPrompt
     label: Use Spring AI to add prompt message retriever and context document
     inputType: checkbox
@@ -58,20 +52,27 @@ accelerator:
     defaultValue: false
     dependsOn:
       name: addPrompt
-  
-  - name: llm
-    label: LLM models selection
-    required: true
-    defaultValue: "platform"
-    inputType: select
-    choices:
-      - value: platform
-        text: Use the chat and embeddings models as defined in the GenAI service binding
-      - value: chatCustom
-        text: Use custom chat model (will require to modify your applications settings)
-      - value: embeddingCustom
-        text: Use custom embedding model (will require to modify your applications settings)
 
+  - name: vectorStore
+    label: Vector Store
+    inputType: select
+    display: true
+    inputType: select
+    defaultValue: memory
+    choices:
+      - value: memory
+        text: Simple (in memory)
+      - value: pgvector
+        text: PostgreSQL pgvector
+  - name: autoConfigPGvector
+    label: Use Spring AI to auto configure vector store initializer based on the PGVector instance binding
+    inputType: checkbox
+    dataType: boolean
+    defaultValue: false
+    dependsOn:
+      name: vectorStore
+      value: pgvector
+  
   - name: addAIMiddleware
     label: Add AI middleware capabilities
     inputType: checkbox
@@ -112,8 +113,7 @@ accelerator:
         text: Tanzu Platform for K8s
       - value: tpVCF
         text: Taznu Platform with VCF Private AI
-
-  
+ 
 
 engine:
   chain:

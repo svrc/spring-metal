@@ -1,7 +1,7 @@
 accelerator:
   displayName: GenAi RAG application with Tanzu Platform
   description: Accelerator for onboarding a GenAI RAG application to the Tanzu Platform
-  iconUrl: https://raw.githubusercontent.com/cpage-pivotal/dallecool/main/config/ai.png
+  iconUrl: https://github.com/0pens0/spring-metal/blob/main/tanzuai.jpg
   tags:
     - java
     - spring

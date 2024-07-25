@@ -43,7 +43,7 @@ jobs:
           echo ${{ vars.REGISTRY }}
           echo ${{ vars.REGISTRY_USER_NAME }}
           echo ${{ vars.BUILD_REGISTRY_CONF }}
-          docker login ${{ vars.REGISTRY }} -u ${{ vars.REGISTRY_USER_NAME }} -p ${{ secrets.REGISTRY_PASS }}
+          docker login ${{ vars.REGISTRY }} -u ${{ vars.REGISTRY_USER_NAME }} -p ${{ secrets.RERGISTRY_PASS }}
           tanzu build -o .build-output
 
       - uses: de-vri-es/setup-git-credentials@v2

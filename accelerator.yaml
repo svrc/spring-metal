@@ -23,9 +23,9 @@ accelerator:
       - value: platform
         text: Use the chat and embeddings models as defined in the GenAI platform marketplace service
       - value: chatCustom
-        text: Use custom chat model (manual configurations required)
+        text: Use custom chat model (warning! manual configuration required)
       - value: embeddingCustom
-        text: Use custom embedding model (manual configurations required)
+        text: Use custom embedding model (warning! manual configuration required)
   
   - name: addPrompt
     label: Use Spring AI to add prompt message retriever and context document
@@ -65,7 +65,7 @@ accelerator:
       - value: tpGreenPlum
         text: Tanzu Greenplum and pgvector 
       - value: external
-        text: External VectorDB (manual configurations required)
+        text: External VectorDB (warning! manual configuration required)
    
   - name: autoConfigPGvector
     label: Use Spring AI to auto configure vector store initializer based on the PGVector instance binding

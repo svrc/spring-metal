@@ -63,7 +63,7 @@ accelerator:
       - value: tpPGVector
         text: Tanzu PostgreSQL pgvector
       - value: tpGreenPlum
-        text: Tanzu Greenplum with M/L support
+        text: Tanzu Greenplum + ML functionality 
       - value: external
         text: External VectorDB (manual configuration required)
    

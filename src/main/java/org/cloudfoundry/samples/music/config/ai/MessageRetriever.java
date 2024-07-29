@@ -60,7 +60,8 @@ public class MessageRetriever {
 		UserMessage userMessage = new UserMessage(message);
 
 		return this.chatClient.prompt()
-				.messages(systemMessage,userMessage)
+				.messages(systemMessage)
+				.user(message)
 				.call()
 				.content();
 

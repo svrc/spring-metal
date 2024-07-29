@@ -74,10 +74,10 @@ spring:
     activate:
       on-profile: postgres
   datasource:
-    url: "jdbc:postgresql://localhost/music"
+    url: "jdbc:postgresql://localhost:15432/music"
     driver-class-name: org.postgresql.Driver
     username: postgres
-    password:
+    password: password
   jpa:
     properties:
       hibernate:

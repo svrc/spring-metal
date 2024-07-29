@@ -1,26 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
-	<modelVersion>4.0.0</modelVersion>
-	<parent>
-		<groupId>org.springframework.boot</groupId>
-		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>3.1.2</version>
-		<relativePath/> <!-- lookup parent from repository -->
-	</parent>
-	<groupId>com.example</groupId>
-	<artifactId>dekt-metal</artifactId>
-	<version>0.5</version>
-	<name>dekt-metal</name>
-	<description>Sample AI app for TAS</description>
-	<properties>
-	  <java.version>17</java.version>
-          <java-cfenv.version>3.0.0</java-cfenv.version>
-          <spring-ai.version>0.7.0-SNAPSHOT</spring-ai.version>	  
-	</properties>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-parent</artifactId>
+    <version>3.3.2</version>
+    <relativePath/> <!-- lookup parent from repository -->
+  </parent>
+  <groupId>com.example</groupId>
+  <artifactId>spring-metal</artifactId>
+  <version>0.5</version>
+  <name>spring-metal</name>
+  <description>Sample AI app for TAS</description>
+  <properties>
+    <java.version>17</java.version>
+    <java-cfenv.version>3.0.0</java-cfenv.version>
+    <spring-ai.version>1.0.0-SNAPSHOT</spring-ai.version>
+  </properties>
 
 
-	<repositories>
+  <repositories>
     <repository>
       <id>maven-central</id>
       <url>https://repo.maven.apache.org/maven2</url>
@@ -41,9 +42,9 @@
       <id>tanzu-spring-repo</id>
       <url>https://artifactory.eng.vmware.com/api-auto-registration-docker-local</url>
     </repository>
-    
-	</repositories>
-  
+
+  </repositories>
+
   <dependencies>
     <!-- Commercial Spring Extensions -->
     <!--
@@ -79,14 +80,12 @@
     </dependency>
     <!-- Spring AI -->
     <dependency>
-      <groupId>org.springframework.experimental.ai</groupId>
+      <groupId>org.springframework.ai</groupId>
       <artifactId>spring-ai-openai-spring-boot-starter</artifactId>
-      <version>${spring-ai.version}</version>
     </dependency>
     <dependency>
-      <groupId>org.springframework.experimental.ai</groupId>
-      <artifactId>spring-ai-pgvector-store</artifactId>
-      <version>${spring-ai.version}</version>
+      <groupId>org.springframework.ai</groupId>
+      <artifactId>spring-ai-pgvector-store-spring-boot-starter</artifactId>
     </dependency>
     <!-- Java CFEnv -->
     <dependency>
@@ -162,7 +161,7 @@
           <groupId>org.junit.vintage</groupId>
           <artifactId>junit-vintage-engine</artifactId>
         </exclusion>
-      </exclusions>		  
+      </exclusions>
     </dependency>
     <dependency>
       <groupId>junit</groupId>
@@ -174,51 +173,62 @@
       <groupId>org.awaitility</groupId>
       <artifactId>awaitility</artifactId>
       <scope>test</scope>
-    </dependency>		
-	  <dependency>
+    </dependency>
+    <dependency>
       <groupId>org.springframework.cloud</groupId>
       <artifactId>spring-cloud-bindings</artifactId>
       <version>2.0.3</version>
     </dependency>
   </dependencies>
-  
 
-	<build>
-		<plugins>
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <groupId>org.springframework.ai</groupId>
+        <artifactId>spring-ai-bom</artifactId>
+        <version>${spring-ai.version}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
+
+  <build>
+    <plugins>
       <plugin>
         <groupId>org.graalvm.buildtools</groupId>
         <artifactId>native-maven-plugin</artifactId>
       </plugin>
-			<plugin>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-maven-plugin</artifactId>
-							<executions>
-								<execution>
-									<id>process-aot</id>
-									<goals>
-										<goal>process-aot</goal>
-									</goals>
-								</execution>
-							</executions>
-			</plugin>
+      <plugin>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-maven-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>process-aot</id>
+            <goals>
+              <goal>process-aot</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
       <plugin>
         <groupId>org.cyclonedx</groupId>
         <artifactId>cyclonedx-maven-plugin</artifactId>
         <version>2.7.1</version>
         <executions>
-        <execution>
-        <phase>validate</phase>
-        <goals>
-        <goal>makeAggregateBom</goal>
-        </goals>
-        </execution>
+          <execution>
+            <phase>validate</phase>
+            <goals>
+              <goal>makeAggregateBom</goal>
+            </goals>
+          </execution>
         </executions>
         <configuration>
-        <outputFormat>json</outputFormat>
-        <outputName>classes/bom</outputName>
+          <outputFormat>json</outputFormat>
+          <outputName>classes/bom</outputName>
         </configuration>
       </plugin>
-		</plugins>
-	</build>
+    </plugins>
+  </build>
 
 </project>

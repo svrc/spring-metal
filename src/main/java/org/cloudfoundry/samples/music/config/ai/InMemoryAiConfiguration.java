@@ -16,25 +16,25 @@
 
 package org.cloudfoundry.samples.music.config.ai;
 
-import org.springframework.ai.embedding.EmbeddingClient;
+import org.springframework.ai.embedding.EmbeddingModel;
+import org.springframework.ai.vectorstore.PgVectorStore;
+import org.springframework.ai.vectorstore.SimpleVectorStore;
 import org.springframework.ai.vectorstore.VectorStore;
-import org.springframework.ai.vectorstore.InMemoryVectorStore;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
+import org.springframework.jdbc.core.JdbcTemplate;
 
 /**
- *
  * @author Long Nguyen
  */
 @Configuration
-@Profile("!postgres")
 public class InMemoryAiConfiguration {
 
-	@Bean
-	public VectorStore vectorStore(EmbeddingClient embeddingClient) {
-		return new InMemoryVectorStore(embeddingClient);
-	}
-
+  @Bean
+  @Profile("!postgres")
+  public VectorStore vectorStore(EmbeddingModel embeddingModel) {
+    return new SimpleVectorStore(embeddingModel);
+  }
 
 }

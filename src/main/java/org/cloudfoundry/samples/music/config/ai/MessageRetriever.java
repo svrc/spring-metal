@@ -21,15 +21,15 @@ import java.util.Map;
 import java.util.stream.Collectors;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.ai.client.AiClient;
-import org.springframework.ai.client.AiResponse;
-import org.springframework.ai.client.Generation;
+import org.springframework.ai.chat.client.ChatClient;
+import org.springframework.ai.chat.messages.Message;
+import org.springframework.ai.chat.messages.UserMessage;
+import org.springframework.ai.chat.model.ChatModel;
+import org.springframework.ai.chat.model.Generation;
+import org.springframework.ai.chat.prompt.Prompt;
+import org.springframework.ai.chat.prompt.SystemPromptTemplate;
 import org.springframework.ai.document.Document;
-import org.springframework.ai.prompt.Prompt;
-import org.springframework.ai.prompt.SystemPromptTemplate;
-import org.springframework.ai.prompt.messages.Message;
-import org.springframework.ai.prompt.messages.UserMessage;
-import org.springframework.ai.retriever.VectorStoreRetriever;
+import org.springframework.ai.vectorstore.VectorStore;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.Resource;
 
@@ -42,19 +42,19 @@ public class MessageRetriever {
 	@Value("classpath:/prompts/system-qa.st")
 	private Resource systemPrompt;
 
-	private VectorStoreRetriever vectorStoreRetriever;
+	private VectorStore vectorStoreRetriever;
 
-	private AiClient aiClient;
+	private ChatModel chatModel;
 
 	private static final Logger logger = LoggerFactory.getLogger(MessageRetriever.class);
 	
-	public MessageRetriever(VectorStoreRetriever vectorStoreRetriever, AiClient aiClient) {
+	public MessageRetriever(VectorStore vectorStoreRetriever, ChatModel chatModel) {
 		this.vectorStoreRetriever = vectorStoreRetriever;
-		this.aiClient = aiClient;
+		this.chatModel = chatModel;
 	}
 
 	public Generation retrieve(String message) {
-		List<Document> relatedDocuments = this.vectorStoreRetriever.retrieve(message);
+		List<Document> relatedDocuments = this.vectorStoreRetriever.similaritySearch(message);
 
 		logger.info("first doc retrieved " + relatedDocuments.get(0).toString());
 
@@ -64,9 +64,8 @@ public class MessageRetriever {
 
 		Prompt prompt = new Prompt(List.of(systemMessage, userMessage));
 
-		AiResponse response = aiClient.generate(prompt);
+		return this.chatModel.call(prompt).getResult();
 
-		return response.getGeneration();
 	}
 
 	private Message getSystemMessage(List<Document> relatedDocuments) {

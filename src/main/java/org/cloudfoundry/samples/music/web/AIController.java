@@ -9,7 +9,7 @@ import org.cloudfoundry.samples.music.domain.Message;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import org.springframework.ai.client.Generation;
+import org.springframework.ai.chat.model.Generation;
 import org.springframework.ai.document.Document;
 import org.springframework.ai.vectorstore.VectorStore;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,11 +38,14 @@ public class AIController {
         this.vectorStore = vectorStore;
     }
     @RequestMapping(value = "/ai/rag", method = RequestMethod.POST)
-    public Generation generate(@RequestBody MessageRequest messageRequest) {
+    public Map<String,Object> generate(@RequestBody MessageRequest messageRequest) {
         Message[] messages = messageRequest.getMessages();
         logger.info("Getting Messages " + messages);
 
-        return messageRetriever.retrieve(messages[messages.length - 1].getText());
+        String query = messages[messages.length - 1].getText();
+        Generation result = messageRetriever.retrieve(query);
+
+        return Map.of("text",result.getOutput().getContent());
     }
 
 

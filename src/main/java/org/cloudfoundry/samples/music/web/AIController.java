@@ -43,32 +43,24 @@ public class AIController {
         logger.info("Getting Messages " + messages);
 
         String query = messages[messages.length - 1].getText();
-        Generation result = messageRetriever.retrieve(query);
+        String result = messageRetriever.retrieve(query);
 
-        return Map.of("text",result.getOutput().getContent());
+        return Map.of("text",result);
     }
-
 
     @RequestMapping(value = "/ai/addDoc", method = RequestMethod.POST)
     public String addDoc(@RequestBody Album album) {
-
         String text = generateVectorDoc(album);
-
-        List<Document> documents = new ArrayList<>();
         Document doc = new Document(album.getId(), text, new HashMap<>());
         logger.info("Adding Album " + doc.toString());
-        documents.add(doc);
-        this.vectorStore.add(documents);
+        this.vectorStore.add(List.of(doc));
         return text;
     }
 
     @RequestMapping(value = "/ai/deleteDoc", method = RequestMethod.POST)
     public String deleteDoc(@RequestBody String id) {
         logger.info("Deleting Album " + id);
-        this.vectorStore.delete(Collections.singletonList(id));
+        this.vectorStore.delete(List.of(id));
         return id;
     }
-
-
-
 }

@@ -41,21 +41,18 @@ public class MessageRetriever {
 
 	@Value("classpath:/prompts/system-qa.st")
 	private Resource systemPrompt;
-
 	private VectorStore vectorStoreRetriever;
-
-	private ChatModel chatModel;
+	private ChatClient chatClient;
 
 	private static final Logger logger = LoggerFactory.getLogger(MessageRetriever.class);
 	
 	public MessageRetriever(VectorStore vectorStoreRetriever, ChatModel chatModel) {
 		this.vectorStoreRetriever = vectorStoreRetriever;
-		this.chatModel = chatModel;
+		this.chatClient = ChatClient.builder(chatModel).build();
 	}
 
-	public Generation retrieve(String message) {
+	public String retrieve(String message) {
 		List<Document> relatedDocuments = this.vectorStoreRetriever.similaritySearch(message);
-
 		logger.info("first doc retrieved " + relatedDocuments.get(0).toString());
 
 		Message systemMessage = getSystemMessage(relatedDocuments);
@@ -64,12 +61,10 @@ public class MessageRetriever {
 
 		Prompt prompt = new Prompt(List.of(systemMessage, userMessage));
 
-		return this.chatModel.call(prompt).getResult();
-
+		return this.chatClient.prompt(prompt).call().content();
 	}
 
 	private Message getSystemMessage(List<Document> relatedDocuments) {
-
 		String documents = relatedDocuments.stream().map(entry -> entry.getContent()).collect(Collectors.joining("\n"));
 		SystemPromptTemplate systemPromptTemplate = new SystemPromptTemplate(systemPrompt);
 		Message systemMessage = systemPromptTemplate.createMessage(Map.of("documents", documents));

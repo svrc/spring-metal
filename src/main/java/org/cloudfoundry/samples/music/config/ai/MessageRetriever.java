@@ -59,9 +59,11 @@ public class MessageRetriever {
 		logger.info("system Message retrieved " + systemMessage.toString());
 		UserMessage userMessage = new UserMessage(message);
 
-		Prompt prompt = new Prompt(List.of(systemMessage, userMessage));
+		return this.chatClient.prompt()
+				.messages(systemMessage,userMessage)
+				.call()
+				.content();
 
-		return this.chatClient.prompt(prompt).call().content();
 	}
 
 	private Message getSystemMessage(List<Document> relatedDocuments) {

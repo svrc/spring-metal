@@ -77,16 +77,18 @@ accelerator:
       value: tpPGVector
   
   - name: runtime
-    label: Deployment Runtime 
-    description: Select deployment runtime and AI middleware capabilities
+    label: Runtime Configurations
+    description: Select platform runtime configurations and AI middleware capabilities
     required: true
-    defaultValue: tpcf
+    defaultValue: all
     inputType: select
     choices:
       - value: tpcf
         text: Tanzu Platform for Cloud Foundry
       - value: tpk8s
         text: Tanzu Platform for K8s
+      - value: all
+        text: Tanzu Platform for Cloud Foundry and K8s
   - name: apiGW
     label: API Gateway with tokens-based rate limiting support
     inputType: checkbox
@@ -106,39 +108,13 @@ accelerator:
 engine:
   chain:
     - merge:
-        - include: [ "**/*" ]
-          exclude: [ "config/*.yaml", "Tiltfile", "README.md", "catalog/*.yaml", ".github/workflows/**" ]
-        - include: [ "Tiltfile" ]
-          chain:
-            - type: ReplaceText
-              substitutions:
-                - text: openai
-                  with: "#artifactId.toLowerCase()"
-
-        - include: [ "config/*.yaml" ]
-          chain:
-            - type: ReplaceText
-              substitutions:
-                - text: ": openai"
-                  with: "': ' + #artifactId.toLowerCase()"
-            - merge:
-                - type: InvokeFragment
-                  reference: tap-workload
-                - include: [ "**" ]
-              onConflict: UseFirst
-
-        - include: [ "README.md" ]
-          chain:
-            - type: ReplaceText
-              substitutions:
-                - text: openai
-                  with: "#artifactId"
-
-        - include: [ "catalog/*.yaml" ]
-          chain:
-            - type: ReplaceText
-              substitutions:
-                - text: openai
-                  with: "#artifactId"
-
-    - type: Provenance
+    #include runtime-configs per user selection
+      - includes: ["**"]
+        excludes: [ "runtime-configs/**"]
+      - includes: [ "runtime-configs/tpk8s/*"]
+        condition: "#runtime == 'tpk8s'"
+      - includes: [ "runtime-configs/tpcf/*"]
+        condition: "#runtime == 'tpcf'"
+      - includes: [ "runtime-configs/**"]
+        condition: "#runtime == 'all'"
+      

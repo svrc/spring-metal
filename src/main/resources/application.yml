@@ -1,12 +1,13 @@
 spring:
   ai:
-#   api-key: ""
-#   chat:
-#     options:
-#       model: gpt-3.5-turbo
-#   embedding:
-#     options:
-#       models: text-embedding-ada-002
+    openai:
+      api-key: "YOUR-KEY"
+#     chat:
+#       options:
+#         model: gpt-3.5-turbo
+#     embedding:
+#       options:
+#         models: text-embedding-ada-002
   jpa:
     generate-ddl: true
 

@@ -20,14 +20,14 @@ This repository contains artifacts necessary to build and run generative AI appl
 
 - Create a ```.tanzu/config``` and ```.tanzu/services``` folders
 
-- Copy ```conf/tanzu-changeme/spring-metal.yml``` to ```.tanzu/config``` and update the CHANGE_ME tokens
-- Copy ```conf/tanzu-changeme/httproute.yml``` to ```.tanzu/config``` and update the CHANGE_ME tokens (app name must match info in ```spring-metal.yml```)
+- Copy ```runtime-configs/tpk8s/tanzu-changeme/spring-metal.yml``` to ```.tanzu/config``` and update the CHANGE_ME tokens
+- Copy ```runtime-configs/tpk8s/tanzu-changeme/httproute.yml``` to ```.tanzu/config``` and update the CHANGE_ME tokens (app name must match info in ```spring-metal.yml```)
 
-- Copy ```conf/tanzu-changeme/genai-external-service.yml``` to ```.tanzu/services``` and update the CHANGE_ME tokens (all keys must be in 64 bit format)
-- Copy ```conf/tanzu-changeme/genai-service-binding.yml``` to ```.tanzu/services``` and update the CHANGE_ME tokens (app name must match info in ```spring-metal.yml```)
+- Copy ```runtime-configs/tpk8s/tanzu-changeme/genai-external-service.yml``` to ```.tanzu/services``` and update the CHANGE_ME tokens (all keys must be in 64 bit format)
+- Copy ```runtime-configs/tpk8s/tanzu-changeme/genai-service-binding.yml``` to ```.tanzu/services``` and update the CHANGE_ME tokens (app name must match info in ```spring-metal.yml```)
 
-- Copy ```conf/tanzu-changeme/postgres-external-service.yml``` to ```.tanzu/services``` and update the CHANGE_ME tokens (all keys must be in 64 bit format)
-- Copy ```conf/tanzu-changeme/postgres-service-binding.yml``` to ```.tanzu/services``` and update the CHANGE_ME tokens (app name must match info in ```spring-metal.yml```)
+- Copy ```runtime-configs/tpk8s/tanzu-changeme/postgres-external-service.yml``` to ```.tanzu/services``` and update the CHANGE_ME tokens (all keys must be in 64 bit format)
+- Copy ```runtime-configs/tpk8s/tanzu-changeme/postgres-service-binding.yml``` to ```.tanzu/services``` and update the CHANGE_ME tokens (app name must match info in ```spring-metal.yml```)
 
 ## Installation
 
@@ -90,7 +90,7 @@ kubectl apply -f .tanzu/services
 ### Troubleshooting
 
 #### Issue: Problem with external service binding.
-- **Solution:** Ensure that all credentials and connection details in `conf/.secret` are correct and updated.
+- **Solution:** Ensure that all credentials and connection details in `.tanzu/config/services` are correct and updated.
 
 #### Issue: Application deployment fails.
 - **Solution:** Check the build output for errors and verify the Tanzu configuration settings.

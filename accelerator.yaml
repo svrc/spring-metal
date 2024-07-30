@@ -84,11 +84,11 @@ accelerator:
     inputType: select
     choices:
       - value: tpcf
-        text: Tanzu Platform for Cloud Foundry
+        text: Tanzu Platform for CF
       - value: tpk8s
         text: Tanzu Platform for K8s
       - value: all
-        text: Tanzu Platform for Cloud Foundry and K8s
+        text: Tanzu Platform for CF & K8s
   - name: apiGW
     label: API Gateway with tokens-based rate limiting support
     inputType: checkbox

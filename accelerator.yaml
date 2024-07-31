@@ -80,15 +80,15 @@ accelerator:
     label: Runtime Configurations
     description: Select platform runtime configurations and AI middleware capabilities
     required: true
-    defaultValue: all
     inputType: select
+    display: true
+    inputType: radio
+    defaultValue: tpcf
     choices:
       - value: tpcf
-        text: Tanzu Platform for CF
+        text: Cloud Foundry
       - value: tpk8s
-        text: Tanzu Platform for K8s
-      - value: all
-        text: Tanzu Platform for CF & K8s
+        text: Kubernetes
   - name: apiGW
     label: API Gateway with tokens-based rate limiting support
     inputType: checkbox

@@ -78,7 +78,7 @@ accelerator:
   
   - name: runtime
     label: Runtime Configurations
-    description: Select platform runtime configurations and AI middleware capabilities
+    description: AI middleware capabilities
     required: true
     inputType: select
     display: true

@@ -26,23 +26,15 @@ import org.springframework.context.annotation.Profile;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 /**
- *
  * @author Long Nguyen
  */
 @Configuration
 public class InMemoryAiConfiguration {
-//
-//	@Bean
-//	@Profile("!postgres")
-//	public VectorStore vectorStore(EmbeddingModel embeddingModel) {
-//		return new SimpleVectorStore(embeddingModel);
-//	}
 
-
-//	@Bean
-//	@Profile("postgres")
-//	public VectorStore gpVector(JdbcTemplate jcbcTemplate, EmbeddingModel embeddingModel) {
-//		return new PgVectorStore(jcbcTemplate, embeddingModel);
-//	}
+  @Bean
+  @Profile("!postgres")
+  public VectorStore vectorStore(EmbeddingModel embeddingModel) {
+    return new SimpleVectorStore(embeddingModel);
+  }
 
 }

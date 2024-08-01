@@ -22,13 +22,12 @@ import java.util.stream.Collectors;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.ai.chat.client.ChatClient;
+import org.springframework.ai.chat.client.advisor.QuestionAnswerAdvisor;
 import org.springframework.ai.chat.messages.Message;
-import org.springframework.ai.chat.messages.UserMessage;
 import org.springframework.ai.chat.model.ChatModel;
-import org.springframework.ai.chat.model.Generation;
-import org.springframework.ai.chat.prompt.Prompt;
 import org.springframework.ai.chat.prompt.SystemPromptTemplate;
 import org.springframework.ai.document.Document;
+import org.springframework.ai.vectorstore.SearchRequest;
 import org.springframework.ai.vectorstore.VectorStore;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.Resource;
@@ -41,29 +40,39 @@ public class MessageRetriever {
 
 	@Value("classpath:/prompts/system-qa.st")
 	private Resource systemPrompt;
-	private VectorStore vectorStoreRetriever;
+	private VectorStore vectorStore;
 	private ChatClient chatClient;
 
 	private static final Logger logger = LoggerFactory.getLogger(MessageRetriever.class);
 	
-	public MessageRetriever(VectorStore vectorStoreRetriever, ChatModel chatModel) {
-		this.vectorStoreRetriever = vectorStoreRetriever;
+	public MessageRetriever(VectorStore vectorStore, ChatModel chatModel) {
+		this.vectorStore = vectorStore;
 		this.chatClient = ChatClient.builder(chatModel).build();
 	}
 
+
 	public String retrieve(String message) {
-		List<Document> relatedDocuments = this.vectorStoreRetriever.similaritySearch(message);
+
+		return this.chatClient
+				.prompt()
+				.advisors(new QuestionAnswerAdvisor(this.vectorStore, SearchRequest.defaults()))
+				.user(message)
+				.call()
+				.content();
+
+		/* // hand rolled implementation
+		List<Document> relatedDocuments = this.vectorStore.similaritySearch(message);
 		logger.info("first doc retrieved " + relatedDocuments.get(0).toString());
 
 		Message systemMessage = getSystemMessage(relatedDocuments);
 		logger.info("system Message retrieved " + systemMessage.toString());
-		UserMessage userMessage = new UserMessage(message);
 
 		return this.chatClient.prompt()
 				.messages(systemMessage)
 				.user(message)
 				.call()
 				.content();
+		*/
 
 	}
 

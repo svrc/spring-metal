@@ -11,11 +11,6 @@
 
   options:
 
-  - name: srcRepo
-    label: Soure repository
-    description: Codebase of an exiting 'inner loop' application
-    required: true
-
   - name: llm
     label: LLM models selection
     required: true

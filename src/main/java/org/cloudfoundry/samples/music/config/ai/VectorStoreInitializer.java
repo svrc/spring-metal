@@ -64,7 +64,7 @@ public class VectorStoreInitializer implements ApplicationListener<ApplicationRe
         List<Document> documents = new ArrayList<>();
 
 
-        List<Document> docs = this.vectorStore.similaritySearch("");
+        List<Document> docs = this.vectorStore.similaritySearch("album");
         logger.info("Vector store contains " + docs.size() + " records");
 
         if (docs.size() == 0) {

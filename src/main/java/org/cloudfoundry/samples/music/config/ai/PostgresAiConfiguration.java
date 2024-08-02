@@ -35,9 +35,9 @@ public class PostgresAiConfiguration {
 	@Bean
 	public VectorStore vectorStore(JdbcTemplate jcbcTemplate, EmbeddingClient embeddingClient) {
 		return new PgVectorStore(jcbcTemplate, embeddingClient,
-				4096,
+				768,
 				PgVectorStore.PgDistanceType.CosineDistance,
-				false,
+				true,
 				PgVectorStore.PgIndexType.NONE);
 	}
 

@@ -8,17 +8,17 @@ metadata:
   name: spring-metal
 spec:
   content:
-    buildTimestamp: "2024-08-04T14:29:01Z"
-    gitCommit: 42a42b1d7ba4df358c8e2dcdd0236a1c1b228b2e-dirty
+    buildTimestamp: "2024-08-04T14:36:03Z"
+    gitCommit: 52fda4d917fbf0637a34636754aee4199995e36f-dirty
     gitURL: github.com/0pens0/spring-metal.git
-    packageImage: harbor.vmtanzu.com/openso-tap-apps/spring-metal@sha256:bda1adb2f1dfcd4c365b550628abcd2be655465026d85fbe30ef2762b5dd0630
+    packageImage: harbor.vmtanzu.com/openso-tap-apps/spring-metal@sha256:91fce0f66f82c55b2f152b5c74af6d5bcd180e23bc75bdf671b549c2dbd8771d
     packageRefName: spring-metal.apps.local
-    packageVersion: 20240804.1429.1306
-    summary: git:42a42b1 @ 2024-08-04T14:29:01Z
-    version: 20240804.1429.1306
+    packageVersion: 20240804.1436.3056
+    summary: git:52fda4d @ 2024-08-04T14:36:03Z
+    version: 20240804.1436.3056
   health:
     maxUnavailableReplicas: 10%
-  image: harbor.vmtanzu.com/openso-tap-apps/spring-metal@sha256:4befd02959faf560af720e687654885719ab0f25544cda611ac65fceabb3247f
+  image: harbor.vmtanzu.com/openso-tap-apps/spring-metal@sha256:7da4aad48c6cf298875158a10018194e444529bd00042209a74fbd815b8c570c
   nonSecretEnv:
   - name: JAVA_TOOL_OPTIONS
     value: -Dmanagement.endpoint.health.probes.add-additional-paths=true -Dmanagement.health.probes.enabled=true
@@ -75,7 +75,7 @@ spec:
   - apiGroup: data.packaging.carvel.dev
     for: kubernetes.delete
     kind: Package
-    name: spring-metal.apps.local.20240804.1429.1306
+    name: spring-metal.apps.local.20240804.1436.3056
   - for: kubernetes.delete
     kind: Secret
     name: spring-metal-values

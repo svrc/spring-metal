@@ -16,7 +16,6 @@
 
 package org.cloudfoundry.samples.music.config.ai;
 
-import java.util.Vector;
 import org.springframework.ai.chat.model.ChatModel;
 import org.springframework.ai.vectorstore.VectorStore;
 import org.springframework.context.annotation.Bean;

@@ -1,7 +1,12 @@
 #!/usr/bin/env bash
 
-PGVECTOR_SERVICE_NAME="embeddings"
-GENAI_SERVICE_NAME="genai-enpoint"
+CF_APP_NAME=spring-metal
+PGVECTOR_EXTERNAL_PORT=1029   # Change this to an open port on your TAS foundation TCP routers
+PGVECTOR_SERVICE_NAME="postgres"
+GENAI_CHAT_PLAN="meta-llama/Meta-Llama-3-8B-Instruct"
+GENAI_EMBED_PLAN="nomic-embed-text"
+GENAI_CHAT_SERVICE_NAME="genai-chat"
+GENAI_EMBED_SERVICE_NAME="genai-embed"
 
 case $1 in
 cf)
@@ -15,8 +20,9 @@ cf)
 	echo
 	echo "$PGVECTOR_SERVICE_NAME creation completed."
 	echo
-    cf create-service genai shared $GENAI_SERVICE_NAME #-c '{"svc_gw_enable": true, "router_group": "default-tcp", "external_port": 1025}' -w
-    cf push -f runtime-configs/tpcf/manifest.yml 
+    cf create-service genai $GENAI_CHAT_PLAN $GENAI_CHAT_SERVICE_NAME 
+#    cf create-service genai $GENAI_EMBED_PLAN $GENAI_EMBED_SERVICE_NAME 
+    cf push $CF_APP_NAME -f runtime-configs/tpcf/manifest.yml 
     ;;
 k8s)
     echo
@@ -31,8 +37,9 @@ k8s)
     ;;
 cleanup)
     cf delete-service $PGVECTOR_SERVICE_NAME -f
-    cf delete-service $GENAI_SERVICE_NAME -f
-    cf delete dekt-metal -f
+    cf delete-service $GENAI_CHAT_SERVICE_NAME -f
+    cf delete-service $GENAI_EMBED_SERVICE_NAME -f
+    cf delete $CF_APP_NAME -f
     kubectl delete -f .tanzu/services
     ;;
 *)

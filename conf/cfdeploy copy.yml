@@ -3,7 +3,7 @@ run-name: ${{ github.actor }} deploying
 on:
   push:
     branches:
-      - "dev"
+      - "none"
 jobs:
   gitops-deploy:
     runs-on: ubuntu-latest
@@ -14,16 +14,15 @@ jobs:
             echo "deb https://packages.cloudfoundry.org/debian stable main" | sudo tee /etc/apt/sources.list.d/cloudfoundry-cli.list
           sudo apt update
           sudo apt install cf8-cli
-#          sudo apt install openjdk-17-jdk openjdk-17-jre
-#          sudo update-java-alternatives --set /usr/lib/jvm/java-1.17.0-openjdk-amd64
-#          export JAVA_HOME=/usr/lib/jvm/java-1.17.0-openjdk-amd64
+          sudo apt install openjdk-17-jdk openjdk-17-jre
+          sudo update-java-alternatives --set /usr/lib/jvm/java-1.17.0-openjdk-amd64
+          export JAVA_HOME=/usr/lib/jvm/java-1.17.0-openjdk-amd64
 
       - name: Connect to CF API
         env:
           CF_API: ${{ vars.CF_API_ENDPOINT }}
           CF_ORG: ${{ vars.CF_ORG }}
           CF_SPACE: ${{ vars.CF_SPACE }}
-          CF_DOCKER_PASSWORD: ${{secrets.CF_DOCKER_PASSWORD}}
 
         run: |
           cf api $CF_API --skip-ssl-validation
@@ -33,10 +32,9 @@ jobs:
       - name: Check out repository code
         uses: actions/checkout@v4
       - name: Deploy
-        env:
-          CF_DOCKER_PASSWORD: ${{secrets.CF_DOCKER_PASSWORD}}
         run: |
-
-          cf push test  --docker-image harbor.vmtanzu.com/openso-tap-apps/spring-metal --docker-username openso
+          export JAVA_HOME=/usr/lib/jvm/java-1.17.0-openjdk-amd64  
+          mvn package
+          cf push
         
       - run: echo "🍏 This job's status is ${{ job.status }}."

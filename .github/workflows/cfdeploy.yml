@@ -30,8 +30,8 @@ jobs:
           cf auth admin ${{ secrets.CF_API_TOKEN }}
           cf target -o $CF_ORG -s $CF_SPACE
 
-      - name: Check out repository code
-        uses: actions/checkout@v4
+#1      - name: Check out repository code
+#        uses: actions/checkout@v4
       - name: Deploy
         env:
           CF_DOCKER_PASSWORD: ${{secrets.CF_DOCKER_PASSWORD}}

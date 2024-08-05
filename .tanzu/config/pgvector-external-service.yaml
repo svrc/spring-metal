@@ -2,8 +2,8 @@ apiVersion: v1
 data:
   database: cG9zdGdyZXM=
   host: dGNwLnRhcy52bXRhbnp1LmNvbQ==
-  password: V0pjZW9iQVlYZ2Eyakk1OQ==
-  port: MTAyNA== # 1024
+  password: bnMyQW8xNVE5N0U4ZnpJUDA0NjM=
+  port: MTAyNA==
   provider: dGFzcG9zdGdyZXNxbA==  # tas
   type: cG9zdGdyZXNxbAo= # postgresql
   username: cGdhZG1pbg== # pgadmin

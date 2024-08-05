@@ -1,7 +1,7 @@
 apiVersion: v1
 data:
   uri: aHR0cHM6Ly9nZW5haS1wcm94eS5zeXMudGFzLnZtdGFuenUuY29t
-  api-key: c2stS1IzNjIyMUdJSXpkbFlIRTRIQnY5UQ==
+  api-key: c2stNFkzanFoY0FldG16RjVueHFlLTZQdw==
   provider: b3BlbmFp  # openai
   type: b3BlbmFp  # openai
 kind: Secret

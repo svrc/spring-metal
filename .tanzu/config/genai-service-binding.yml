@@ -13,4 +13,4 @@ spec:
   targetRef:
     apiGroup: apps.tanzu.vmware.com
     kind: ContainerApp
-    name: pring-metal
+    name: spring-metal

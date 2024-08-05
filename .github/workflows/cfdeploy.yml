@@ -8,24 +8,14 @@ jobs:
   gitops-deploy:
     runs-on: ubuntu-latest
     steps:
-      - name: Install CLI
+      - name: Deploy to CF
+        env:
+          CF_DOCKER_PASSWORD: ${{secrets.CF_DOCKER_PASSWORD}}
         run: |
           wget -q -O - https://packages.cloudfoundry.org/debian/cli.cloudfoundry.org.key | sudo apt-key add -
           echo "deb https://packages.cloudfoundry.org/debian stable main" | sudo tee /etc/apt/sources.list.d/cloudfoundry-cli.list
           sudo apt update
           sudo apt install cf8-cli
-#          sudo apt install openjdk-17-jdk openjdk-17-jre
-#          sudo update-java-alternatives --set /usr/lib/jvm/java-1.17.0-openjdk-amd64
-#          export JAVA_HOME=/usr/lib/jvm/java-1.17.0-openjdk-amd64
-
-      - name: Deploy to CF
-        env:
-#          CF_API: ${{ vars.CF_API_ENDPOINT }}
-#          CF_ORG: ${{ vars.CF_ORG }}
-#          CF_SPACE: ${{ vars.CF_SPACE }}
-          CF_DOCKER_PASSWORD: ${{secrets.CF_DOCKER_PASSWORD}}
-
-        run: |
           cf api ${{ vars.CF_API_ENDPOINT }} --skip-ssl-validation
           cf auth admin ${{ secrets.CF_API_TOKEN }}
           cf target -o ${{ vars.CF_ORG }} -s ${{ vars.CF_SPACE }}

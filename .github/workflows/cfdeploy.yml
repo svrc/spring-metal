@@ -37,6 +37,6 @@ jobs:
           CF_DOCKER_PASSWORD: ${{secrets.CF_DOCKER_PASSWORD}}
         run: |
 
-          cf push test  --docker-image harbor.vmtanzu.com/openso-tap-apps/spring-metal --docker-username openso
+          cf push spring-metal  --docker-image harbor.vmtanzu.com/openso-tap-apps/spring-metal --docker-username openso
         
       - run: echo "🍏 This job's status is ${{ job.status }}."

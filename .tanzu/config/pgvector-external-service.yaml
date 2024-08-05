@@ -3,7 +3,7 @@ data:
   database: cG9zdGdyZXM=
   host: dGNwLnRhcy52bXRhbnp1LmNvbQ==
   password: V0pjZW9iQVlYZ2Eyakk1OQ==
-  port: MTAyNg== # 1026
+  port: MTAyNA== # 1024
   provider: dGFzcG9zdGdyZXNxbA==  # tas
   type: cG9zdGdyZXNxbAo= # postgresql
   username: cGdhZG1pbg== # pgadmin

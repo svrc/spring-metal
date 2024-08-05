@@ -1,4 +1,4 @@
-name: Deploy to K8s
+name: Build and Deploy to TP
 run-name: ${{ github.actor }} deploying
 on:
   push:
@@ -22,19 +22,13 @@ jobs:
           tanzu config eula accept
           tanzu init
           tanzu version
-
-      - name: Install Tanzu plugins
-        #env:
-          #TANZU_CLI_INCLUDE_DEACTIVATED_PLUGINS_TEST_ONLY: 1
-        run: |
           tanzu plugin install build
           tanzu plugin install resource
-
           
       - name: Check out repository code
         uses: actions/checkout@v4
 
-      - name: Build and Deploy to Tanzu Space
+      - name: Build
         env:
           TANZU_API_TOKEN: ${{ secrets.API_TOKEN }}
         run: |
@@ -50,7 +44,7 @@ jobs:
         with:
           credentials: ${{secrets.GIT_CREDENTIALS}}
         
-      - name: Promote to dev environment
+      - name: Promote to TPK8S Gitops
         run: |
           git config --global user.name "0pens0"
           git config --global user.email oren@penso.io
@@ -62,6 +56,19 @@ jobs:
           git commit -m "push new version to stage"
           git push
           cd ..
+      
+      - name: Deploy to TPCF
+        env:
+          CF_DOCKER_PASSWORD: ${{secrets.CF_DOCKER_PASSWORD}}
+        run: |
+          wget -q -O - https://packages.cloudfoundry.org/debian/cli.cloudfoundry.org.key | sudo apt-key add -
+          echo "deb https://packages.cloudfoundry.org/debian stable main" | sudo tee /etc/apt/sources.list.d/cloudfoundry-cli.list
+          sudo apt update
+          sudo apt install cf8-cli
+          cf api ${{ vars.CF_API_ENDPOINT }} --skip-ssl-validation
+          cf auth admin ${{ secrets.CF_API_TOKEN }}
+          cf target -o ${{ vars.CF_ORG }} -s ${{ vars.CF_SPACE }}
+          cf push spring-metal  --docker-image harbor.vmtanzu.com/openso-tap-apps/spring-metal --docker-username openso
           
 
       - uses: stefanzweifel/git-auto-commit-action@v5

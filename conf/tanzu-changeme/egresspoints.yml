@@ -1,7 +1,7 @@
 apiVersion: networking.tanzu.vmware.com/v1alpha1
 kind: EgressPoint
 metadata:
-  name: spring-metal-ext-services
+  name: spring-metal-ext-svc-egress
   namespace: default
 spec:
   targets:
@@ -10,6 +10,7 @@ spec:
     port:
       number: 8443
       protocol: HTTPS
+  - hosts:
     - tcp.tas.vmtanzu.com
     port:
       number: 1024

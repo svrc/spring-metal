@@ -57,18 +57,18 @@ jobs:
           git push
           cd ..
       
-      - name: Deploy to TPCF
-        env:
-          CF_DOCKER_PASSWORD: ${{secrets.CF_DOCKER_PASSWORD}}
-        run: |
-          wget -q -O - https://packages.cloudfoundry.org/debian/cli.cloudfoundry.org.key | sudo apt-key add -
-          echo "deb https://packages.cloudfoundry.org/debian stable main" | sudo tee /etc/apt/sources.list.d/cloudfoundry-cli.list
-          sudo apt update
-          sudo apt install cf8-cli
-          cf api ${{ vars.CF_API_ENDPOINT }} --skip-ssl-validation
-          cf auth admin ${{ secrets.CF_API_TOKEN }}
-          cf target -o ${{ vars.CF_ORG }} -s ${{ vars.CF_SPACE }}
-          cf push spring-metal  --docker-image harbor.vmtanzu.com/openso-tap-apps/spring-metal --docker-username openso
+#      - name: Deploy to TPCF
+#        env:
+#          CF_DOCKER_PASSWORD: ${{secrets.CF_DOCKER_PASSWORD}}
+#        run: |
+#          wget -q -O - https://packages.cloudfoundry.org/debian/cli.cloudfoundry.org.key | sudo apt-key add -
+#          echo "deb https://packages.cloudfoundry.org/debian stable main" | sudo tee /etc/apt/sources.list.d/cloudfoundry-cli.list
+#          sudo apt update
+#          sudo apt install cf8-cli
+#          cf api ${{ vars.CF_API_ENDPOINT }} --skip-ssl-validation
+#          cf auth admin ${{ secrets.CF_API_TOKEN }}
+#          cf target -o ${{ vars.CF_ORG }} -s ${{ vars.CF_SPACE }}
+#          cf push spring-metal  --docker-image harbor.vmtanzu.com/openso-tap-apps/spring-metal --docker-username openso
           
 
       - uses: stefanzweifel/git-auto-commit-action@v5

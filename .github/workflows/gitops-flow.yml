@@ -56,7 +56,7 @@ jobs:
           git add .
           git commit -m "push new version to stage"
           git push
-          cd ..
+#          cd ..
       
 #      - name: Deploy to TPCF
 #        env:

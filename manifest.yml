@@ -7,7 +7,7 @@ applications:
   #routes:
   #  - route: spring-metal-demo-gitops.vmtanzu.net
   #    protocol: http2
-
+  random-route: true
   env:
     JBP_CONFIG_SPRING_AUTO_RECONFIGURATION: '{enabled: false}'
     SPRING_PROFILES_ACTIVE: http2

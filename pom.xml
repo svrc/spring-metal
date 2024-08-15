@@ -16,7 +16,7 @@
   <description>Sample AI app for TAS</description>
   <properties>
     <java.version>17</java.version>
-    <java-cfenv.version>3.0.0</java-cfenv.version>
+    <java-cfenv.version>3.1.6-SNAPSHOT</java-cfenv.version>
     <spring-ai.version>1.0.0-SNAPSHOT</spring-ai.version>
   </properties>
 
@@ -37,12 +37,17 @@
         <enabled>true</enabled>
       </snapshots>
     </repository>
-    <!-- Commercial Spring Extensions -->
+    <repository>
+        <id>cfenv.local</id>
+        <name>cfenv</name>
+        <url>file:${project.basedir}/local-maven-repo</url>
+    </repository>
+    <!-- Commercial Spring Extensions 
     <repository>
       <id>tanzu-spring-repo</id>
       <url>https://artifactory.eng.vmware.com/api-auto-registration-docker-local</url>
     </repository>
-
+    -->
   </repositories>
 
   <dependencies>
@@ -113,7 +118,7 @@
     <!-- Java CFEnv -->
     <dependency>
       <groupId>io.pivotal.cfenv</groupId>
-      <artifactId>java-cfenv-boot</artifactId>
+      <artifactId>java-cfenv-all</artifactId>
       <version>${java-cfenv.version}</version>
     </dependency>
     <dependency>

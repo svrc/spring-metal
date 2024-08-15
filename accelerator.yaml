@@ -16,6 +16,7 @@ accelerator:
     label: Soure repository
     description: Codebase of an exiting 'inner loop' application
     required: true
+    defaultValue: "https://github.com/scottfrederick/spring-music"
 
   - name: llm
     label: LLM models selection

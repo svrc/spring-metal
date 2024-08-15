@@ -8,8 +8,9 @@ applications:
   random-route: true
 
   services:
-  - genai-enpoint
-  - embeddings
+  - genai-chat
+  - genai-embed
+  - vector-db
 
   env:
     JBP_CONFIG_SPRING_AUTO_RECONFIGURATION: '{enabled: false}'

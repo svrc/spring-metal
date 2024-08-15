@@ -7,11 +7,6 @@ applications:
   buildpack: java_buildpack_offline
   random-route: true
 
-  services:
-  - genai-chat
-  - genai-embed
-  - postgres
-
   env:
     JBP_CONFIG_SPRING_AUTO_RECONFIGURATION: '{enabled: false}'
     SPRING_PROFILES_ACTIVE: http2

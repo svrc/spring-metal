@@ -16,7 +16,47 @@ This repository contains artifacts necessary to build and run generative AI appl
 - Access to a Route53 domain and necessary AWS permissions.
 - Configured egress settings (closed by default) to connect to external services.
 
-## Preperations
+
+## Installation
+
+### Cloud Foundry Runtime
+
+#### Preperations
+Update the following in ```demo.sh``` according to your TPCF configurations
+
+```bash
+PGVECTOR_SERVICE_NAME="vector-db"
+PGVECTOR_PLAN_NAME="on-demand-postgres-db"
+
+GENAI_CHAT_SERVICE_NAME="genai-chat" # must be identical to runtime-configs/tpcf/manifest.yaml
+GENAI_CHAT_PLAN_NAME="meta-llama/Meta-Llama-3-8B-Instruct" # plan must have chat capabilty
+
+GENAI_EMBEDDINGS_SERVICE_NAME="genai-embed" # must be identical to runtime-configs/tpcf/manifest.yaml
+GENAI_EMBEDDINGS_PLAN_NAME="nomic-embed-text" # plan must have Embeddings capabilty
+```
+
+#### Build
+
+```bash
+mvn clean package -DskipTests
+```
+
+#### Deployment
+Run the demo script to create all services and push the spring-metal application
+
+```bash
+cf login -u admin -p YOUR_CF_ADMIN_PASSWORD
+cf target -o YOUR_ORG -s YOUR_SPACE
+
+./demo.sh cf
+```
+Notes:
+- if your Cloud Foundry Runtime srrvices are hosted on a private network, you will need to create or update your postgres service with the TCP Router and Service instance gateway.  [Documentation](https://docs.vmware.com/en/VMware-Tanzu-Postgres-for-Tanzu-Application-Service/1.1/postgres/create-service-gateway-instance.html)
+- The contents of your Kubernetes service secret can be viewed through the service key.  
+  
+### Kubernetes Runtime
+
+#### Preperations
 
 - Create a ```.tanzu/config``` and ```.tanzu/services``` folders
 
@@ -29,38 +69,20 @@ This repository contains artifacts necessary to build and run generative AI appl
 - Copy ```runtime-configs/tpk8s/tanzu-changeme/postgres-external-service.yml``` to ```.tanzu/services``` and update the CHANGE_ME tokens (all keys must be in 64 bit format)
 - Copy ```runtime-configs/tpk8s/tanzu-changeme/postgres-service-binding.yml``` to ```.tanzu/services``` and update the CHANGE_ME tokens (app name must match info in ```spring-metal.yml```)
 
-## Installation
-
-### Cloud Foundry Runtime
-Set up your target environment and create necessary back-end services for the ai demo:
-
-```bash
-cf target -o ai-apps -s ai-spring-metal
-cf create-service private-ai-service shared-ai-plan ai-service
-cf create-service-key ai-service ai-key
-cf service-key ai-service ai-key
-cf create-service postgres on-demand-postgres-db pgvector
-cf create-service-key pgvector pg-key
-cf service-key pgvector pg-key
-cf push
-```
-Notes:
-- if your Cloud Foundry Runtime srrvices are hosted on a private network, you will need to create or update your postgres service with the TCP Router and Service instance gateway.  [Documentation](https://docs.vmware.com/en/VMware-Tanzu-Postgres-for-Tanzu-Application-Service/1.1/postgres/create-service-gateway-instance.html)
-- The contents of your Kubernetes service secret can be viewed through the service key.  
-  
-### Kubernetes Runtime
-
-Set up your Kubernetes environment ensuring all prerequisites are met:
-
-#### Set context:
+#### Deployment - all in one
 
 ```bash
 tanzu login
 tanzu context use <my-context>
 tanzu project use <my-project>
 tanzu space use <my-space>
+
+./demo.sh k8s
 ```
-## Build
+
+#### Deployment - step by step
+
+##### Build
 
 Follow these commands to build your application:
 
@@ -69,7 +91,7 @@ tanzu build config --containerapp-registry [YOUR CONTAINER REGISTRY]
 tanzu build -o build-output
 ```
 
-## Deploy
+##### Deploy
 
 Follow these commands to deploy your application from the build-output folder:
 
@@ -77,7 +99,7 @@ Follow these commands to deploy your application from the build-output folder:
 tanzu deploy --from-build build-output
 ```
 
-## Bind
+##### Bind
 
 #### Create and bind the pre-provisioned services :
 Create secrets to external Postgres (with pgvector) and GenAI control apis running on TPCF and bind them as pre-provisioned services 
@@ -85,6 +107,12 @@ Create secrets to external Postgres (with pgvector) and GenAI control apis runni
 ```bash
 tanzu context use <my-context>
 kubectl apply -f .tanzu/services
+```
+
+### Cleanup
+
+```bash
+./demo.sh cleanup
 ```
 
 ### Troubleshooting

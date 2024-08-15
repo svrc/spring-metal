@@ -9,7 +9,7 @@ GENAI_CHAT_PLAN_NAME="meta-llama/Meta-Llama-3-8B-Instruct" # plan must have chat
 GENAI_EMBEDDINGS_SERVICE_NAME="genai-embed" 
 GENAI_EMBEDDINGS_PLAN_NAME="nomic-embed-text" # plan must have Embeddings capabilty
 
-APP_NAME="spring-metal" # must match runtime-configs/tpcf/manifest.yml
+APP_NAME="spring-metal" # If you want to override the app name in runtime-configs/tpcf/manifest.yml
 
 
 case $1 in
@@ -29,18 +29,18 @@ cf)
  
 	echo && printf "\e[37mℹ️  Creating $GENAI_CHAT_SERVICE_NAME and $GENAI_EMBEDDINGS_SERVICE_NAME GenAI services ...\e[m\n" && echo
 
-    cf create-service genai $GENAI_CHAT_PLAN_NAME $GENAI_CHAT_SERVICE_NAME #-c '{"svc_gw_enable": true, "router_group": "default-tcp", "external_port": 1025}' -w
-    cf create-service genai $GENAI_EMBEDDINGS_PLAN_NAME $GENAI_EMBEDDINGS_SERVICE_NAME #-c '{"svc_gw_enable": true, "router_group": "default-tcp", "external_port": 1025}' -w
+    cf create-service genai $GENAI_CHAT_PLAN_NAME $GENAI_CHAT_SERVICE_NAME 
+    cf create-service genai $GENAI_EMBEDDINGS_PLAN_NAME $GENAI_EMBEDDINGS_SERVICE_NAME 
  
     echo && printf "\e[37mℹ️  Deploying spring-metal application ...\e[m\n" && echo
-    cf push -f runtime-configs/tpcf/manifest.yml 
+    cf push $APP_NAME -f runtime-configs/tpcf/manifest.yml --no-start
 
     echo && printf "\e[37mℹ️  Binding services ...\e[m\n" && echo
 
     cf bind-service $APP_NAME $PGVECTOR_SERVICE_NAME
     cf bind-service $APP_NAME $GENAI_CHAT_SERVICE_NAME
     cf bind-service $APP_NAME $GENAI_EMBEDDINGS_SERVICE_NAME
-    cf restage $APP_NAME
+    cf start $APP_NAME
 
     ;;
 k8s)

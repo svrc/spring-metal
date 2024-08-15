@@ -106,9 +106,7 @@ public class SpringApplicationContextInitializer implements ApplicationContextIn
         if (!llmServices.isEmpty()) {
             logger.info("Setting service profile llm");
             appEnvironment.addActiveProfile("llm");
-            CfCredentials llmCredentials = cfEnv.findCredentialsByTag("llm");
-            appEnvironment.getSystemProperties().put("spring.ai.openai.base-url", llmCredentials.getMap().get("api_base") + "/");
-            appEnvironment.getSystemProperties().put("spring.ai.openai.api-key", llmCredentials.getMap().get("api_key"));
+          
         }
 
         if (k8sServiceTypes.contains("openai")) {

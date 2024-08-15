@@ -3,11 +3,9 @@ applications:
 - name: spring-metal
   
   memory: 1G
-  path: ../../target/dekt-metal-0.5.jar
-  #buildpack: java_buildpack_offline
+  path: ../../target/spring-metal-0.5.jar
+  buildpack: java_buildpack_offline
   random-route: true
-
- #services are bound at runtime , see demo.sh
 
   env:
     JBP_CONFIG_SPRING_AUTO_RECONFIGURATION: '{enabled: false}'

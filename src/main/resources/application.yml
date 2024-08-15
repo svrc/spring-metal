@@ -2,15 +2,13 @@ spring:
   ai:
     openai:
       api-key: "YOUR-KEY"
-#     chat:
-#       options:
-#         model: gpt-3.5-turbo
-#     embedding:
-#       options:
-#         models: text-embedding-ada-002
+    vectorstore:
+      pgvector: 
+        initialize-schema: true
+        remove-existing-vector-store-table: true
   jpa:
     generate-ddl: true
-
+---
 management:
   wavefront:
     api-token: cfd06c63-7ef3-4f3d-a48f-8bf662bf2453// this is a fake token since wavefront lib expects a token, though this is not used for authentication to collector for ingestion
@@ -85,19 +83,15 @@ spring:
 
 ---
 spring:
-  config:
-    activate:
-      on-profile: postgres
   datasource:
-    url: "jdbc:postgresql://localhost/music"
+    url: "jdbc:postgresql://localhost:15432/music"
     driver-class-name: org.postgresql.Driver
     username: postgres
-    password:
+    password: password
   jpa:
     properties:
       hibernate:
         dialect: org.hibernate.dialect.PostgreSQLDialect
----
 #tanzu:
 #  governance:
 #    fips:

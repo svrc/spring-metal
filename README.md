@@ -35,6 +35,12 @@ GENAI_EMBEDDINGS_SERVICE_NAME="genai-embed" # must be identical to runtime-confi
 GENAI_EMBEDDINGS_PLAN_NAME="nomic-embed-text" # plan must have Embeddings capabilty
 ```
 
+#### Build
+
+```bash
+mvn clean package -DskipTests
+```
+
 #### Deployment
 Run the demo script to create all services and push the spring-metal application
 

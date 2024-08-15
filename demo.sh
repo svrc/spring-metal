@@ -54,7 +54,7 @@ cleanup)
     cf delete-service $PGVECTOR_SERVICE_NAME -f
     cf delete-service $GENAI_CHAT_SERVICE_NAME -f
     cf delete-service $GENAI_EMBEDDINGS_SERVICE_NAME -f
-    cf delete dekt-metal -f -r
+    cf delete $APP_NAME -f -r
     kubectl delete -f .tanzu/services
     ;;
 *)

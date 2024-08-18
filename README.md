@@ -27,18 +27,19 @@ Update the following in ```demo.sh``` according to your TPCF configurations
 ```bash
 PGVECTOR_SERVICE_NAME="vector-db"
 PGVECTOR_PLAN_NAME="on-demand-postgres-db"
+PGVECTOR_EXTERNAL_PORT=1025 # Need TCP Router on the TPCF foundation enabled, and Service Gateways on the Postgres tile enabled.  Choose an available port 
 
-GENAI_CHAT_SERVICE_NAME="genai-chat" # must be identical to runtime-configs/tpcf/manifest.yaml
+GENAI_CHAT_SERVICE_NAME="genai-chat" 
 GENAI_CHAT_PLAN_NAME="meta-llama/Meta-Llama-3-8B-Instruct" # plan must have chat capabilty
 
-GENAI_EMBEDDINGS_SERVICE_NAME="genai-embed" # must be identical to runtime-configs/tpcf/manifest.yaml
+GENAI_EMBEDDINGS_SERVICE_NAME="genai-embed" 
 GENAI_EMBEDDINGS_PLAN_NAME="nomic-embed-text" # plan must have Embeddings capabilty
 ```
 
 #### Build
 
 ```bash
-mvn clean package -DskipTests
+mvn clean package 
 ```
 
 #### Deployment
@@ -58,24 +59,22 @@ Notes:
 
 #### Preperations
 
-- Create a ```.tanzu/config``` and ```.tanzu/services``` folders
-
-- Copy ```runtime-configs/tpk8s/tanzu-changeme/spring-metal.yml``` to ```.tanzu/config``` and update the CHANGE_ME tokens
-- Copy ```runtime-configs/tpk8s/tanzu-changeme/httproute.yml``` to ```.tanzu/config``` and update the CHANGE_ME tokens (app name must match info in ```spring-metal.yml```)
-
-- Copy ```runtime-configs/tpk8s/tanzu-changeme/genai-external-service.yml``` to ```.tanzu/services``` and update the CHANGE_ME tokens (all keys must be in 64 bit format)
-- Copy ```runtime-configs/tpk8s/tanzu-changeme/genai-service-binding.yml``` to ```.tanzu/services``` and update the CHANGE_ME tokens (app name must match info in ```spring-metal.yml```)
-
-- Copy ```runtime-configs/tpk8s/tanzu-changeme/postgres-external-service.yml``` to ```.tanzu/services``` and update the CHANGE_ME tokens (all keys must be in 64 bit format)
-- Copy ```runtime-configs/tpk8s/tanzu-changeme/postgres-service-binding.yml``` to ```.tanzu/services``` and update the CHANGE_ME tokens (app name must match info in ```spring-metal.yml```)
-
-#### Deployment - all in one
+- Ensure the CF runtime services are installed and your CF CLI is targeted to the org/space you used above.
+- Ensure you're logged into the tanzu platform and your kubernetes context is set to your space
+- Template the Kubernetes services and bindings
 
 ```bash
 tanzu login
 tanzu context use <my-context>
 tanzu project use <my-project>
 tanzu space use <my-space>
+export KUBECONFIG=~/.config/tanzu/kube/config 
+./demo.sh prepare-k8s
+```
+
+#### Deployment - all in one
+
+```bash
 
 ./demo.sh k8s
 ```

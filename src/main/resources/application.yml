@@ -1,15 +1,7 @@
 spring:
   ai:
-    cloud:
-      bindings:
-        genai:
-          enabled: true
     openai:
       api-key: "YOUR-KEY"
-    vectorstore:
-      pgvector: 
-        initialize-schema: true
-        remove-existing-vector-store-table: true
   jpa:
     generate-ddl: true
 ---
@@ -87,6 +79,9 @@ spring:
 
 ---
 spring:
+  config:
+    activate:
+      on-profile: postgres
   datasource:
     url: "jdbc:postgresql://localhost:15432/music"
     driver-class-name: org.postgresql.Driver
@@ -96,6 +91,11 @@ spring:
     properties:
       hibernate:
         dialect: org.hibernate.dialect.PostgreSQLDialect
+  ai:
+    vectorstore:
+      pgvector: 
+        initialize-schema: true
+        remove-existing-vector-store-table: true
 #tanzu:
 #  governance:
 #    fips:

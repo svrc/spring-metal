@@ -121,6 +121,6 @@ cleanup)
     kubectl delete -f .tanzu/config
     ;;
 *)
-    echo && printf "\e[31m⏹  Usage: cf/k8s/cleanup \e[m\n" && echo
+    echo && printf "\e[31m⏹  Usage: cf/prepare-k8s/k8s/cleanup \e[m\n" && echo
     ;;
 esac

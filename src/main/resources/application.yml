@@ -1,5 +1,9 @@
 spring:
   ai:
+    cloud:
+      bindings:
+        genai:
+          enabled: true
     openai:
       api-key: "YOUR-KEY"
     vectorstore:

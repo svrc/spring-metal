@@ -109,16 +109,10 @@ public class SpringApplicationContextInitializer implements ApplicationContextIn
           
         }
 
-        if (k8sServiceTypes.contains("openai")) {
+        if (k8sServiceTypes.contains("genai")) {
            logger.info("Setting service profile llm");
            appEnvironment.addActiveProfile("llm");
-           bindings.filterBindings("openai").forEach(binding -> {
-			 appEnvironment.getSystemProperties().put("spring.ai.openai.api-key", binding.getSecret().get("api-key"));
-			 String openAiUrl = binding.getSecret().get("uri");
-			 if (!openAiUrl.endsWith("/"))
-			 	openAiUrl = openAiUrl + "/";
-			 appEnvironment.getSystemProperties().put("spring.ai.openai.base-url", openAiUrl);
-		   });
+          
         }
 
         if (profiles.size() > 0) {

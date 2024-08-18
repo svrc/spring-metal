@@ -9,12 +9,12 @@ import org.cloudfoundry.samples.music.domain.Message;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import org.springframework.ai.chat.model.Generation;
 import org.springframework.ai.document.Document;
 import org.springframework.ai.vectorstore.VectorStore;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Profile;
 import org.springframework.web.bind.annotation.*;
+
 
 @RestController
 @Profile("llm")
@@ -37,6 +37,7 @@ public class AIController {
         this.messageRetriever = messageRetriever;
         this.vectorStore = vectorStore;
     }
+    
     @RequestMapping(value = "/ai/rag", method = RequestMethod.POST)
     public Map<String,Object> generate(@RequestBody MessageRequest messageRequest) {
         Message[] messages = messageRequest.getMessages();

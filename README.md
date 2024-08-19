@@ -39,7 +39,7 @@ GENAI_EMBEDDINGS_PLAN_NAME="nomic-embed-text" # plan must have Embeddings capabi
 #### Build
 
 ```bash
-mvn clean package 
+mvn clean package -DskipTests
 ```
 
 #### Deployment

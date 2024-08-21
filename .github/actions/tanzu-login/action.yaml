@@ -1,0 +1,19 @@
+name: 'tanzu login'
+description: 'Login the user'
+inputs:
+  api-token:
+    description: 'Token used to login with the CLI'
+    required: true
+  endpoint:
+    description: 'Endpoint to authenticate against'
+    default: 'console.cloud.vmware.com'
+runs:
+  using: "composite"
+  steps:
+    - name: Login
+      shell: bash
+      env:
+        TANZU_API_TOKEN: ${{ inputs.api-token }}
+        ENDPOINT: ${{ inputs.endpoint }}
+      run: |
+        tanzu login --endpoint ${ENDPOINT}

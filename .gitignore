@@ -40,3 +40,6 @@ dependency-reduced-pom.xml
 mem*.db
 
 README.html
+conf/external-services/genai-service-binding.yml
+conf/external-services/postgres-service-binding.yml
+demo.sh

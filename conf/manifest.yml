@@ -3,17 +3,9 @@ applications:
 - name: spring-metal
   
   memory: 1G
-<<<<<<<< HEAD:conf/manifest.yml
-  path: target/dekt-metal-0.5.jar
-  #buildpack: java_buildpack_offline
-  #routes:
-  #  - route: spring-metal-demo-gitops.vmtanzu.net
-  #    protocol: http2
-========
   path: ../../target/spring-metal-0.5.jar
   buildpack: java_buildpack_offline
   random-route: true
->>>>>>>> main:runtime-configs/tpcf/manifest.yml
 
   env:
     JBP_CONFIG_SPRING_AUTO_RECONFIGURATION: '{enabled: false}'

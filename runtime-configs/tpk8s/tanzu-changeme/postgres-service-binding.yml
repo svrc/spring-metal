@@ -1,11 +1,7 @@
 apiVersion: services.tanzu.vmware.com/v1
 kind: ServiceBinding
 metadata:
-<<<<<<< HEAD:.tanzu/config/postgres-service-binding.yml
   name: pgvector-spring-metal-openso
-=======
-  name: pgvector-CHANGE_ME
->>>>>>> main:runtime-configs/tpk8s/tanzu-changeme/postgres-service-binding.yml
   namespace: default
 spec:
   alias: db
@@ -17,8 +13,4 @@ spec:
   targetRef:
     apiGroup: apps.tanzu.vmware.com
     kind: ContainerApp
-<<<<<<< HEAD:.tanzu/config/postgres-service-binding.yml
     name: spring-metal-openso
-=======
-    name: CHANGE_ME
->>>>>>> main:runtime-configs/tpk8s/tanzu-changeme/postgres-service-binding.yml

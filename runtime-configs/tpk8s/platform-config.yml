@@ -3,10 +3,7 @@ kind: ContainerAppBuildPlan
 metadata:
   name: platform-config
 spec:
-<<<<<<< HEAD:conf/platform-config.yml
   registry: harbor.vmtanzu.com/openso-tap-apps
-=======
->>>>>>> main:runtime-configs/tpk8s/platform-config.yml
   buildpacks:
     builder: "paketobuildpacks/builder-jammy-base"
   postBuildSteps:

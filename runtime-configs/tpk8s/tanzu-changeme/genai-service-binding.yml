@@ -1,7 +1,11 @@
 apiVersion: services.tanzu.vmware.com/v1
 kind: ServiceBinding
 metadata:
+<<<<<<< HEAD:.tanzu/config/genai-service-binding.yml
+  name: genai-chat-spring-metal-openso
+=======
   name: genai-chat-CHANGE_ME
+>>>>>>> main:runtime-configs/tpk8s/tanzu-changeme/genai-service-binding.yml
   namespace: default
 spec:
   alias: ai-chat
@@ -13,13 +17,21 @@ spec:
   targetRef:
     apiGroup: apps.tanzu.vmware.com
     kind: ContainerApp
+<<<<<<< HEAD:.tanzu/config/genai-service-binding.yml
+    name: spring-metal-openso
+=======
     name: CHANGE_ME
+>>>>>>> main:runtime-configs/tpk8s/tanzu-changeme/genai-service-binding.yml
 
 ---
 apiVersion: services.tanzu.vmware.com/v1
 kind: ServiceBinding
 metadata:
+<<<<<<< HEAD:.tanzu/config/genai-service-binding.yml
+  name: genai-embed-spring-metal-openso
+=======
   name: genai-embed-CHANGE_ME
+>>>>>>> main:runtime-configs/tpk8s/tanzu-changeme/genai-service-binding.yml
   namespace: default
 spec:
   alias: ai-embed
@@ -31,4 +43,8 @@ spec:
   targetRef:
     apiGroup: apps.tanzu.vmware.com
     kind: ContainerApp
+<<<<<<< HEAD:.tanzu/config/genai-service-binding.yml
+    name: spring-metal-openso
+=======
     name: CHANGE_ME
+>>>>>>> main:runtime-configs/tpk8s/tanzu-changeme/genai-service-binding.yml

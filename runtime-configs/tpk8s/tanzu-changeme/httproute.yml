@@ -1,9 +1,15 @@
 apiVersion: gateway.networking.k8s.io/v1beta1
 kind: HTTPRoute
 metadata:
+<<<<<<< HEAD:.tanzu/config/httproute.yml
+  name: spring-metal-openso
+  annotations:
+    healthcheck.gslb.tanzu.vmware.com/service: spring-metal-openso
+=======
   name: CHANGE_ME
   annotations:
     healthcheck.gslb.tanzu.vmware.com/service: CHANGE_ME
+>>>>>>> main:runtime-configs/tpk8s/tanzu-changeme/httproute.yml
     healthcheck.gslb.tanzu.vmware.com/path: /
     healthcheck.gslb.tanzu.vmware.com/port: "8080"
 spec:
@@ -11,12 +17,20 @@ spec:
   - group: gateway.networking.k8s.io
     kind: Gateway
     name: default-gateway
+<<<<<<< HEAD:.tanzu/config/httproute.yml
+    sectionName: http-spring-metal-openso
+=======
     sectionName: http-CHANGE_ME
+>>>>>>> main:runtime-configs/tpk8s/tanzu-changeme/httproute.yml
   rules:
   - backendRefs:
     - group: ""
       kind: Service
+<<<<<<< HEAD:.tanzu/config/httproute.yml
+      name: spring-metal-openso
+=======
       name: CHANGE_ME
+>>>>>>> main:runtime-configs/tpk8s/tanzu-changeme/httproute.yml
       port: 8080
       weight: 1
     matches:

@@ -3,6 +3,10 @@ kind: ContainerAppBuildPlan
 metadata:
   name: platform-config
 spec:
+<<<<<<< HEAD:conf/platform-config.yml
+  registry: harbor.vmtanzu.com/openso-tap-apps
+=======
+>>>>>>> main:runtime-configs/tpk8s/platform-config.yml
   buildpacks:
     builder: "paketobuildpacks/builder-jammy-base"
   postBuildSteps:
@@ -14,3 +18,19 @@ spec:
     steps:
     - namedtask: tanzu-kubernetes-deployment
     - namedtask: tanzu-kubernetes-carvel-package
+
+---
+#  runtimes:
+#  - name: kubernetes-plain
+#    steps:
+#    - name: kubernetes-deployment
+#      namedTask: tanzu-kubernetes-deployment
+#  - name: kubernetes-carvel-package
+#    description: create a carvel package for deploying on kubernetes
+#    steps:
+#    - namedtask: tanzu-kubernetes-deployment
+#    - namedtask: tanzu-kubernetes-carvel-package
+#  - name: container-image
+#    description: write image to file for use with container runtime (i.e docker run)
+#    steps:
+#    - namedtask: tanzu-container-image

@@ -2,7 +2,11 @@ apiVersion: apps.tanzu.vmware.com/v1
 kind: ContainerApp
 metadata:
   creationTimestamp: null
+<<<<<<< HEAD:.tanzu/config/spring-metal.yml
+  name: spring-metal-openso
+=======
   name: CHANGE_ME
+>>>>>>> main:runtime-configs/tpk8s/tanzu-changeme/spring-metal.yml
 spec:
   build:
     buildpacks: {}

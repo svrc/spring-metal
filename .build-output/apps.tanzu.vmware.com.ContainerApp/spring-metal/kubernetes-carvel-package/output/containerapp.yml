@@ -3,22 +3,22 @@ kind: ContainerApp
 metadata:
   annotations:
     apps.tanzu.vmware.com/promotable: ""
-    apps.tanzu.vmware.com/promote-group: ContainerApp/spring-metal-openso
+    apps.tanzu.vmware.com/promote-group: ContainerApp/spring-metal
     containerapp.apps.tanzu.vmware.com/class: kubernetes
-  name: spring-metal-openso
+  name: spring-metal
 spec:
   content:
-    buildTimestamp: "2024-08-21T16:33:54Z"
-    gitCommit: 1632cfd8cbaf6fc2df4306ab4d7b604a67c303e7-dirty
+    buildTimestamp: "2024-08-21T16:43:17Z"
+    gitCommit: da0378905e4fbf5615f8d693dcd5a1aed8e6ff98-dirty
     gitURL: github.com/0pens0/spring-metal.git
-    packageImage: harbor.vmtanzu.com/openso-tap-apps/spring-metal-openso@sha256:e7d04eb7923285d79a429c3d27dfcdbda056b06e0daea6696a5d711ec877e0fe
-    packageRefName: spring-metal-openso.apps.local
-    packageVersion: 20240821.1633.54966
-    summary: git:1632cfd @ 2024-08-21T16:33:54Z
-    version: 20240821.1633.54966
+    packageImage: harbor.vmtanzu.com/openso-tap-apps/spring-metal@sha256:8b2f2dba15e6da94e364156a45cb3eb2ddda9b990cd320cb5e4a275832714eb1
+    packageRefName: spring-metal.apps.local
+    packageVersion: 20240821.1643.17008
+    summary: git:da03789 @ 2024-08-21T16:43:17Z
+    version: 20240821.1643.17008
   health:
     maxUnavailableReplicas: 10%
-  image: harbor.vmtanzu.com/openso-tap-apps/spring-metal-openso@sha256:f7ba0c84af420a40be4b6433d0671c197947f57d6bdb0d52c75dbf0ca189627b
+  image: harbor.vmtanzu.com/openso-tap-apps/spring-metal@sha256:f7ba0c84af420a40be4b6433d0671c197947f57d6bdb0d52c75dbf0ca189627b
   nonSecretEnv:
   - name: JAVA_TOOL_OPTIONS
     value: -Dmanagement.endpoint.health.probes.add-additional-paths=true -Dmanagement.health.probes.enabled=true
@@ -48,45 +48,45 @@ spec:
   relatedRefs:
   - for: kubernetes.list-replicas
     kind: Pod
-    labelSelector: containerapp.apps.tanzu.vmware.com/app-name=spring-metal-openso
+    labelSelector: containerapp.apps.tanzu.vmware.com/app-name=spring-metal
   - apiGroup: apps
     for: kubernetes.service-binding-target
     kind: Deployment
-    name: spring-metal-openso
+    name: spring-metal
   - for: kubernetes.service-target
     kind: Service
-    name: spring-metal-openso
+    name: spring-metal
   - for: kubernetes.scale-replicas
     keyPath: .data['values.yml']->[yaml].replicas
     kind: Secret
-    name: spring-metal-openso-values
+    name: spring-metal-values
   - for: kubernetes.scale-resources
     keyPath: .data['values.yml']->[yaml].resources
     kind: Secret
-    name: spring-metal-openso-values
+    name: spring-metal-values
   - for: kubernetes.set-secret-env
     keyPath: .data['values.yml']->[yaml].secretEnv
     kind: Secret
-    name: spring-metal-openso-values
+    name: spring-metal-values
   - apiGroup: packaging.carvel.dev
     for: kubernetes.delete
     kind: PackageInstall
-    name: spring-metal-openso
+    name: spring-metal
   - apiGroup: data.packaging.carvel.dev
     for: kubernetes.delete
     kind: Package
-    name: spring-metal-openso.apps.local.20240821.1633.54966
+    name: spring-metal.apps.local.20240821.1643.17008
   - for: kubernetes.delete
     kind: Secret
-    name: spring-metal-openso-values
+    name: spring-metal-values
   - for: kubernetes.set-content-hash
     keyPath: .data['values.yml']->[yaml].contentHash
     kind: Secret
-    name: spring-metal-openso-values
+    name: spring-metal-values
   - for: kubernetes.set-content-version
     keyPath: .data['values.yml']->[yaml].contentVersion
     kind: Secret
-    name: spring-metal-openso-values
+    name: spring-metal-values
   resources:
     cpu: 300m
     memory: 1Gi

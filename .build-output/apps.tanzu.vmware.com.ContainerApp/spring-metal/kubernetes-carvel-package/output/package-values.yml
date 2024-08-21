@@ -5,7 +5,7 @@ kind: Secret
 metadata:
   annotations:
     apps.tanzu.vmware.com/promotable: ""
-    apps.tanzu.vmware.com/promote-group: ContainerApp/spring-metal-openso
+    apps.tanzu.vmware.com/promote-group: ContainerApp/spring-metal
   creationTimestamp: null
-  name: spring-metal-openso-values
+  name: spring-metal-values
 type: Opaque

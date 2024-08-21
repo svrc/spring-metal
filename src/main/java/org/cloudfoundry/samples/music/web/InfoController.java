@@ -9,14 +9,11 @@ import jakarta.servlet.http.HttpServletRequest;
 
 import org.cloudfoundry.samples.music.domain.ApplicationInfo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cloud.bindings.Binding;
+import org.springframework.cloud.bindings.Bindings;
 import org.springframework.core.env.Environment;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-
-import org.springframework.cloud.bindings.Bindings;
-import org.springframework.cloud.bindings.Binding;
-
 
 
 import io.pivotal.cfenv.core.CfEnv;

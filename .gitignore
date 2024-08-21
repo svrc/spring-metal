@@ -7,12 +7,17 @@ Thumbs.db
 #*
 *#
 
+# tanzu files #
+.tanzu
+.build-output
+
 # Build Files #
 
 bin
 target
 build/
 .gradle
+.mvn
 
 # Eclipse Project Files #
 
@@ -20,12 +25,13 @@ build/
 .project
 .settings
 
-# IntelliJ IDEA Files #
+# IDEA Files #
 
 *.iml
 *.ipr
 *.iws
 *.idea
+.vscode
 
 # Spring Bootstrap artifacts
 
@@ -34,3 +40,6 @@ dependency-reduced-pom.xml
 mem*.db
 
 README.html
+conf/external-services/genai-service-binding.yml
+conf/external-services/postgres-service-binding.yml
+demo.sh

@@ -39,10 +39,4 @@ dependency-reduced-pom.xml
 mem*.db
 
 README.html
-conf/external-services/genai-service-binding.yml
-conf/external-services/postgres-service-binding.yml
-demo.sh
-.tanzu/config/genai-service-binding.yml
-.tanzu/config/httproute.yml
-.tanzu/config/postgres-service-binding.yml
-.tanzu/config/spring-metal.yml
+

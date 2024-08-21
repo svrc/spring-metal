@@ -1,0 +1,22 @@
+name: 'tanzu-cli plugin install'
+description: 'Installing plugin for TANZU CLI'
+inputs:
+  name:
+    description: 'Name of the plugin to install'
+    required: true
+  target:
+    description: 'Target of the plugin'
+    default: global
+  version:
+    description: 'Version of the TANZU CLI Plugin to install'
+    default: 'latest'
+runs:
+  using: "composite"
+  steps:
+    - name: Install Tanzu CLI Plugin
+      shell: bash
+      env:
+        PLUGIN_NAME: ${{ inputs.name }}
+        PLUGIN_VERSION: ${{ inputs.version }}
+        PLUGIN_TARGET: ${{ inputs.target }}
+      run: install.sh
